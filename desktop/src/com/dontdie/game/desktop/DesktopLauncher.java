@@ -7,8 +7,7 @@ import com.dontdie.game.DontDieGame;
 public class DesktopLauncher {
 	public static final int SCREEN_WIDTH = 900;
 	public static final int SCREEN_HEIGHT = 700;
-
-	public static void main (String[] arg) {
+	public static void main (String[] warg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = SCREEN_WIDTH;
         config.height = SCREEN_HEIGHT;
