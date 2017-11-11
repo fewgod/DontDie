@@ -8,7 +8,7 @@ public class World { // what happen to the game will be create here
     public static final int CHOOSE_PLAYER_STATE = 1;
     public static final int START_GAME_STATE = 2;
 	public int gameState;
-	public boolean chose2Player;
+	public boolean chose2Player = false;
  // now can play 2 players if delete those comment symbol
     World(DontDieGame dontdieGame) {
         this.dontdieGame = dontdieGame; //? why must use this and why it must be 'this.dontdieGame = dontdieGame';

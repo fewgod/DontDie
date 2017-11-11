@@ -23,7 +23,11 @@ public class GameScreen extends ScreenAdapter {
         player2Img = new Texture("Player2.png");
         world = new World(dontdieGame); //create
         player1 = world.getPlayer1();
-        player2 = world.getPlayer2();
+        //player2 = world.getPlayer2();
+        if(world.chose2Player == true) 
+        {
+        	player2 = world.getPlayer2();
+        }
         worldRender = new WorldRenderer(this.dontdieGame,world); //what is the difference if use dontdieGame instead of this.dontdieGame
     }
     
