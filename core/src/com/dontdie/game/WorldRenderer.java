@@ -35,6 +35,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	}
 	
 	public void render(float delta) { // this draw game animation to window
+		world.update(delta); //this make the world update which will order enemy and object to update afterward
         SpriteBatch batch = dontdieGame.batch; //what is this line??
         batch.begin();
         Vector2 player1Pos = player1.getPosition(); //get position of player 1 to draw it

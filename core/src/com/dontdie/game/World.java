@@ -30,4 +30,9 @@ public class World { // what happen to the game will be create here
     Snake getSnake() { //return type is snake
         return snake1;
     }
+    
+    public void update(float delta) //for make every object update itself
+    {
+    	snake1.update(delta);
+    }
 }
