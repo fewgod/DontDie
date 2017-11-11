@@ -28,7 +28,7 @@ public class Player1 {
     }
     
     public void move(int dir) { 
-    	if(currPos.x < 3)
+    	if(currPos.x < 3) // prevent player walk off screen
     	{
     		currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[2][0];
     	}

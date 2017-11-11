@@ -37,22 +37,46 @@ public class GameScreen extends ScreenAdapter {
 
     private void update(float delta) 
     {
-
-        if(Gdx.input.isKeyPressed(Keys.UP) || Gdx.input.isKeyPressed(Keys.W)) 
+    	moveplayer1();
+    	moveplayer2();
+    }
+    private void moveplayer1()//input for player1 movement
+    {
+    	if(Gdx.input.isKeyPressed(Keys.W)) 
         {
             player1.move(Player1.DIRECTION_UP);
         }
-        if(Gdx.input.isKeyPressed(Keys.RIGHT) || Gdx.input.isKeyPressed(Keys.D)) 
+        if(Gdx.input.isKeyPressed(Keys.D)) 
         {
             player1.move(Player1.DIRECTION_RIGHT);
         }
-        if(Gdx.input.isKeyPressed(Keys.DOWN) || Gdx.input.isKeyPressed(Keys.S)) 
+        if(Gdx.input.isKeyPressed(Keys.S)) 
         {
             player1.move(Player1.DIRECTION_DOWN);
         }
-        if(Gdx.input.isKeyPressed(Keys.LEFT) || Gdx.input.isKeyPressed(Keys.A)) 
+        if(Gdx.input.isKeyPressed(Keys.A)) 
         {
             player1.move(Player1.DIRECTION_LEFT);
+        }
+    }
+    
+    private void moveplayer2()//input for player2 movement
+    {
+        if(Gdx.input.isKeyPressed(Keys.UP)) 
+        {
+            player2.move(Player1.DIRECTION_UP);
+        }
+        if(Gdx.input.isKeyPressed(Keys.RIGHT)) 
+        {
+            player2.move(Player1.DIRECTION_RIGHT);
+        }
+        if(Gdx.input.isKeyPressed(Keys.DOWN)) 
+        {
+            player2.move(Player1.DIRECTION_DOWN);
+        }
+        if(Gdx.input.isKeyPressed(Keys.LEFT)) 
+        {
+            player2.move(Player1.DIRECTION_LEFT);
         }
     }
 }
