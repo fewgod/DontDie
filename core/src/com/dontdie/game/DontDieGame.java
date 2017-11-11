@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class DontDieGame extends Game {
 	public SpriteBatch batch;
-	Texture img;
 	
 	@Override
 	public void create () {
