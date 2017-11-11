@@ -6,6 +6,7 @@ public class World { // what happen to the game will be create here
     private Player1 player1;
     private Player1 player2;
     private DontDieGame dontdieGame;
+    private Snake snake1;
     
     public static final int CHOOSE_PLAYER_STATE = 1;
     public static final int START_GAME_STATE = 2;
@@ -17,6 +18,7 @@ public class World { // what happen to the game will be create here
         gameState = CHOOSE_PLAYER_STATE;
         player1 = new Player1(400,400);
         player2 = new Player1(400,100);
+        snake1 = new Snake(400,500);
     }
  
     Player1 getPlayer1() {
@@ -24,5 +26,8 @@ public class World { // what happen to the game will be create here
     }
     Player1 getPlayer2() {
         return player2;
+    }
+    Snake getSnake() { //return type is snake
+        return snake1;
     }
 }

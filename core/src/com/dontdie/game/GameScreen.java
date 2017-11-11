@@ -17,7 +17,7 @@ public class GameScreen extends ScreenAdapter {
 	private WorldRenderer worldRender;
     World world;
 
-    public GameScreen(DontDieGame dontdieGame) { //receive input and final drawn after receive from WorldRenderer
+    public GameScreen(DontDieGame dontdieGame) { //receive input and final drawn after receive from WorldRenderer if dont have Worldrenderer will only accept input but not draw anything
         this.dontdieGame = dontdieGame;
         player1Img = new Texture("Player1.png");
         player2Img = new Texture("Player2.png");
