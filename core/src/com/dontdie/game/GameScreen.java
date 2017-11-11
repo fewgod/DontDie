@@ -22,15 +22,8 @@ public class GameScreen extends ScreenAdapter {
         player1Img = new Texture("Player1.png");
         player2Img = new Texture("Player2.png");
         world = new World(dontdieGame); //create
-        //if(world.gameState == world.START_GAME_STATE)
-        //{
-        	//player1 = world.getPlayer1();
+        player1 = world.getPlayer1();
         player2 = world.getPlayer2();
-        	//if(world.chose2Player == true) 
-        	//{
-        	//	player2 = world.getPlayer2();
-        	//}
-        //}
         worldRender = new WorldRenderer(this.dontdieGame,world); //what is the difference if use dontdieGame instead of this.dontdieGame
     }
     
@@ -44,17 +37,15 @@ public class GameScreen extends ScreenAdapter {
 
     private void update(float delta) 
     {
-    	/*if(Gdx.input.isKeyPressed(Keys.R) && world.gameState == world.CHOOSE_PLAYER_STATE)
+    	/*if(Gdx.input.isKeyPressed(Keys.Q) && world.chosePlayer == false)
     	{
     		world.chose2Player = false;
     		world.chosePlayer = true;
-    		world.gameState = world.START_GAME_STATE;
     	}
-    	if(Gdx.input.isKeyPressed(Keys.T) && world.gameState == world.CHOOSE_PLAYER_STATE)
+    	if(Gdx.input.isKeyPressed(Keys.W) && world.chosePlayer == false)
     	{
     		world.chose2Player = true;
     		world.chosePlayer = true;
-    		world.gameState = world.START_GAME_STATE;
     	}*/
 
         if(Gdx.input.isKeyPressed(Keys.UP) || Gdx.input.isKeyPressed(Keys.W)) 
