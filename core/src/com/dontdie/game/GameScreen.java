@@ -10,27 +10,25 @@ import com.badlogic.gdx.math.Vector2;
 public class GameScreen extends ScreenAdapter {
 	 
     private DontDieGame dontdieGame;
-    private Texture playerImg;
+    private Texture player1Img;
     private Player1 player1;
+	private WorldRenderer worldRender;
     World world;
 
-    public GameScreen(DontDieGame dontdieGame) {
+    public GameScreen(DontDieGame dontdieGame) { //receive input and final drawn after receive from WorldRenderer
         this.dontdieGame = dontdieGame;
-        playerImg = new Texture("Player1.png");
-        world = new World(dontdieGame);
+        player1Img = new Texture("Player1.png");
+        world = new World(dontdieGame); //create
         player1 = world.getPlayer1();
+        worldRender = new WorldRenderer(this.dontdieGame,world); //what is the difference if use dontdieGame instead of this.dontdieGame
     }
     
     @Override
     public void render(float delta) {
     	update(delta);
-    	Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        SpriteBatch batch = dontdieGame.batch;
-        batch.begin();
-        Vector2 player1Pos = player1.getPosition();
-        batch.draw(playerImg, player1Pos.x, player1Pos.y);
-        batch.end();
+        worldRender.render(delta);
     }
 
     private void update(float delta) 
