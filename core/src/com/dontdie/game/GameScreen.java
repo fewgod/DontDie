@@ -21,7 +21,7 @@ public class GameScreen extends ScreenAdapter {
     
     @Override
     public void render(float delta) {
-    	//update(delta);
+    	update(delta);
     	Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         SpriteBatch batch = dontdieGame.batch;
@@ -31,6 +31,23 @@ public class GameScreen extends ScreenAdapter {
         batch.end();
     }
 
-	//private void update(float delta) {	
-	//}
+    private void update(float delta) 
+    {
+        if(Gdx.input.isKeyPressed(Keys.UP)) 
+        {
+            player1.move(Player1.DIRECTION_UP);
+        }
+        if(Gdx.input.isKeyPressed(Keys.RIGHT)) 
+        {
+            player1.move(Player1.DIRECTION_RIGHT);
+        }
+        if(Gdx.input.isKeyPressed(Keys.DOWN)) 
+        {
+            player1.move(Player1.DIRECTION_DOWN);
+        }
+        if(Gdx.input.isKeyPressed(Keys.LEFT)) 
+        {
+            player1.move(Player1.DIRECTION_LEFT);
+        }
+    }
 }
