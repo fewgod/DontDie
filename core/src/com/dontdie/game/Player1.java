@@ -13,9 +13,9 @@ public class Player1 {
  
     private static final int [][] DIR_OFFSETS = new int [][] { // for use with move method
         {0,0},
-        {0,-1},
-        {1,0},
         {0,1},
+        {1,0},
+        {0,-1},
         {-1,0}
     };
     
