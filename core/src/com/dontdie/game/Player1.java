@@ -8,6 +8,7 @@ public class Player1 {
     public static final int DIRECTION_DOWN = 3;
     public static final int DIRECTION_LEFT = 4;
     public static final int DIRECTION_STILL = 0;
+    public int faceDir = DIRECTION_UP;
     private int PLAYER_MOVE_SPEED = 4;
     private Vector2 currPos;
  

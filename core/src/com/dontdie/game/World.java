@@ -16,7 +16,7 @@ public class World { // what happen to the game will be create here
     World(DontDieGame dontdieGame) {
         this.dontdieGame = dontdieGame; //? why must use this and why it must be 'this.dontdieGame = dontdieGame';
         gameState = CHOOSE_PLAYER_STATE;
-        player1 = new Player1(400,400);
+        player1 = new Player1(400,400); // create class in class??
         player2 = new Player1(400,100);
         snake1 = new Snake(400,500);
     }

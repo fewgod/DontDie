@@ -10,8 +10,6 @@ import com.badlogic.gdx.math.Vector2;
 public class GameScreen extends ScreenAdapter {
 	 
     private DontDieGame dontdieGame;
-    private Texture player1Img;
-	private Texture player2Img;
     private Player1 player1;
     private Player1 player2;
 	private WorldRenderer worldRender;
@@ -19,8 +17,6 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(DontDieGame dontdieGame) { //receive input and final drawn after receive from WorldRenderer if dont have Worldrenderer will only accept input but not draw anything
         this.dontdieGame = dontdieGame;
-        player1Img = new Texture("Player1.png");
-        player2Img = new Texture("Player2.png");
         world = new World(dontdieGame); //create
         player1 = world.getPlayer1();
         player2 = world.getPlayer2();
@@ -44,18 +40,22 @@ public class GameScreen extends ScreenAdapter {
     {
     	if(Gdx.input.isKeyPressed(Keys.W)) 
         {
+    		player1.faceDir = Player1.DIRECTION_UP;
             player1.move(Player1.DIRECTION_UP);
         }
         if(Gdx.input.isKeyPressed(Keys.D)) 
         {
+            player1.faceDir = Player1.DIRECTION_RIGHT;
             player1.move(Player1.DIRECTION_RIGHT);
         }
         if(Gdx.input.isKeyPressed(Keys.S)) 
         {
+            player1.faceDir = Player1.DIRECTION_DOWN;
             player1.move(Player1.DIRECTION_DOWN);
         }
         if(Gdx.input.isKeyPressed(Keys.A)) 
         {
+            player1.faceDir = Player1.DIRECTION_LEFT;
             player1.move(Player1.DIRECTION_LEFT);
         }
     }

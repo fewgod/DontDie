@@ -12,7 +12,10 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private World world;
 	private Player1 player1;
 	private Player1 player2;
-	private Texture player1Img;
+	private Texture player1RightImg;
+	private Texture player1LeftImg;
+	private Texture player1UpImg;
+	private Texture player1DownImg;
 	private Texture player2Img;
 	private Texture backgroundImg;
 	
@@ -24,7 +27,11 @@ public class WorldRenderer { //what happen to the game world will be draw here
 
 		this.world = world;
 
-		player1Img = new Texture("Player1.png");
+		player1RightImg = new Texture("Player1_Right.png");
+		player1LeftImg = new Texture("Player1_Left.png");
+		player1UpImg = new Texture("Player1_Up.png");
+		player1DownImg = new Texture("Player1_Down.png");
+		
 		player2Img = new Texture("Player2.png");
 		backgroundImg = new Texture("background.jpg");
 		player1 = world.getPlayer1();
@@ -42,7 +49,22 @@ public class WorldRenderer { //what happen to the game world will be draw here
         Vector2 player2Pos = player2.getPosition(); //get position of player 2 to draw it
         Vector2 snake1Pos = snake1.getPosition(); //why no need to declare snake1Pos variable??
         batch.draw(backgroundImg, 0, 0);
-        batch.draw(player1Img, player1Pos.x, player1Pos.y);
+        if(player1.faceDir == player1.DIRECTION_RIGHT)
+        {
+        	batch.draw(player1RightImg, player1Pos.x, player1Pos.y);
+        }
+        if(player1.faceDir == player1.DIRECTION_LEFT)
+        {
+        	batch.draw(player1LeftImg, player1Pos.x, player1Pos.y);
+        }
+        if(player1.faceDir == player1.DIRECTION_UP)
+        {
+        	batch.draw(player1UpImg, player1Pos.x, player1Pos.y);
+        }
+        if(player1.faceDir == player1.DIRECTION_DOWN)
+        {
+        	batch.draw(player1DownImg, player1Pos.x, player1Pos.y);
+        }
         batch.draw(player2Img, player2Pos.x, player2Pos.y);
         batch.draw(snakeImg, snake1Pos.x, snake1Pos.y);
         batch.end();
