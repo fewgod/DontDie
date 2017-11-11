@@ -37,16 +37,6 @@ public class GameScreen extends ScreenAdapter {
 
     private void update(float delta) 
     {
-    	/*if(Gdx.input.isKeyPressed(Keys.Q) && world.chosePlayer == false)
-    	{
-    		world.chose2Player = false;
-    		world.chosePlayer = true;
-    	}
-    	if(Gdx.input.isKeyPressed(Keys.W) && world.chosePlayer == false)
-    	{
-    		world.chose2Player = true;
-    		world.chosePlayer = true;
-    	}*/
 
         if(Gdx.input.isKeyPressed(Keys.UP) || Gdx.input.isKeyPressed(Keys.W)) 
         {

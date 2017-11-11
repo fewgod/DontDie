@@ -1,5 +1,7 @@
 package com.dontdie.game;
 
+import com.badlogic.gdx.graphics.Texture;
+
 public class World { // what happen to the game will be create here
     private Player1 player1;
     private Player1 player2;
@@ -13,15 +15,8 @@ public class World { // what happen to the game will be create here
     World(DontDieGame dontdieGame) {
         this.dontdieGame = dontdieGame; //? why must use this and why it must be 'this.dontdieGame = dontdieGame';
         gameState = CHOOSE_PLAYER_STATE;
-        /*if(gameState == CHOOSE_PLAYER_STATE && chose2Player == false) 
-        {
-        	player1 = new Player1(100,100);
-        }
-        else if(gameState == CHOOSE_PLAYER_STATE && chose2Player == true) 
-        {*/
-        	player1 = new Player1(100,100);
-        	player2 = new Player1(400,100);
-        //}
+        player1 = new Player1(400,400);
+        player2 = new Player1(400,100);
     }
  
     Player1 getPlayer1() {

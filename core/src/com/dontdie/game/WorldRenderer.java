@@ -14,6 +14,8 @@ public class WorldRenderer { //what happen to the game world will be drawn here
 	private Player1 player2;
 	private Texture player1Img;
 	private Texture player2Img;
+	private Texture backgroundImg;
+	
 
 	public WorldRenderer(DontDieGame dontdieGame, World world) {
 		this.dontdieGame = dontdieGame;
@@ -23,6 +25,7 @@ public class WorldRenderer { //what happen to the game world will be drawn here
 
 		player1Img = new Texture("Player1.png");
 		player2Img = new Texture("Player2.png");
+		backgroundImg = new Texture("background.jpg");
 		player1 = world.getPlayer1();
 		player2 = world.getPlayer2();
 	}
@@ -32,6 +35,7 @@ public class WorldRenderer { //what happen to the game world will be drawn here
         batch.begin();
         Vector2 player1Pos = player1.getPosition(); //get position of player 1 to draw it
         Vector2 player2Pos = player2.getPosition(); //get position of player 1 to draw it
+        batch.draw(backgroundImg, 0, 0);
         batch.draw(player1Img, player1Pos.x, player1Pos.y);
         batch.draw(player2Img, player2Pos.x, player2Pos.y);
         batch.end();
