@@ -12,11 +12,13 @@ public class GameScreen extends ScreenAdapter {
     private DontDieGame dontdieGame;
     private Texture playerImg;
     private Player1 player1;
+    World world;
 
     public GameScreen(DontDieGame dontdieGame) {
         this.dontdieGame = dontdieGame;
         playerImg = new Texture("Player1.png");
-        player1 = new Player1(100,100); //player starting pos
+        world = new World(dontdieGame);
+        player1 = world.getPlayer1();
     }
     
     @Override
