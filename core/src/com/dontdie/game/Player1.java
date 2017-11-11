@@ -28,6 +28,22 @@ public class Player1 {
     }
     
     public void move(int dir) { 
+    	if(currPos.x <5)
+    	{
+    		currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[2][0];
+    	}
+    	if(currPos.x >880)
+    	{
+    		currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[4][0];
+    	}
+    	if(currPos.y <5)
+    	{
+    		currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[1][1];
+    	}
+    	if(currPos.y >665)
+    	{
+    		currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[3][1];
+    	}
     	currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[dir][0];
         currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[dir][1];
         // first [dir] is chose which {,} to use, second [] chose first para or second para in {,}
