@@ -64,18 +64,22 @@ public class GameScreen extends ScreenAdapter {
     {
         if(Gdx.input.isKeyPressed(Keys.UP)) 
         {
+        	player2.faceDir = Player1.DIRECTION_UP;
             player2.move(Player1.DIRECTION_UP);
         }
         if(Gdx.input.isKeyPressed(Keys.RIGHT)) 
         {
+        	player2.faceDir = Player1.DIRECTION_RIGHT;
             player2.move(Player1.DIRECTION_RIGHT);
         }
         if(Gdx.input.isKeyPressed(Keys.DOWN)) 
         {
+        	player2.faceDir = Player1.DIRECTION_DOWN;
             player2.move(Player1.DIRECTION_DOWN);
         }
         if(Gdx.input.isKeyPressed(Keys.LEFT)) 
         {
+        	player2.faceDir = Player1.DIRECTION_LEFT;
             player2.move(Player1.DIRECTION_LEFT);
         }
     }
