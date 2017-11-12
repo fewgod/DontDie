@@ -1,6 +1,7 @@
 package com.dontdie.game;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
@@ -16,6 +17,7 @@ public class World { // what happen to the game will be create here
     public static final int START_GAME_STATE = 2;
 	public int gameState;
 	public boolean chose2Player;
+	private Random rand = new Random(); //for random things such as number
  // now can play 2 players if delete those comment symbol
     World(DontDieGame dontdieGame) {
     	world = this;
@@ -23,9 +25,9 @@ public class World { // what happen to the game will be create here
         gameState = CHOOSE_PLAYER_STATE;
         player1 = new Player1(400,400); // create class in class??
         player2 = new Player1(400,100);
-        for(int i = 0 ; i<50 ; i++)  //add i number of snake 
+        for(int i = 0 ; i<5 ; i++)  //add i number of snake 
         {
-        	snake_list.add( new Snake(world,i,100)); //add 1 snake to snake_list at ... position
+        	snake_list.add( new Snake(world,rand.nextInt(600)+50 , rand.nextInt(500)+50)); //add 1 snake to snake_list at random position
         }
     }
  
