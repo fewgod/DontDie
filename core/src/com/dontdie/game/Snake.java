@@ -15,7 +15,7 @@ public class Snake {
     public static final int DIRECTION_RIGHT = 2;
     public static final int DIRECTION_BOTTOM = 3;
     public static final int DIRECTION_LEFT = 4;
-    public static final int DIRECTION_UPPER_RIGHT = 5;
+    public static final int DIRECTION_UPPER_RIGHT = 5; // from 5 to 8 will walk in both axis
     public static final int DIRECTION_UPPER_LEFT = 6;
     public static final int DIRECTION_BOTTOM_RIGHT = 7;
     public static final int DIRECTION_BOTTOM_LEFT = 8;
@@ -48,7 +48,7 @@ public class Snake {
 	
 	public void update(float delta) //snake will move to the right
     {
-		if(rand.nextInt(100)< 5)
+		if(rand.nextInt(100)< 7) //if less got less than x number will turn toward player1
 		{
 			checkWhereIsPlayer1();
 		}
@@ -57,26 +57,13 @@ public class Snake {
 
 	private void move() 
 	{
-		/*//Vector2 player1Pos = player1.getPosition(); //get position of player 1
-        //Vector2 player2Pos = player2.getPosition(); //get position of player 2
-        if(player1Pos.x > currPos.x) 
-        {
-        	currPos.x += SNAKE_MOVE_SPEED;
-        }
-        if(player1Pos.x < currPos.x) 
-        {
-        	currPos.x -= SNAKE_MOVE_SPEED;
-        }
-        if(player1Pos.y > currPos.y) 
-        {
-        	currPos.y += SNAKE_MOVE_SPEED;
-        }
-        if(player1Pos.y < currPos.y) 
-        {
-        	currPos.y -= SNAKE_MOVE_SPEED;
-        }*/
+		/*if(faceDir >= 5) //if snake move in both axis will use trigometry to make the movement speed the same as move in 1 axis
+		{
+			currPos.x += Math.pow((Math.pow(SNAKE_MOVE_SPEED,2) + Math.pow(SNAKE_MOVE_SPEED,2)),1/2)* DIR_OFFSETS[faceDir][0];
+			currPos.y += Math.pow((Math.pow(SNAKE_MOVE_SPEED,2) + Math.pow(SNAKE_MOVE_SPEED,2)),1/2)* DIR_OFFSETS[faceDir][1];
+		}*/
 		currPos.x += SNAKE_MOVE_SPEED * DIR_OFFSETS[faceDir][0];
-    	currPos.y += SNAKE_MOVE_SPEED * DIR_OFFSETS[faceDir][1];
+		currPos.y += SNAKE_MOVE_SPEED * DIR_OFFSETS[faceDir][1];
 	}
 	private void checkWhereIsPlayer1() 
 	{

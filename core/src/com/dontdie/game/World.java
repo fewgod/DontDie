@@ -18,7 +18,6 @@ public class World { // what happen to the game will be create here
 	public int gameState;
 	public boolean chose2Player;
 	private Random rand = new Random(); //for random things such as number
- // now can play 2 players if delete those comment symbol
     World(DontDieGame dontdieGame) {
     	world = this;
         this.dontdieGame = dontdieGame; //? why must use this and why it must be 'this.dontdieGame = dontdieGame';
