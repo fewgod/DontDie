@@ -20,7 +20,7 @@ public class Player1 {
         {-1,0}
     };
     
-    public Player1(int x, int y) { //when first init give spawn position to player 1
+    public Player1(World world , int x, int y) { //when first init give spawn position to player 1
         currPos = new Vector2(x,y);
     }    
  

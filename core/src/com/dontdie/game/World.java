@@ -23,11 +23,11 @@ public class World { // what happen to the game will be create here
     	world = this;
         this.dontdieGame = dontdieGame; //? why must use this and why it must be 'this.dontdieGame = dontdieGame';
         gameState = CHOOSE_PLAYER_STATE;
-        player1 = new Player1(400,400); // create class in class??
-        player2 = new Player1(400,100);
+        player1 = new Player1(world, 400,400); // create class in class??
+        player2 = new Player1(world, 400,100);
         for(int i = 0 ; i<5 ; i++)  //add i number of snake 
         {
-        	snake_list.add( new Snake(world,rand.nextInt(600)+50 , rand.nextInt(500)+50)); //add 1 snake to snake_list at random position
+        	snake_list.add( new Snake(world, rand.nextInt(600)+50 , rand.nextInt(500)+50)); //add 1 snake to snake_list at random position
         }
     }
  
