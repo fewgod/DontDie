@@ -69,13 +69,13 @@ public class Snake {
 	{
 		Vector2 player1Pos = player1.getPosition(); //get position of player 1
         Vector2 player2Pos = player2.getPosition(); //get position of player 2
-		if(player1Pos.y > currPos.y) //if player is at the top of snake
-        {
-			if(player1Pos.x > currPos.x) //if player is at the top right of snake
+		if(player1Pos.y - rand.nextInt(20) > currPos.y) //if player is at the top of snake 
+        { //add + - randint for more variety ways of moving.. suppose to ..?
+			if(player1Pos.x - rand.nextInt(20) > currPos.x) //if player is at the top right of snake
 	        {
 				faceDir = DIRECTION_UPPER_RIGHT;
 	        }
-			else if(player1Pos.x < currPos.x) //if player is at the top left of snake
+			else if(player1Pos.x + rand.nextInt(20) < currPos.x) //if player is at the top left of snake
 	        {
 				faceDir = DIRECTION_UPPER_LEFT;
 	        }
@@ -84,13 +84,13 @@ public class Snake {
 				faceDir = DIRECTION_UP;
 			}
         }
-		if(player1Pos.y < currPos.y) //if player is at the bottom of snake
+		if(player1Pos.y + rand.nextInt(20) < currPos.y) //if player is at the bottom of snake
         {
-			if(player1Pos.x > currPos.x) //if player is  at the bottom right of snake
+			if(player1Pos.x - rand.nextInt(20) > currPos.x) //if player is  at the bottom right of snake
 	        {
 				faceDir = DIRECTION_BOTTOM_RIGHT;
 	        }
-			else if(player1Pos.x < currPos.x) //if player is at the bottom left of snake
+			else if(player1Pos.x + rand.nextInt(20)< currPos.x) //if player is at the bottom left of snake
 	        {
 				faceDir = DIRECTION_BOTTOM_LEFT;
 	        }
