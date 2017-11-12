@@ -1,6 +1,6 @@
 package com.dontdie.game;
 
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector2; //how to create position at the center of image (right now it's bottom left)
 
 public class Player1 {
 	public static final int DIRECTION_UP = 1;

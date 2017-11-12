@@ -1,12 +1,15 @@
 package com.dontdie.game;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
 
 public class World { // what happen to the game will be create here
     private Player1 player1;
     private Player1 player2;
     private DontDieGame dontdieGame;
-    private Snake snake1;
+    public ArrayList<Snake> snake_list = new ArrayList<Snake>();
     public World world;
     
     public static final int CHOOSE_PLAYER_STATE = 1;
@@ -20,7 +23,10 @@ public class World { // what happen to the game will be create here
         gameState = CHOOSE_PLAYER_STATE;
         player1 = new Player1(400,400); // create class in class??
         player2 = new Player1(400,100);
-        snake1 = new Snake(world,400,500);
+        for(int i = 0 ; i<50 ; i++)  //add i number of snake 
+        {
+        	snake_list.add( new Snake(world,i,100)); //add 1 snake to snake_list at ... position
+        }
     }
  
     Player1 getPlayer1() {
@@ -29,9 +35,9 @@ public class World { // what happen to the game will be create here
     Player1 getPlayer2() {
         return player2;
     }
-    Snake getSnake() 
+    Snake getSnake(int i) 
     { //return type is snake
-        return snake1;
+        return snake_list.get(i);
     }
     World getWorld() 
     { //
@@ -40,6 +46,10 @@ public class World { // what happen to the game will be create here
     
     public void update(float delta) //for make every object update itself
     {
-    	snake1.update(delta);
+    	for(int i =0 ; i< snake_list.size() ; i++) //update every snake in snake_list
+    	{
+    		snake_list.get(i).update(delta);
+    	}
+    	//snake1.update(delta);
     }
 }

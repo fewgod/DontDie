@@ -47,7 +47,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		player2 = world.getPlayer2();
 		
 		snakeImg = new Texture ("snake.png");
-		snake1 = world.getSnake();
+		//snake1 = world.getSnake();
 	}
 	
 	public void render(float delta) { // this draw game animation to window
@@ -56,7 +56,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
         batch.begin();
         Vector2 player1Pos = player1.getPosition(); //get position of player 1 to draw it
         Vector2 player2Pos = player2.getPosition(); //get position of player 2 to draw it
-        Vector2 snake1Pos = snake1.getPosition(); //why no need to declare snake1Pos variable??
+        //Vector2 snake1Pos = snake1.getPosition(); why no need to declare snake1Pos variable??
         batch.draw(backgroundImg, 0, 0);
         //render player1 face
         if(player1.faceDir == player1.DIRECTION_RIGHT)
@@ -93,8 +93,11 @@ public class WorldRenderer { //what happen to the game world will be draw here
         {
         	batch.draw(player2DownImg, player2Pos.x, player2Pos.y);
         }
-        //batch.draw(player2Img, player2Pos.x, player2Pos.y);
-        batch.draw(snakeImg, snake1Pos.x, snake1Pos.y);
+        for(int i =0;i< world.snake_list.size(); i++) //draw every snake in snake_list
+    	{
+        	batch.draw(snakeImg, world.snake_list.get(i).getPosition().x, world.snake_list.get(i).getPosition().y);
+    	}
+        //batch.draw(snakeImg, snake1Pos.x, snake1Pos.y);
         batch.end();
     }
 }
