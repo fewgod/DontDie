@@ -46,13 +46,11 @@ public class Snake {
         return currPos;    
     }
 	
-	public void update(float delta) //snake will move to the right
+	public void update(float delta) //make snake do things
     {
-		if(rand.nextInt(100)< 7) //if less got less than x number will turn toward player1
-		{
-			checkWhereIsPlayer1();
-		}
+		shouldItTurnTowardPlayer();
 		move();
+		//checkIfCollideWithPlayer();
     }
 
 	private void move() 
@@ -65,7 +63,15 @@ public class Snake {
 		currPos.x += SNAKE_MOVE_SPEED * DIR_OFFSETS[faceDir][0];
 		currPos.y += SNAKE_MOVE_SPEED * DIR_OFFSETS[faceDir][1];
 	}
-	private void checkWhereIsPlayer1() 
+	
+	private void shouldItTurnTowardPlayer() 
+	{
+		if(rand.nextInt(100)< 7) //if less got less than x number will turn toward player1
+		{
+			checkWhereIsPlayer1();
+		}
+	}
+	private void checkWhereIsPlayer1() //make snake turn toward player1 
 	{
 		Vector2 player1Pos = player1.getPosition(); //get position of player 1
         Vector2 player2Pos = player2.getPosition(); //get position of player 2
@@ -98,6 +104,16 @@ public class Snake {
 			{
 				faceDir = DIRECTION_BOTTOM;
 			}
+        }
+	}
+	
+	private void checkIfCollideWithPlayer() //player1 test only
+	{
+		Vector2 player1Pos = player1.getPosition(); //get position of player 1
+        Vector2 player2Pos = player2.getPosition(); //get position of player 2
+        if(player1Pos.x == currPos.x && player1Pos.y == currPos.y) 
+        {
+        	world.removePlayer();
         }
 	}
 }

@@ -18,7 +18,8 @@ public class World { // what happen to the game will be create here
 	public int gameState;
 	public boolean chose2Player;
 	private Random rand = new Random(); //for random things such as number
-    World(DontDieGame dontdieGame) {
+	
+    public World(DontDieGame dontdieGame) {
     	world = this;
         this.dontdieGame = dontdieGame; //? why must use this and why it must be 'this.dontdieGame = dontdieGame';
         gameState = CHOOSE_PLAYER_STATE;
@@ -40,9 +41,9 @@ public class World { // what happen to the game will be create here
     { //return type is snake
         return snake_list.get(i);
     }
-    World getWorld() 
-    { //
-        return world;
+
+    public void removePlayer() { // test not working
+    	snake_list.remove(0);//just to make it doen't give blank method
     }
     
     public void update(float delta) //for make every object update itself
