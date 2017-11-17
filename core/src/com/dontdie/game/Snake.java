@@ -10,6 +10,8 @@ public class Snake {
 	private World world;
 	private Player1 player1;
 	private Player1 player2;
+	private boolean chasingPlayer1;
+	private boolean chasingPlayer2;
 	
 	public static final int DIRECTION_UP = 1;
     public static final int DIRECTION_RIGHT = 2;
@@ -67,9 +69,26 @@ public class Snake {
 		}
 	}
 	
+	private void shouldItChangePlayerToChase()
+	{
+		if(rand.nextInt(1000) < 20) //if got less than x will change target
+		{
+			if(chasingPlayer1 == true) 
+			{
+				chasingPlayer1 = false;
+				chasingPlayer2 = true;
+			}
+			else if(chasingPlayer2 == true) 
+			{
+				chasingPlayer2 = false;
+				chasingPlayer1 = true;
+			}
+		}
+	}
+	
 	private void shouldItTurnTowardPlayer() 
 	{
-		if(rand.nextInt(100)< 7) //if less got less than x number will turn toward player1
+		if(rand.nextInt(100)< 8) //if less got less than x number will turn toward player1
 		{
 			checkWhereIsPlayer1();
 		}
