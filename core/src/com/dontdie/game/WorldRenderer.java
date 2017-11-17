@@ -99,7 +99,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
         	batch.draw(snakeImg, world.snake_list.get(i).getPosition().x, world.snake_list.get(i).getPosition().y);
     	}
         
-        for(int i =0;i< world.timestopper_list.size(); i++) //draw every snake in snake_list
+        for(int i =0;i< world.timestopper_list.size(); i++) //draw every timestopper item in timestopper_list 
     	{
         	batch.draw(timestopperImg, world.timestopper_list.get(i).getPosition().x, world.timestopper_list.get(i).getPosition().y);
     	}
