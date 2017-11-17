@@ -42,7 +42,7 @@ public class Snake {
 		player2 = world.getPlayer2();
 	}
 
-	public Vector2 getPosition() { // for other class to get current position of player1
+	public Vector2 getPosition() { // for other class to get current position of snake
         return currPos;    
     }
 	
@@ -60,8 +60,11 @@ public class Snake {
 			currPos.x += Math.pow((Math.pow(SNAKE_MOVE_SPEED,2) + Math.pow(SNAKE_MOVE_SPEED,2)),1/2)* DIR_OFFSETS[faceDir][0];
 			currPos.y += Math.pow((Math.pow(SNAKE_MOVE_SPEED,2) + Math.pow(SNAKE_MOVE_SPEED,2)),1/2)* DIR_OFFSETS[faceDir][1];
 		}*/
-		currPos.x += SNAKE_MOVE_SPEED * DIR_OFFSETS[faceDir][0];
-		currPos.y += SNAKE_MOVE_SPEED * DIR_OFFSETS[faceDir][1];
+		if(world.timestop <0) //check if whether the time is stop, if not it can move.
+		{
+			currPos.x += SNAKE_MOVE_SPEED * DIR_OFFSETS[faceDir][0];
+			currPos.y += SNAKE_MOVE_SPEED * DIR_OFFSETS[faceDir][1];
+		}
 	}
 	
 	private void shouldItTurnTowardPlayer() 
