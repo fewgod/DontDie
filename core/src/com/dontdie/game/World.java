@@ -12,7 +12,7 @@ public class World { // what happen to the game will be create here
     private DontDieGame dontdieGame;
     public ArrayList<Snake> snake_list = new ArrayList<Snake>();
     
-    public int timestop = 150; //test time stop item fuction
+    public int timestop  = 0; //init the time stop count to 0
     public ArrayList<Timestopper> timestopper_list = new ArrayList<Timestopper>();
     
     public World world;
