@@ -44,14 +44,8 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		timestopperImg = new Texture("stopwatch.png");
 		
 		backgroundImg = new Texture("background.jpg");
-		if(world.player1IsDead == false)
-		{
 			player1 = world.getPlayer1();
-		}
-		if(world.player2IsDead == false)
-		{
 			player2 = world.getPlayer2();
-		}
 		
 		snakeImg = new Texture ("snake.png");
 	}
@@ -64,7 +58,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
         
         
         //when draw:draw currPos position, but when calculate, use CURR_CENTER so hit box of that object will always be at center of image
-        if(world.player1IsDead == false)
+        if(player1.isPlayerDead == false)
         {
         	Vector2 player1Pos = player1.getPosition(); //get position of player 1 to draw it
         	//render player1 face
@@ -85,7 +79,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
         		batch.draw(player1DownImg, player1Pos.x, player1Pos.y);
         	}
         }
-        if(world.player2IsDead == false)
+        if(player2.isPlayerDead == false)
         {
         	Vector2 player2Pos = player2.getPosition(); //get position of player 2 to draw it
         	//render player2 face

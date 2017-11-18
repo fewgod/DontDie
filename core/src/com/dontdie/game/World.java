@@ -23,18 +23,12 @@ public class World { // what happen to the game will be create here
 	public boolean chose2Player;
 	private Random rand = new Random(); //for random things such as number
 	
-	public boolean player1IsDead;
-	public boolean player2IsDead;
-	
     public World(DontDieGame dontdieGame) {
     	world = this;
         this.dontdieGame = dontdieGame; //? why must use this and why it must be 'this.dontdieGame = dontdieGame';
         gameState = CHOOSE_PLAYER_STATE;
         player1 = new Player1(world, 300,150); // create class in class??
         player2 = new Player1(world, 600,150);
-        
-        player1IsDead = false;
-        player2IsDead = false;
         
         timestopper_list.add( new Timestopper(world, rand.nextInt(600)+50 , rand.nextInt(500)+50));//add 1 timestopper item to the world
         
@@ -55,17 +49,18 @@ public class World { // what happen to the game will be create here
         return snake_list.get(i);
     }
 
-    public void killPlayer1()
+    public void killPlayer()
     {
-    	world.player1IsDead = true;
-		world.player1 = null;
+    	if(player1.isPlayerDead == true)
+    	{
+    		world.player1 = null;
+    	}
+    	if(player2.isPlayerDead == true)
+    	{
+    		world.player2 = null;
+    	}
     }
-    public void killPlayer2()
-    {
-    	world.player2IsDead = true;
-		world.player2 = null;
-    }
-    
+
     public void somePlayerIsDead() { 
     	// to let other class call this method to reconfig all enemies to change pattern and change who to chase
     	//wont run unless being call

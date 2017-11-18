@@ -59,14 +59,9 @@ public class Snake {
 		currPos = new Vector2(x,y);
 		currCenter_X = currPos.x + GET_CENTER_X;
 		currCenter_Y = currPos.y + GET_CENTER_Y;
-		if(world.player1IsDead == false) 
-		{
-			player1 = world.getPlayer1();
-		}
-		if(world.player2IsDead == false) 
-		{
-			player2 = world.getPlayer2();
-		}
+		
+		player1 = world.getPlayer1();
+		player2 = world.getPlayer2();
 		cooldown_movetime = 0;
 	}
 
@@ -74,7 +69,7 @@ public class Snake {
 	{
 		chasingPlayer1 = false;
 		chasingPlayer2 = false;
-		if(world.player1IsDead == false && world.player2IsDead == false) // if both alive will random
+		if(player1.isPlayerDead == false && player2.isPlayerDead == false) // if both alive will random
 		{	
 			int randomedNumber = rand.nextInt(100);
 			if(randomedNumber < 50) //if got less than 50 will chase player 1
@@ -86,11 +81,11 @@ public class Snake {
 				chasingPlayer2 = true;
 			}
 		}
-		else if (world.player1IsDead == false) //if player2 is dead
+		else if (player1.isPlayerDead == false) //if player2 is dead
 		{
 			chasingPlayer1 = true;
 		}
-		else if (world.player2IsDead == false) //if player1 is dead
+		else if (player2.isPlayerDead == false) //if player1 is dead
 		{
 			chasingPlayer2 = true;
 		}
@@ -119,12 +114,12 @@ public class Snake {
 			init(); //init who to chase for the first time
 			initWhoToChase = true;
 		}
-		if(world.player1IsDead == false && world.player2IsDead == false) // will only change target when both player is alive
+		if(player1.isPlayerDead == false && player2.isPlayerDead == false) // will only change target when both player is alive
 		{	
 			shouldItChangePlayerToChase();
 		}
 		shouldItTurnTowardPlayer();
-		if(world.player1IsDead == false || world.player2IsDead == false) //if both are dead will stop moving
+		if(player1.isPlayerDead == false || player2.isPlayerDead == false) //if both are dead will stop moving
 		{
 			move();
 		}
@@ -152,12 +147,12 @@ public class Snake {
 	{
 		if(rand.nextInt(10000) < 12) //if got less than x will change target
 		{
-			if((chasingPlayer1 == true) && (world.player2IsDead == false)) 
+			if(chasingPlayer1 == true && player2.isPlayerDead == false) 
 			{
 				chasingPlayer1 = false;
 				chasingPlayer2 = true;
 			}
-			else if((chasingPlayer2 == true) && (world.player1IsDead == false)) 
+			else if(chasingPlayer2 == true && player1.isPlayerDead== false) 
 			{
 				chasingPlayer2 = false;
 				chasingPlayer1 = true;
@@ -167,13 +162,13 @@ public class Snake {
 	
 	private void shouldItTurnTowardPlayer() 
 	{
-		if((chasingPlayer1 == true) && (world.player1IsDead == false))
+		if(chasingPlayer1 == true && player1.isPlayerDead == false)
 		{	if(rand.nextInt(100)< 11) //if less got less than x number will turn toward player1
 			{
 				checkWhereIsPlayer1();
 			}
 		}
-		if((chasingPlayer2 == true) && (world.player2IsDead == false))
+		if(chasingPlayer2 == true && player2.isPlayerDead == false)
 		{	if(rand.nextInt(100)< 11) //if less got less than x number will turn toward player2
 			{
 				checkWhereIsPlayer2();
@@ -269,7 +264,7 @@ public class Snake {
 	
 	private void checkIfCollideWithPlayer() //when collide will remove this enemy
 	{
-		if(world.player1IsDead == false)
+		if(player1.isPlayerDead == false)
 		{
 			Vector2 player1Pos = player1.getPosition(); //get position of player 1
 			if(player1.getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && player1.getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player1 is within 20 radius.x of this enemy
@@ -277,13 +272,14 @@ public class Snake {
 				if(player1.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player1.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this enemy
 				{
 					pushPlayer(1);
+					player1.takeDamage(1);
 					//world.killPlayer1();
 					//world.somePlayerIsDead(); //for snake it will change player to chase
 				}
 			}
 		}
 		
-		if(world.player2IsDead == false)
+		if(player2.isPlayerDead== false)
 		{
 			Vector2 player2Pos = player2.getPosition(); //get position of player 1
 			if(player2.getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && player2.getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player2 is within 20 radius.x of this enemy
@@ -291,6 +287,7 @@ public class Snake {
 				if(player2.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player2.getCurrentYPos()< currCenter_Y + IMAGE_RADIUS_Y) //if player2 is within 20 radius.y of this enemy
 				{
 					pushPlayer(2);
+					player2.takeDamage(1);
 					//world.killPlayer2();
 					//world.somePlayerIsDead(); //for snake it will change player to chase
 				}

@@ -26,6 +26,7 @@ public class Player1 {
   	private float IMAGE_RADIUS_Y = GET_CENTER_Y;
   	private float currCenter_X;
   	private float currCenter_Y;
+	public boolean isPlayerDead;
     
     private static final int [][] DIR_OFFSETS = new int [][] { // for use with move method
         {0,0},
@@ -42,6 +43,7 @@ public class Player1 {
         currCenter_X = currPos.x + GET_CENTER_X;
         currCenter_Y = currPos.y + GET_CENTER_Y;
         
+        isPlayerDead = false;
         hitPoints = 3;
     }    
  
@@ -69,11 +71,12 @@ public class Player1 {
     public void checkIfAlive() {
     	if(hitPoints <= 0)
     	{
-    		world.player1IsDead = true;
+    		isPlayerDead = true;
+    		world.somePlayerIsDead();
     	}
     	else
     	{
-    		world.player1IsDead = false;
+    		isPlayerDead = false;
     	}
     }
     
