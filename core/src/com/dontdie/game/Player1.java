@@ -14,6 +14,8 @@ public class Player1 {
     public int faceDir;
     private int PLAYER_MOVE_SPEED = 4;
     public Vector2 currPos;
+    private World world;
+    private int hitPoints;
  
   //snake image size is 22*41
   	private float IMAGE_SIZE_X = 22;
@@ -34,10 +36,13 @@ public class Player1 {
     };
     
     public Player1(World world , int x, int y) { //when first init give spawn position to player 1
+    	this.world = world;
     	faceDir = DIRECTION_UP;
         currPos = new Vector2(x,y);
         currCenter_X = currPos.x + GET_CENTER_X;
         currCenter_Y = currPos.y + GET_CENTER_Y;
+        
+        hitPoints = 3;
     }    
  
     public Vector2 getPosition() { // for other class to get current position of player1
@@ -54,6 +59,22 @@ public class Player1 {
     public float getCurrentYPos() 
     {
     	return currCenter_Y = currPos.y + GET_CENTER_Y;
+    }
+    
+    public void takeDamage(int damageReceive) {
+    	hitPoints -= damageReceive;
+    	checkIfAlive();
+    }
+    
+    public void checkIfAlive() {
+    	if(hitPoints <= 0)
+    	{
+    		world.player1IsDead = true;
+    	}
+    	else
+    	{
+    		world.player1IsDead = false;
+    	}
     }
     
     public void move(int dir) { 
@@ -82,6 +103,7 @@ public class Player1 {
     
     public void update(float delta)
     {
+    	
     	getCurrentXPos();
     	getCurrentYPos();
     }

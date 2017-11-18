@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Snake {
 	private int SNAKE_MOVE_SPEED = 3;
-	private int SNAKE_PUSH_POWER = SNAKE_MOVE_SPEED * 3;
+	private int SNAKE_PUSH_POWER = SNAKE_MOVE_SPEED * 10;
 	
 	//snake image size is 40*40
 	private float IMAGE_SIZE_X = 40;
@@ -36,7 +36,9 @@ public class Snake {
     public static final int DIRECTION_BOTTOM_LEFT = 8;
     public static final int DIRECTION_STILL = 0;
 	private int faceDir;
-	private Random rand = new Random(); // to random change to face player
+	private Random rand = new Random(); // to random chance to face player
+	
+	private int cooldown_movetime; // if less than 0 will be able to move
 	
 	//when first init decide which player is to chase
 	
@@ -65,6 +67,7 @@ public class Snake {
 		{
 			player2 = world.getPlayer2();
 		}
+		cooldown_movetime = 0;
 	}
 
 	public void init() //run this method every time snake is created or every time someone is dead
@@ -135,18 +138,19 @@ public class Snake {
 			currPos.x += Math.pow((Math.pow(SNAKE_MOVE_SPEED,2) + Math.pow(SNAKE_MOVE_SPEED,2)),1/2)* DIR_OFFSETS[faceDir][0];
 			currPos.y += Math.pow((Math.pow(SNAKE_MOVE_SPEED,2) + Math.pow(SNAKE_MOVE_SPEED,2)),1/2)* DIR_OFFSETS[faceDir][1];
 		}*/
-		if(world.timestop <0) //check if whether the time is stop, if not it can move.
+		if(world.timestop <= 0 && cooldown_movetime <= 0) //check if whether the time is stop and is it in unmovable state? , if not it can move.
 		{
 			currPos.x += SNAKE_MOVE_SPEED * DIR_OFFSETS[faceDir][0];
 			currPos.y += SNAKE_MOVE_SPEED * DIR_OFFSETS[faceDir][1];
 			currCenter_X = currPos.x + GET_CENTER_X;
 			currCenter_Y = currPos.y + GET_CENTER_Y;
 		}
+		cooldown_movetime -=1;
 	}
 	
 	private void shouldItChangePlayerToChase()
 	{
-		if(rand.nextInt(10000) < 10) //if got less than x will change target
+		if(rand.nextInt(10000) < 12) //if got less than x will change target
 		{
 			if((chasingPlayer1 == true) && (world.player2IsDead == false)) 
 			{
@@ -270,7 +274,7 @@ public class Snake {
 			Vector2 player1Pos = player1.getPosition(); //get position of player 1
 			if(player1.getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && player1.getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player1 is within 20 radius.x of this enemy
 			{
-				if(player1.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player2.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this enemy
+				if(player1.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player1.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this enemy
 				{
 					pushPlayer(1);
 					//world.killPlayer1();
@@ -307,5 +311,6 @@ public class Snake {
 			world.player2.currPos.x += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][0];
 			world.player2.currPos.y += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][1];
 		}
+		cooldown_movetime = 6;
 	}
 }
