@@ -16,7 +16,10 @@ public class Timestopper {
 		{
 			player1 = world.getPlayer1();
 		}
-		player2 = world.getPlayer2();
+		if(world.player2IsDead == false) 
+		{
+			player2 = world.getPlayer2();
+		}
 		isItemPickUp = false;
 	}
 	

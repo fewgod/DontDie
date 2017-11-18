@@ -43,11 +43,14 @@ public class Snake {
 	public Snake(World world, int x, int y) { // do this method all time
 		this.world = world;
 		currPos = new Vector2(x,y);
-		if(world.player1IsDead == false)
-        {
+		if(world.player1IsDead == false) 
+		{
 			player1 = world.getPlayer1();
-        }
-		player2 = world.getPlayer2();
+		}
+		if(world.player2IsDead == false) 
+		{
+			player2 = world.getPlayer2();
+		}
 	}
 
 	private void initWhoToChase() 
@@ -85,7 +88,7 @@ public class Snake {
 			initWhoToChase(); //init who to chase for the first time
 			initWhoToChase = true;
 		}
-		if(world.player1IsDead == false && world.player2IsDead == false) // will only change target when both player is alive
+		if((world.player1IsDead == false) && (world.player2IsDead == false)) // will only change target when both player is alive
 		{	
 			shouldItChangePlayerToChase();
 		}
@@ -112,12 +115,12 @@ public class Snake {
 	{
 		if(rand.nextInt(10000) < 10) //if got less than x will change target
 		{
-			if(chasingPlayer1 == true && world.player2IsDead == false) 
+			if((chasingPlayer1 == true) && (world.player2IsDead == false)) 
 			{
 				chasingPlayer1 = false;
 				chasingPlayer2 = true;
 			}
-			else if(chasingPlayer2 == true && world.player1IsDead == false) 
+			else if((chasingPlayer2 == true) && (world.player1IsDead == false)) 
 			{
 				chasingPlayer2 = false;
 				chasingPlayer1 = true;
@@ -127,14 +130,14 @@ public class Snake {
 	
 	private void shouldItTurnTowardPlayer() 
 	{
-		if(chasingPlayer1 == true && world.player1IsDead == false)
-		{	if(rand.nextInt(100)< 11) //if less got less than x number will turn toward player1
+		if((chasingPlayer1 == true) && (world.player1IsDead == false))
+		{	if(rand.nextInt(100)< 20) //if less got less than x number will turn toward player1
 			{
 				checkWhereIsPlayer1();
 			}
 		}
-		if(chasingPlayer2 == true && world.player2IsDead == false)
-		{	if(rand.nextInt(100)< 11) //if less got less than x number will turn toward player2
+		if((chasingPlayer2 == true) && (world.player2IsDead == false))
+		{	if(rand.nextInt(100)< 20) //if less got less than x number will turn toward player2
 			{
 				checkWhereIsPlayer2();
 			}
@@ -143,13 +146,13 @@ public class Snake {
 	private void checkWhereIsPlayer1() //make snake turn toward player1 
 	{
 		Vector2 player1Pos = player1.getPosition(); //get position of player 1
-		if(player1Pos.y - rand.nextInt(20) > currPos.y) //if player is at the top of snake 
+		if(player1Pos.y - rand.nextInt(10) > currPos.y) //if player is at the top of snake 
         { //add + - randint for more variety ways of moving.. suppose to ..?
-			if(player1Pos.x - rand.nextInt(20) > currPos.x) //if player is at the top right of snake
+			if(player1Pos.x - rand.nextInt(10) > currPos.x) //if player is at the top right of snake
 	        {
 				faceDir = DIRECTION_UPPER_RIGHT;
 	        }
-			else if(player1Pos.x + rand.nextInt(20) < currPos.x) //if player is at the top left of snake
+			else if(player1Pos.x + rand.nextInt(10) < currPos.x) //if player is at the top left of snake
 	        {
 				faceDir = DIRECTION_UPPER_LEFT;
 	        }
@@ -158,13 +161,13 @@ public class Snake {
 				faceDir = DIRECTION_UP;
 			}
         }
-		if(player1Pos.y + rand.nextInt(20) < currPos.y) //if player is at the bottom of snake
+		else if(player1Pos.y + rand.nextInt(10) < currPos.y) //if player is at the bottom of snake
         {
-			if(player1Pos.x - rand.nextInt(20) > currPos.x) //if player is  at the bottom right of snake
+			if(player1Pos.x - rand.nextInt(10) > currPos.x) //if player is  at the bottom right of snake
 	        {
 				faceDir = DIRECTION_BOTTOM_RIGHT;
 	        }
-			else if(player1Pos.x + rand.nextInt(20)< currPos.x) //if player is at the bottom left of snake
+			else if(player1Pos.x + rand.nextInt(10)< currPos.x) //if player is at the bottom left of snake
 	        {
 				faceDir = DIRECTION_BOTTOM_LEFT;
 	        }
@@ -173,18 +176,26 @@ public class Snake {
 				faceDir = DIRECTION_BOTTOM;
 			}
         }
+		else if(player1Pos.x - rand.nextInt(10) > currPos.x) //if player is at the right of snake
+		{
+			faceDir = DIRECTION_RIGHT;
+		}
+		else if(player1Pos.x + rand.nextInt(10)< currPos.x) //if player is at the left of snake
+		{
+			faceDir = DIRECTION_LEFT;
+		}
 	}
 	
 	private void checkWhereIsPlayer2() //make snake turn toward player1 
 	{
         Vector2 player2Pos = player2.getPosition(); //get position of player 2
-		if(player2Pos.y - rand.nextInt(20) > currPos.y) //if player is at the top of snake 
+        if(player2Pos.y - rand.nextInt(10) > currPos.y) //if player is at the top of snake 
         { //add + - randint for more variety ways of moving.. suppose to ..?
-			if(player2Pos.x - rand.nextInt(20) > currPos.x) //if player is at the top right of snake
+			if(player2Pos.x - rand.nextInt(10) > currPos.x) //if player2 is at the top right of snake
 	        {
 				faceDir = DIRECTION_UPPER_RIGHT;
 	        }
-			else if(player2Pos.x + rand.nextInt(20) < currPos.x) //if player is at the top left of snake
+			else if(player2Pos.x + rand.nextInt(10) < currPos.x) //if player2 is at the top left of snake
 	        {
 				faceDir = DIRECTION_UPPER_LEFT;
 	        }
@@ -193,13 +204,13 @@ public class Snake {
 				faceDir = DIRECTION_UP;
 			}
         }
-		if(player2Pos.y + rand.nextInt(20) < currPos.y) //if player is at the bottom of snake
+        else if(player2Pos.y + rand.nextInt(10) < currPos.y) //if player2 is at the bottom of snake
         {
-			if(player2Pos.x - rand.nextInt(20) > currPos.x) //if player is  at the bottom right of snake
+			if(player2Pos.x - rand.nextInt(10) > currPos.x) //if player2 is  at the bottom right of snake
 	        {
 				faceDir = DIRECTION_BOTTOM_RIGHT;
 	        }
-			else if(player2Pos.x + rand.nextInt(20)< currPos.x) //if player is at the bottom left of snake
+			else if(player2Pos.x + rand.nextInt(10)< currPos.x) //if player2 is at the bottom left of snake
 	        {
 				faceDir = DIRECTION_BOTTOM_LEFT;
 	        }
@@ -208,6 +219,14 @@ public class Snake {
 				faceDir = DIRECTION_BOTTOM;
 			}
         }
+		else if(player2Pos.x - rand.nextInt(10) > currPos.x) //if player2 is at the right of snake
+		{
+			faceDir = DIRECTION_RIGHT;
+		}
+		else if(player2Pos.x + rand.nextInt(10)< currPos.x) //if player2 is at the left of snake
+		{
+			faceDir = DIRECTION_LEFT;
+		}
 	}
 	
 	private void checkIfCollideWithPlayer() //when collide will remove this enemy
@@ -220,25 +239,27 @@ public class Snake {
 				if(player1Pos.y > currPos.y - 30 && player1Pos.y < currPos.y + 30) //if player1 is within 30 radius.y of this enemy
 				{
 					world.player1IsDead = true;
-					world.player1 = null;
 					chasingPlayer1 = false;
 					chasingPlayer2 = true;
-					shouldItTurnTowardPlayer(); //force to chase the other after player1 is dead
+					world.player1 = null;
+					checkWhereIsPlayer2(); //force to chase the other after player1 is dead
+					shouldItTurnTowardPlayer();
 				}
 			}
 		}
 		if(world.player2IsDead == false)
 		{
 			Vector2 player2Pos = player2.getPosition(); //get position of player 1
-			if(player2Pos.x > currPos.x - 30 && player2Pos.x < currPos.x + 30)  //if player1 is within 30 radius.x of this enemy
+			if(player2Pos.x > currPos.x - 30 && player2Pos.x < currPos.x + 30)  //if player2 is within 30 radius.x of this enemy
 			{
-				if(player2Pos.y > currPos.y - 30 && player2Pos.y < currPos.y + 30) //if player1 is within 30 radius.y of this enemy
+				if(player2Pos.y > currPos.y - 30 && player2Pos.y < currPos.y + 30) //if player2 is within 30 radius.y of this enemy
 				{
 					world.player2IsDead = true;
-					world.player2 = null;
 					chasingPlayer2 = false;
 					chasingPlayer1 = true;
-					shouldItTurnTowardPlayer(); //force to chase the other after player2 is dead
+					world.player2 = null;
+					checkWhereIsPlayer1(); //force to chase the other after player2 is dead
+					shouldItTurnTowardPlayer();
 				}
 			}
 		}

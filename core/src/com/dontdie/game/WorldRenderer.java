@@ -22,7 +22,6 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Texture player2UpImg;
 	private Texture player2DownImg;
 	private Texture timestopperImg;
-	//private Texture player2Img;
 	private Texture backgroundImg;
 	
 	private Snake snake1;
