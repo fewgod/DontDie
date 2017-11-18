@@ -12,7 +12,10 @@ public class Timestopper {
 	public Timestopper(World world, int x, int y) { // do this method all time
 		this.world = world;
 		currPos = new Vector2(x,y);
-		player1 = world.getPlayer1();
+		if(world.player1IsDead == false) 
+		{
+			player1 = world.getPlayer1();
+		}
 		player2 = world.getPlayer2();
 		isItemPickUp = false;
 	}
@@ -31,24 +34,28 @@ public class Timestopper {
 	{
 		if(isItemPickUp == false)
 		{
-			Vector2 player1Pos = player1.getPosition(); //get position of player 1
+			if(world.player1IsDead == false)
+			{
+				Vector2 player1Pos = player1.getPosition(); //get position of player 1
+				if(player1Pos.x > currPos.x - 30 && player1Pos.x < currPos.x + 30)  //if player1 is within 30 radius.x of this item
+				{
+					if(player1Pos.y > currPos.y - 30 && player1Pos.y < currPos.y + 30) //if player1 is within 30 radius.y of this item
+					{
+						world.timestop = 250;
+        				isItemPickUp = true;
+        				world.timestopper_list.remove(0); // work only if 1 item of this class exist
+					}
+				}
+			}
+        	
         	Vector2 player2Pos = player2.getPosition(); //get position of player 2
-        	if(player1Pos.x > currPos.x - 30 && player1Pos.x < currPos.x + 30)  //if player1 is within 30 radius.x of this item
-        	{
-        		if(player1Pos.y > currPos.y - 30 && player1Pos.y < currPos.y + 30) //if player1 is within 30 radius.y of this item
-        		{
-        			world.timestop = 250;
-        			isItemPickUp = true;
-        			world.timestopper_list.remove(0); // work only if 1 item of this class exist
-        		}
-        	}
         	if(player2Pos.x > currPos.x - 30 && player2Pos.x < currPos.x + 30)  //if player2 is within 30 radius.x of this item
         	{
         		if(player2Pos.y > currPos.y - 30 && player2Pos.y < currPos.y + 30) //if player2 is within 30 radius.y of this item
         		{
         			world.timestop = 250;
         			isItemPickUp = true;
-        			world.timestopper_list.remove(0); // work only if 1 item of this class exist
+        			world.timestopper_list.remove(this);
         		}
         	}
 		}

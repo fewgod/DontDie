@@ -43,13 +43,16 @@ public class Snake {
 	public Snake(World world, int x, int y) { // do this method all time
 		this.world = world;
 		currPos = new Vector2(x,y);
-		player1 = world.getPlayer1();
+		if(world.player1IsDead == false)
+        {
+			player1 = world.getPlayer1();
+        }
 		player2 = world.getPlayer2();
 	}
 
 	private void initWhoToChase() 
 	{
-		if(rand.nextInt(100) < 50) //if got less than 50 will chase player 1
+		if(rand.nextInt(100) < 50 && world.player1IsDead == false) //if got less than 50 will chase player 1
 		{
 			chasingPlayer1 = true;
 		}
@@ -94,7 +97,7 @@ public class Snake {
 	{
 		if(rand.nextInt(10000) < 10) //if got less than x will change target
 		{
-			if(chasingPlayer1 == true) 
+			if(chasingPlayer1 == true && world.player1IsDead == false) 
 			{
 				chasingPlayer1 = false;
 				chasingPlayer2 = true;
@@ -109,7 +112,7 @@ public class Snake {
 	
 	private void shouldItTurnTowardPlayer() 
 	{
-		if(chasingPlayer1 == true)
+		if(chasingPlayer1 == true && world.player1IsDead == false)
 		{	if(rand.nextInt(100)< 11) //if less got less than x number will turn toward player1
 			{
 				checkWhereIsPlayer1();
@@ -194,14 +197,19 @@ public class Snake {
 	
 	private void checkIfCollideWithPlayer() //when collide will remove this enemy
 	{
-		Vector2 player1Pos = player1.getPosition(); //get position of player 1
+		if(world.player1IsDead == false)
+		{
+			Vector2 player1Pos = player1.getPosition(); //get position of player 1
+			if(player1Pos.x > currPos.x - 30 && player1Pos.x < currPos.x + 30)  //if player1 is within 30 radius.x of this enemy
+			{
+				if(player1Pos.y > currPos.y - 30 && player1Pos.y < currPos.y + 30) //if player1 is within 30 radius.y of this enemy
+				{
+					world.player1IsDead = true;
+					world.player1 = null;
+    			//world.snake_list.remove(this);
+				}
+			}
+		}
         Vector2 player2Pos = player2.getPosition(); //get position of player 2
-        if(player1Pos.x > currPos.x - 30 && player1Pos.x < currPos.x + 30)  //if player1 is within 30 radius.x of this enemy
-    	{
-    		if(player1Pos.y > currPos.y - 30 && player1Pos.y < currPos.y + 30) //if player1 is within 30 radius.y of this enemy
-    		{
-    			world.snake_list.remove(this);
-    		}
-    	}
 	}
 }

@@ -18,7 +18,10 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(DontDieGame dontdieGame) { //receive input and final drawn after receive from WorldRenderer if dont have Worldrenderer will only accept input but not draw anything
         this.dontdieGame = dontdieGame;
         world = new World(dontdieGame); //create
-        player1 = world.getPlayer1();
+        if(world.player1IsDead == false)
+        {
+        	player1 = world.getPlayer1();
+        }
         player2 = world.getPlayer2();
         worldRender = new WorldRenderer(this.dontdieGame,world); //what is the difference if use dontdieGame instead of this.dontdieGame
     }
@@ -33,7 +36,10 @@ public class GameScreen extends ScreenAdapter {
 
     private void update(float delta) 
     {
-    	moveplayer1();
+    	if(world.player1IsDead == false)
+        {
+    		moveplayer1();
+        }
     	moveplayer2();
     }
     private void moveplayer1()//input for player1 movement

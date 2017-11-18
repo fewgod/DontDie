@@ -45,7 +45,10 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		timestopperImg = new Texture("stopwatch.png");
 		
 		backgroundImg = new Texture("background.jpg");
-		player1 = world.getPlayer1();
+		if(world.player1IsDead == false)
+		{
+			player1 = world.getPlayer1();
+		}
 		player2 = world.getPlayer2();
 		
 		snakeImg = new Texture ("snake.png");
@@ -55,27 +58,31 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		world.update(delta); //this make the world update which will order enemy and object to update afterward
         SpriteBatch batch = dontdieGame.batch; //what is this line??
         batch.begin();
-        Vector2 player1Pos = player1.getPosition(); //get position of player 1 to draw it
-        Vector2 player2Pos = player2.getPosition(); //get position of player 2 to draw it
         batch.draw(backgroundImg, 0, 0);
-        //render player1 face
-        if(player1.faceDir == player1.DIRECTION_RIGHT)
+        
+        if(world.player1IsDead == false)
         {
-        	batch.draw(player1RightImg, player1Pos.x, player1Pos.y);
-        }
-        if(player1.faceDir == player1.DIRECTION_LEFT)
-        {
-        	batch.draw(player1LeftImg, player1Pos.x, player1Pos.y);
-        }
-        if(player1.faceDir == player1.DIRECTION_UP)
-        {
-        	batch.draw(player1UpImg, player1Pos.x, player1Pos.y);
-        }
-        if(player1.faceDir == player1.DIRECTION_DOWN)
-        {
-        	batch.draw(player1DownImg, player1Pos.x, player1Pos.y);
+        	Vector2 player1Pos = player1.getPosition(); //get position of player 1 to draw it
+        	//render player1 face
+        	if(player1.faceDir == player1.DIRECTION_RIGHT)
+        	{
+        		batch.draw(player1RightImg, player1Pos.x, player1Pos.y);
+        	}
+        	if(player1.faceDir == player1.DIRECTION_LEFT)
+        	{
+        		batch.draw(player1LeftImg, player1Pos.x, player1Pos.y);
+        	}
+        	if(player1.faceDir == player1.DIRECTION_UP)
+        	{
+        		batch.draw(player1UpImg, player1Pos.x, player1Pos.y);
+        	}
+        	if(player1.faceDir == player1.DIRECTION_DOWN)
+        	{
+        		batch.draw(player1DownImg, player1Pos.x, player1Pos.y);
+        	}
         }
         
+        Vector2 player2Pos = player2.getPosition(); //get position of player 2 to draw it
         //render player2 face
         if(player2.faceDir == player2.DIRECTION_RIGHT)
         {
