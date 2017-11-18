@@ -13,8 +13,8 @@ public class Snake {
 	private float IMAGE_SIZE_Y = 40;
 	private float GET_CENTER_X = IMAGE_SIZE_X/2;
 	private float GET_CENTER_Y = IMAGE_SIZE_Y/2;
-	private float IMAGE_RADIUS_X = IMAGE_SIZE_X/2;
-	private float IMAGE_RADIUS_Y = IMAGE_SIZE_Y/2;
+	private float IMAGE_RADIUS_X = GET_CENTER_X; //only for easy use
+	private float IMAGE_RADIUS_Y = GET_CENTER_Y;
 	private float CURR_CENTER_X;
 	private float CURR_CENTER_Y;
 	
