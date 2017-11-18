@@ -13,10 +13,10 @@ public class Snake {
 	private float IMAGE_SIZE_Y = 40;
 	private float GET_CENTER_X = IMAGE_SIZE_X/2;
 	private float GET_CENTER_Y = IMAGE_SIZE_Y/2;
-	private float IMAGE_RADIUS_X = GET_CENTER_X; //only for easy use
+	private float IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
 	private float IMAGE_RADIUS_Y = GET_CENTER_Y;
-	private float CURR_CENTER_X;
-	private float CURR_CENTER_Y;
+	private float currCenter_X;
+	private float currCenter_Y;
 	
 	private Vector2 currPos;
 	private World world;
@@ -55,8 +55,8 @@ public class Snake {
 	public Snake(World world, int x, int y) { // do this method all time
 		this.world = world;
 		currPos = new Vector2(x,y);
-		CURR_CENTER_X = currPos.x + GET_CENTER_X;
-		CURR_CENTER_Y = currPos.y + GET_CENTER_Y;
+		currCenter_X = currPos.x + GET_CENTER_X;
+		currCenter_Y = currPos.y + GET_CENTER_Y;
 		if(world.player1IsDead == false) 
 		{
 			player1 = world.getPlayer1();
@@ -94,9 +94,19 @@ public class Snake {
 	}
 	
 	public Vector2 getPosition() { // for other class to get current position of snake
-		CURR_CENTER_X = currPos.x + GET_CENTER_X;
-		CURR_CENTER_Y = currPos.y + GET_CENTER_Y;
+		currCenter_X = currPos.x + GET_CENTER_X;
+		currCenter_Y = currPos.y + GET_CENTER_Y;
         return currPos;    
+    }
+	
+	public float getCurrentXPos() 
+    {
+    	return currCenter_X = currPos.x + GET_CENTER_X;
+    }
+    
+    public float getCurrentYPos() 
+    {
+    	return currCenter_Y = currPos.y + GET_CENTER_Y;
     }
 	
 	public void update(float delta) //make snake do things
@@ -129,8 +139,8 @@ public class Snake {
 		{
 			currPos.x += SNAKE_MOVE_SPEED * DIR_OFFSETS[faceDir][0];
 			currPos.y += SNAKE_MOVE_SPEED * DIR_OFFSETS[faceDir][1];
-			CURR_CENTER_X = currPos.x + GET_CENTER_X;
-			CURR_CENTER_Y = currPos.y + GET_CENTER_Y;
+			currCenter_X = currPos.x + GET_CENTER_X;
+			currCenter_Y = currPos.y + GET_CENTER_Y;
 		}
 	}
 	
@@ -170,13 +180,13 @@ public class Snake {
 	private void checkWhereIsPlayer1() //make snake turn toward player1 
 	{
 		Vector2 player1Pos = player1.getPosition(); //get position of player 1
-		if(player1.getCurrentYPos() - rand.nextInt(10) > CURR_CENTER_Y) //if player is at the top of snake 
+		if(player1.getCurrentYPos() - rand.nextInt(10) > currCenter_Y) //if player is at the top of snake 
         { //add + - randint for more variety ways of moving.. suppose to ..?
-			if(player1.getCurrentXPos() - rand.nextInt(10) > CURR_CENTER_X) //if player is at the top right of snake
+			if(player1.getCurrentXPos() - rand.nextInt(10) > currCenter_X) //if player is at the top right of snake
 	        {
 				faceDir = DIRECTION_UPPER_RIGHT;
 	        }
-			else if(player1.getCurrentXPos()+ rand.nextInt(10) < CURR_CENTER_X) //if player is at the top left of snake
+			else if(player1.getCurrentXPos()+ rand.nextInt(10) < currCenter_X) //if player is at the top left of snake
 	        {
 				faceDir = DIRECTION_UPPER_LEFT;
 	        }
@@ -185,13 +195,13 @@ public class Snake {
 				faceDir = DIRECTION_UP;
 			}
         }
-		else if(player1.getCurrentYPos() + rand.nextInt(10) < CURR_CENTER_Y) //if player is at the bottom of snake
+		else if(player1.getCurrentYPos() + rand.nextInt(10) < currCenter_Y) //if player is at the bottom of snake
         {
-			if(player1.getCurrentXPos() - rand.nextInt(10) > CURR_CENTER_X) //if player is  at the bottom right of snake
+			if(player1.getCurrentXPos() - rand.nextInt(10) > currCenter_X) //if player is  at the bottom right of snake
 	        {
 				faceDir = DIRECTION_BOTTOM_RIGHT;
 	        }
-			else if(player1.getCurrentXPos() + rand.nextInt(10)< CURR_CENTER_X) //if player is at the bottom left of snake
+			else if(player1.getCurrentXPos() + rand.nextInt(10)< currCenter_X) //if player is at the bottom left of snake
 	        {
 				faceDir = DIRECTION_BOTTOM_LEFT;
 	        }
@@ -200,11 +210,11 @@ public class Snake {
 				faceDir = DIRECTION_BOTTOM;
 			}
         }
-		else if(player1.getCurrentXPos() - rand.nextInt(10) > CURR_CENTER_X) //if player is at the right of snake
+		else if(player1.getCurrentXPos() - rand.nextInt(10) > currCenter_X) //if player is at the right of snake
 		{
 			faceDir = DIRECTION_RIGHT;
 		}
-		else if(player1.getCurrentXPos() + rand.nextInt(10)< CURR_CENTER_X) //if player is at the left of snake
+		else if(player1.getCurrentXPos() + rand.nextInt(10)< currCenter_X) //if player is at the left of snake
 		{
 			faceDir = DIRECTION_LEFT;
 		}
@@ -213,13 +223,13 @@ public class Snake {
 	private void checkWhereIsPlayer2() //make snake turn toward player1 
 	{
         //Vector2 player2Pos = player2.getPosition(); //get position of player 2
-        if(player2.getCurrentYPos() - rand.nextInt(10) > currPos.y) //if player is at the top of snake 
+        if(player2.getCurrentYPos() - rand.nextInt(10) > currCenter_Y) //if player is at the top of snake 
         { //add + - randint for more variety ways of moving.. suppose to ..?
-			if(player2.getCurrentXPos() - rand.nextInt(10) > CURR_CENTER_X) //if player2 is at the top right of snake
+			if(player2.getCurrentXPos() - rand.nextInt(10) > currCenter_X) //if player2 is at the top right of snake
 	        {
 				faceDir = DIRECTION_UPPER_RIGHT;
 	        }
-			else if(player2.getCurrentXPos() + rand.nextInt(10) < CURR_CENTER_X) //if player2 is at the top left of snake
+			else if(player2.getCurrentXPos() + rand.nextInt(10) < currCenter_X) //if player2 is at the top left of snake
 	        {
 				faceDir = DIRECTION_UPPER_LEFT;
 	        }
@@ -228,13 +238,13 @@ public class Snake {
 				faceDir = DIRECTION_UP;
 			}
         }
-        else if(player2.getCurrentYPos() + rand.nextInt(10) < CURR_CENTER_Y) //if player2 is at the bottom of snake
+        else if(player2.getCurrentYPos() + rand.nextInt(10) < currCenter_Y) //if player2 is at the bottom of snake
         {
-			if(player2.getCurrentXPos() - rand.nextInt(10) > CURR_CENTER_X) //if player2 is  at the bottom right of snake
+			if(player2.getCurrentXPos() - rand.nextInt(10) > currCenter_X) //if player2 is  at the bottom right of snake
 	        {
 				faceDir = DIRECTION_BOTTOM_RIGHT;
 	        }
-			else if(player2.getCurrentXPos() + rand.nextInt(10)< CURR_CENTER_X) //if player2 is at the bottom left of snake
+			else if(player2.getCurrentXPos() + rand.nextInt(10)< currCenter_X) //if player2 is at the bottom left of snake
 	        {
 				faceDir = DIRECTION_BOTTOM_LEFT;
 	        }
@@ -243,11 +253,11 @@ public class Snake {
 				faceDir = DIRECTION_BOTTOM;
 			}
         }
-		else if(player2.getCurrentXPos() - rand.nextInt(10) > CURR_CENTER_X) //if player2 is at the right of snake
+		else if(player2.getCurrentXPos() - rand.nextInt(10) > currCenter_X) //if player2 is at the right of snake
 		{
 			faceDir = DIRECTION_RIGHT;
 		}
-		else if(player2.getCurrentXPos() + rand.nextInt(10)< CURR_CENTER_X) //if player2 is at the left of snake
+		else if(player2.getCurrentXPos() + rand.nextInt(10)< currCenter_X) //if player2 is at the left of snake
 		{
 			faceDir = DIRECTION_LEFT;
 		}
@@ -258,9 +268,9 @@ public class Snake {
 		if(world.player1IsDead == false)
 		{
 			Vector2 player1Pos = player1.getPosition(); //get position of player 1
-			if(player1Pos.x > CURR_CENTER_X - IMAGE_RADIUS_X && player1Pos.x < CURR_CENTER_X + IMAGE_RADIUS_X)  //if player1 is within 20 radius.x of this enemy
+			if(player1Pos.x > currCenter_X - IMAGE_RADIUS_X && player1Pos.x < currCenter_X + IMAGE_RADIUS_X)  //if player1 is within 20 radius.x of this enemy
 			{
-				if(player1Pos.y > CURR_CENTER_Y - IMAGE_RADIUS_Y && player1Pos.y < CURR_CENTER_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this enemy
+				if(player1Pos.y > currCenter_Y - IMAGE_RADIUS_Y && player1Pos.y < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this enemy
 				{
 					//pushPlayer(1);
 					world.killPlayer1();
@@ -272,9 +282,9 @@ public class Snake {
 		if(world.player2IsDead == false)
 		{
 			Vector2 player2Pos = player2.getPosition(); //get position of player 1
-			if(player2Pos.x > CURR_CENTER_X - IMAGE_RADIUS_X && player2Pos.x < CURR_CENTER_X + IMAGE_RADIUS_X)  //if player2 is within 20 radius.x of this enemy
+			if(player2Pos.x > currCenter_X - IMAGE_RADIUS_X && player2Pos.x < currCenter_X + IMAGE_RADIUS_X)  //if player2 is within 20 radius.x of this enemy
 			{
-				if(player2Pos.y > CURR_CENTER_Y - IMAGE_RADIUS_Y && player2Pos.y < CURR_CENTER_Y + IMAGE_RADIUS_Y) //if player2 is within 20 radius.y of this enemy
+				if(player2Pos.y > currCenter_Y - IMAGE_RADIUS_Y && player2Pos.y < currCenter_Y + IMAGE_RADIUS_Y) //if player2 is within 20 radius.y of this enemy
 				{
 					//pushPlayer(2);
 					world.killPlayer2();

@@ -62,6 +62,8 @@ public class WorldRenderer { //what happen to the game world will be draw here
         batch.begin();
         batch.draw(backgroundImg, 0, 0);
         
+        
+        //when draw:draw currPos position, but when calculate, use CURR_CENTER so hit box of that object will always be at center of image
         if(world.player1IsDead == false)
         {
         	Vector2 player1Pos = player1.getPosition(); //get position of player 1 to draw it
