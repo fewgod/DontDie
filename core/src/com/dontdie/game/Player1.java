@@ -15,7 +15,7 @@ public class Player1 {
     private int PLAYER_MOVE_SPEED = 4;
     public Vector2 currPos;
     private World world;
-    private int hitPoints;
+    private int hitPoints; //should be private but for test will let it be public
  
   //snake image size is 22*41
   	private float IMAGE_SIZE_X = 22;

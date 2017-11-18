@@ -61,7 +61,7 @@ public class World { // what happen to the game will be create here
     	}
     }
 
-    public void somePlayerIsDead() { 
+    public void somePlayerIsDead() { //or somePlayer being revived 
     	// to let other class call this method to reconfig all enemies to change pattern and change who to chase
     	//wont run unless being call
     	for(int i =0 ; i< snake_list.size() ; i++) //update every snake in snake_list
