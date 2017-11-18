@@ -53,8 +53,10 @@ public class Snake {
 		}
 	}
 
-	private void initWhoToChase() 
+	private void initWhoToChase() //run this method every time snake is created or every time someone is dead
 	{
+		chasingPlayer1 = false;
+		chasingPlayer2 = false;
 		if(world.player1IsDead == false && world.player2IsDead == false) // if both alive will random
 		{	
 			int randomedNumber = rand.nextInt(100);
@@ -88,12 +90,15 @@ public class Snake {
 			initWhoToChase(); //init who to chase for the first time
 			initWhoToChase = true;
 		}
-		if((world.player1IsDead == false) && (world.player2IsDead == false)) // will only change target when both player is alive
+		if(world.player1IsDead == false && world.player2IsDead == false) // will only change target when both player is alive
 		{	
 			shouldItChangePlayerToChase();
 		}
 		shouldItTurnTowardPlayer();
-		move();
+		if(world.player1IsDead == false || world.player2IsDead == false) //if both are dead will stop moving
+		{
+			move();
+		}
 		checkIfCollideWithPlayer();
     }
 
@@ -131,18 +136,19 @@ public class Snake {
 	private void shouldItTurnTowardPlayer() 
 	{
 		if((chasingPlayer1 == true) && (world.player1IsDead == false))
-		{	if(rand.nextInt(100)< 20) //if less got less than x number will turn toward player1
+		{	if(rand.nextInt(100)< 11) //if less got less than x number will turn toward player1
 			{
 				checkWhereIsPlayer1();
 			}
 		}
 		if((chasingPlayer2 == true) && (world.player2IsDead == false))
-		{	if(rand.nextInt(100)< 20) //if less got less than x number will turn toward player2
+		{	if(rand.nextInt(100)< 11) //if less got less than x number will turn toward player2
 			{
 				checkWhereIsPlayer2();
 			}
 		}
 	}
+	
 	private void checkWhereIsPlayer1() //make snake turn toward player1 
 	{
 		Vector2 player1Pos = player1.getPosition(); //get position of player 1
@@ -239,14 +245,17 @@ public class Snake {
 				if(player1Pos.y > currPos.y - 30 && player1Pos.y < currPos.y + 30) //if player1 is within 30 radius.y of this enemy
 				{
 					world.player1IsDead = true;
-					chasingPlayer1 = false;
-					chasingPlayer2 = true;
 					world.player1 = null;
-					checkWhereIsPlayer2(); //force to chase the other after player1 is dead
-					shouldItTurnTowardPlayer();
+					
+					for(int i =0 ; i< world.snake_list.size() ; i++) //update every snake in snake_list
+			    	{
+			    		world.snake_list.get(i).initWhoToChase(); //force every snake to chase the other after player1 is dead
+			    		shouldItTurnTowardPlayer();
+			    	}
 				}
 			}
 		}
+		
 		if(world.player2IsDead == false)
 		{
 			Vector2 player2Pos = player2.getPosition(); //get position of player 1
@@ -255,11 +264,13 @@ public class Snake {
 				if(player2Pos.y > currPos.y - 30 && player2Pos.y < currPos.y + 30) //if player2 is within 30 radius.y of this enemy
 				{
 					world.player2IsDead = true;
-					chasingPlayer2 = false;
-					chasingPlayer1 = true;
 					world.player2 = null;
-					checkWhereIsPlayer1(); //force to chase the other after player2 is dead
-					shouldItTurnTowardPlayer();
+
+					for(int i =0 ; i< world.snake_list.size() ; i++) //update every snake in snake_list
+			    	{
+			    		world.snake_list.get(i).initWhoToChase(); //force every snake to chase the other after player1 is dead
+			    		shouldItTurnTowardPlayer();
+			    	}
 				}
 			}
 		}

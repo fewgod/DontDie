@@ -37,7 +37,7 @@ public class World { // what happen to the game will be create here
         
         timestopper_list.add( new Timestopper(world, rand.nextInt(600)+50 , rand.nextInt(500)+50));//add 1 timestopper item to the world
         
-        for(int i = 0 ; i< rand.nextInt(6) + 1 ; i++)  //add i number of snake 
+        for(int i = 0 ; i< rand.nextInt(20) + 1 ; i++)  //add i number of snake 
         {
         	snake_list.add( new Snake(world, rand.nextInt(600)+50 , rand.nextInt(500)+50)); //add 1 snake to snake_list at random position
         }
