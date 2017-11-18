@@ -10,8 +10,9 @@ public class Snake {
 	private World world;
 	private Player1 player1;
 	private Player1 player2;
-	private boolean chasingPlayer1;
-	private boolean chasingPlayer2;
+	private boolean chasingPlayer1 = false;
+	private boolean chasingPlayer2 = false;
+	private boolean initWhoToChase = false;
 	
 	public static final int DIRECTION_UP = 1;
     public static final int DIRECTION_RIGHT = 2;
@@ -24,6 +25,8 @@ public class Snake {
     public static final int DIRECTION_STILL = 0;
 	private int faceDir;
 	private Random rand = new Random(); // to random change to face player
+	
+	//when first init decide which player is to chase
 	
 	private static final int [][] DIR_OFFSETS = new int [][] { // for use with move method
         {0,0}, //still
@@ -44,15 +47,33 @@ public class Snake {
 		player2 = world.getPlayer2();
 	}
 
+	private void initWhoToChase() 
+	{
+		if(rand.nextInt(100) < 50) //if got less than 50 will chase player 1
+		{
+			chasingPlayer1 = true;
+		}
+		else
+		{
+			chasingPlayer2 = true;
+		}
+	}
+	
 	public Vector2 getPosition() { // for other class to get current position of snake
         return currPos;    
     }
 	
 	public void update(float delta) //make snake do things
     {
+		if(initWhoToChase == false)
+		{
+			initWhoToChase(); //init who to chase for the first time
+			initWhoToChase = true;
+		}
+		shouldItChangePlayerToChase();
 		shouldItTurnTowardPlayer();
 		move();
-		//checkIfCollideWithPlayer();
+		checkIfCollideWithPlayer();
     }
 
 	private void move() 
@@ -71,7 +92,7 @@ public class Snake {
 	
 	private void shouldItChangePlayerToChase()
 	{
-		if(rand.nextInt(1000) < 20) //if got less than x will change target
+		if(rand.nextInt(10000) < 10) //if got less than x will change target
 		{
 			if(chasingPlayer1 == true) 
 			{
@@ -88,15 +109,22 @@ public class Snake {
 	
 	private void shouldItTurnTowardPlayer() 
 	{
-		if(rand.nextInt(100)< 8) //if less got less than x number will turn toward player1
-		{
-			checkWhereIsPlayer1();
+		if(chasingPlayer1 == true)
+		{	if(rand.nextInt(100)< 11) //if less got less than x number will turn toward player1
+			{
+				checkWhereIsPlayer1();
+			}
+		}
+		if(chasingPlayer2 == true)
+		{	if(rand.nextInt(100)< 11) //if less got less than x number will turn toward player1
+			{
+				checkWhereIsPlayer2();
+			}
 		}
 	}
 	private void checkWhereIsPlayer1() //make snake turn toward player1 
 	{
 		Vector2 player1Pos = player1.getPosition(); //get position of player 1
-        Vector2 player2Pos = player2.getPosition(); //get position of player 2
 		if(player1Pos.y - rand.nextInt(20) > currPos.y) //if player is at the top of snake 
         { //add + - randint for more variety ways of moving.. suppose to ..?
 			if(player1Pos.x - rand.nextInt(20) > currPos.x) //if player is at the top right of snake
@@ -129,13 +157,51 @@ public class Snake {
         }
 	}
 	
-	private void checkIfCollideWithPlayer() //player1 test only
+	private void checkWhereIsPlayer2() //make snake turn toward player1 
+	{
+        Vector2 player2Pos = player2.getPosition(); //get position of player 2
+		if(player2Pos.y - rand.nextInt(20) > currPos.y) //if player is at the top of snake 
+        { //add + - randint for more variety ways of moving.. suppose to ..?
+			if(player2Pos.x - rand.nextInt(20) > currPos.x) //if player is at the top right of snake
+	        {
+				faceDir = DIRECTION_UPPER_RIGHT;
+	        }
+			else if(player2Pos.x + rand.nextInt(20) < currPos.x) //if player is at the top left of snake
+	        {
+				faceDir = DIRECTION_UPPER_LEFT;
+	        }
+			else //if player is at the top of snake only
+			{
+				faceDir = DIRECTION_UP;
+			}
+        }
+		if(player2Pos.y + rand.nextInt(20) < currPos.y) //if player is at the bottom of snake
+        {
+			if(player2Pos.x - rand.nextInt(20) > currPos.x) //if player is  at the bottom right of snake
+	        {
+				faceDir = DIRECTION_BOTTOM_RIGHT;
+	        }
+			else if(player2Pos.x + rand.nextInt(20)< currPos.x) //if player is at the bottom left of snake
+	        {
+				faceDir = DIRECTION_BOTTOM_LEFT;
+	        }
+			else //if player is at the bottom of snake only
+			{
+				faceDir = DIRECTION_BOTTOM;
+			}
+        }
+	}
+	
+	private void checkIfCollideWithPlayer() //when collide will remove this enemy
 	{
 		Vector2 player1Pos = player1.getPosition(); //get position of player 1
         Vector2 player2Pos = player2.getPosition(); //get position of player 2
-        if(player1Pos.x == currPos.x && player1Pos.y == currPos.y) 
-        {
-        	world.removePlayer();
-        }
+        if(player1Pos.x > currPos.x - 30 && player1Pos.x < currPos.x + 30)  //if player1 is within 30 radius.x of this enemy
+    	{
+    		if(player1Pos.y > currPos.y - 30 && player1Pos.y < currPos.y + 30) //if player1 is within 30 radius.y of this enemy
+    		{
+    			world.snake_list.remove(this);
+    		}
+    	}
 	}
 }

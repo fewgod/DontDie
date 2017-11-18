@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 
 public class World { // what happen to the game will be create here
-    private Player1 player1;
-    private Player1 player2;
+    public Player1 player1;
+    public Player1 player2;
     private DontDieGame dontdieGame;
     public ArrayList<Snake> snake_list = new ArrayList<Snake>();
     
