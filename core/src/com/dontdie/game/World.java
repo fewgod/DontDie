@@ -37,7 +37,7 @@ public class World { // what happen to the game will be create here
         
         timestopper_list.add( new Timestopper(world, rand.nextInt(600)+50 , rand.nextInt(500)+50));//add 1 timestopper item to the world
         
-        for(int i = 0 ; i< rand.nextInt(20) + 1 ; i++)  //add i number of snake 
+        for(int i = 0 ; i< rand.nextInt(5) + 1 ; i++)  //add i number of snake 
         {
         	snake_list.add( new Snake(world, rand.nextInt(600)+50 , rand.nextInt(500)+50)); //add 1 snake to snake_list at random position
         }
@@ -54,8 +54,13 @@ public class World { // what happen to the game will be create here
         return snake_list.get(i);
     }
 
-    public void removePlayer() { // test not working
-    	snake_list.remove(0);//just to make it doen't give blank method
+    public void somePlayerIsDead() { 
+    	// to let other class call this method to reconfig all enemies to change pattern and change who to chase
+    	//wont run unless being call
+    	for(int i =0 ; i< snake_list.size() ; i++) //update every snake in snake_list
+    	{
+    		snake_list.get(i).init(); //force every snake to chase the other after player1 is dead;
+    	}
     }
     
     public void update(float delta) //for make every object update itself

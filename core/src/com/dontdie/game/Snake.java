@@ -53,7 +53,7 @@ public class Snake {
 		}
 	}
 
-	private void initWhoToChase() //run this method every time snake is created or every time someone is dead
+	public void init() //run this method every time snake is created or every time someone is dead
 	{
 		chasingPlayer1 = false;
 		chasingPlayer2 = false;
@@ -87,7 +87,7 @@ public class Snake {
     {
 		if(initWhoToChase == false)
 		{
-			initWhoToChase(); //init who to chase for the first time
+			init(); //init who to chase for the first time
 			initWhoToChase = true;
 		}
 		if(world.player1IsDead == false && world.player2IsDead == false) // will only change target when both player is alive
@@ -246,12 +246,7 @@ public class Snake {
 				{
 					world.player1IsDead = true;
 					world.player1 = null;
-					
-					for(int i =0 ; i< world.snake_list.size() ; i++) //update every snake in snake_list
-			    	{
-			    		world.snake_list.get(i).initWhoToChase(); //force every snake to chase the other after player1 is dead
-			    		shouldItTurnTowardPlayer();
-			    	}
+					world.somePlayerIsDead(); //for snake it will change player to chase
 				}
 			}
 		}
@@ -265,14 +260,11 @@ public class Snake {
 				{
 					world.player2IsDead = true;
 					world.player2 = null;
-
-					for(int i =0 ; i< world.snake_list.size() ; i++) //update every snake in snake_list
-			    	{
-			    		world.snake_list.get(i).initWhoToChase(); //force every snake to chase the other after player1 is dead
-			    		shouldItTurnTowardPlayer();
-			    	}
+					world.somePlayerIsDead(); //for snake it will change player to chase
 				}
 			}
 		}
 	}
+	
+	
 }
