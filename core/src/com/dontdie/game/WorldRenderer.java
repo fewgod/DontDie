@@ -49,7 +49,10 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		{
 			player1 = world.getPlayer1();
 		}
-		player2 = world.getPlayer2();
+		if(world.player2IsDead == false)
+		{
+			player2 = world.getPlayer2();
+		}
 		
 		snakeImg = new Texture ("snake.png");
 	}
@@ -81,24 +84,26 @@ public class WorldRenderer { //what happen to the game world will be draw here
         		batch.draw(player1DownImg, player1Pos.x, player1Pos.y);
         	}
         }
-        
-        Vector2 player2Pos = player2.getPosition(); //get position of player 2 to draw it
-        //render player2 face
-        if(player2.faceDir == player2.DIRECTION_RIGHT)
+        if(world.player2IsDead == false)
         {
-        	batch.draw(player2RightImg, player2Pos.x, player2Pos.y);
-        }
-        if(player2.faceDir == player2.DIRECTION_LEFT)
-        {
-        	batch.draw(player2LeftImg, player2Pos.x, player2Pos.y);
-        }
-        if(player2.faceDir == player2.DIRECTION_UP)
-        {
-        	batch.draw(player2UpImg, player2Pos.x, player2Pos.y);
-        }
-        if(player2.faceDir == player2.DIRECTION_DOWN)
-        {
-        	batch.draw(player2DownImg, player2Pos.x, player2Pos.y);
+        	Vector2 player2Pos = player2.getPosition(); //get position of player 2 to draw it
+        	//render player2 face
+        	if(player2.faceDir == player2.DIRECTION_RIGHT)
+        	{
+        		batch.draw(player2RightImg, player2Pos.x, player2Pos.y);
+        	}
+        	if(player2.faceDir == player2.DIRECTION_LEFT)
+        	{
+        		batch.draw(player2LeftImg, player2Pos.x, player2Pos.y);
+        	}
+        	if(player2.faceDir == player2.DIRECTION_UP)
+        	{
+        		batch.draw(player2UpImg, player2Pos.x, player2Pos.y);
+        	}
+        	if(player2.faceDir == player2.DIRECTION_DOWN)
+        	{
+        		batch.draw(player2DownImg, player2Pos.x, player2Pos.y);
+        	}
         }
         
         for(int i =0;i< world.snake_list.size(); i++) //draw every snake in snake_list

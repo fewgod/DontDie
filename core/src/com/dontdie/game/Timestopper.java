@@ -48,15 +48,18 @@ public class Timestopper {
 				}
 			}
         	
-        	Vector2 player2Pos = player2.getPosition(); //get position of player 2
-        	if(player2Pos.x > currPos.x - 30 && player2Pos.x < currPos.x + 30)  //if player2 is within 30 radius.x of this item
-        	{
-        		if(player2Pos.y > currPos.y - 30 && player2Pos.y < currPos.y + 30) //if player2 is within 30 radius.y of this item
-        		{
-        			world.timestop = 250;
-        			isItemPickUp = true;
-        			world.timestopper_list.remove(this);
-        		}
+			if(world.player2IsDead == false)
+			{
+				Vector2 player2Pos = player2.getPosition(); //get position of player 2
+				if(player2Pos.x > currPos.x - 30 && player2Pos.x < currPos.x + 30)  //if player2 is within 30 radius.x of this item
+				{
+					if(player2Pos.y > currPos.y - 30 && player2Pos.y < currPos.y + 30) //if player2 is within 30 radius.y of this item
+					{
+						world.timestop = 250;
+						isItemPickUp = true;
+						world.timestopper_list.remove(this);
+					}
+				}
         	}
 		}
 	}

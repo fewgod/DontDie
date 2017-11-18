@@ -22,7 +22,10 @@ public class GameScreen extends ScreenAdapter {
         {
         	player1 = world.getPlayer1();
         }
-        player2 = world.getPlayer2();
+        if(world.player2IsDead == false)
+        {
+        	player2 = world.getPlayer2();
+        }
         worldRender = new WorldRenderer(this.dontdieGame,world); //what is the difference if use dontdieGame instead of this.dontdieGame
     }
     
@@ -40,7 +43,10 @@ public class GameScreen extends ScreenAdapter {
         {
     		moveplayer1();
         }
-    	moveplayer2();
+    	if(world.player2IsDead == false)
+        {
+    		moveplayer2();
+        }
     }
     private void moveplayer1()//input for player1 movement
     {
