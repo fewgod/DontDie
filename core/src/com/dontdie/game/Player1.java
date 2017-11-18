@@ -10,7 +10,7 @@ public class Player1 {
     public static final int DIRECTION_STILL = 0;
     public int faceDir = DIRECTION_UP;
     private int PLAYER_MOVE_SPEED = 4;
-    private Vector2 currPos;
+    public Vector2 currPos;
  
     private static final int [][] DIR_OFFSETS = new int [][] { // for use with move method
         {0,0},

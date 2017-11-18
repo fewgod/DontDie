@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Snake {
 	private int SNAKE_MOVE_SPEED = 3;
+	private int SNAKE_PUSH_POWER = SNAKE_MOVE_SPEED * 3;
 	private Vector2 currPos;
 	private World world;
 	private Player1 player1;
@@ -244,8 +245,8 @@ public class Snake {
 			{
 				if(player1Pos.y > currPos.y - 30 && player1Pos.y < currPos.y + 30) //if player1 is within 30 radius.y of this enemy
 				{
-					world.player1IsDead = true;
-					world.player1 = null;
+					//pushPlayer(1);
+					world.killPlayer1();
 					world.somePlayerIsDead(); //for snake it will change player to chase
 				}
 			}
@@ -258,13 +259,26 @@ public class Snake {
 			{
 				if(player2Pos.y > currPos.y - 30 && player2Pos.y < currPos.y + 30) //if player2 is within 30 radius.y of this enemy
 				{
-					world.player2IsDead = true;
-					world.player2 = null;
+					//pushPlayer(2);
+					world.killPlayer2();
 					world.somePlayerIsDead(); //for snake it will change player to chase
 				}
 			}
 		}
 	}
 	
-	
+	private void pushPlayer(int player) 
+	{
+		int playerNumber = player;
+		if(playerNumber == 1)
+		{
+			world.player1.currPos.x += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][0];
+			world.player1.currPos.y += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][1];
+		}
+		if(playerNumber == 2)
+		{
+			world.player2.currPos.x += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][0];
+			world.player2.currPos.y += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][1];
+		}
+	}
 }
