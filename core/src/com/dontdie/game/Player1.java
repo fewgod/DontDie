@@ -42,6 +42,16 @@ public class Player1 {
         return currPos;    
     }
     
+    public float getCurrentXPos() 
+    {
+    	return CURR_CENTER_X = currPos.x + GET_CENTER_X;
+    }
+    
+    public float getCurrentYPos() 
+    {
+    	return CURR_CENTER_Y = currPos.y + GET_CENTER_Y;
+    }
+    
     public void move(int dir) { 
     	if(CURR_CENTER_X < 10) // prevent player walk off screen
     	{

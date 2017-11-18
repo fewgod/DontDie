@@ -55,9 +55,9 @@ public class Timestopper {
 			if(world.player1IsDead == false)
 			{
 				Vector2 player1Pos = player1.getPosition(); //get position of player 1
-				if(player1Pos.x > CURR_CENTER_X - IMAGE_RADIUS_X && player1Pos.x < CURR_CENTER_X + IMAGE_RADIUS_X)  //if player1 is within 20 radius.x of this item
+				if(player1.getCurrentXPos() > CURR_CENTER_X - IMAGE_RADIUS_X && player1Pos.x < CURR_CENTER_X + IMAGE_RADIUS_X)  //if player1 is within 20 radius.x of this item
 				{
-					if(player1Pos.y > CURR_CENTER_Y - IMAGE_RADIUS_Y && player1Pos.y < CURR_CENTER_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this item
+					if(player1.getCurrentYPos() > CURR_CENTER_Y - IMAGE_RADIUS_Y && player1Pos.y < CURR_CENTER_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this item
 					{
 						world.timestop = 250;
         				isItemPickUp = true;
@@ -69,9 +69,9 @@ public class Timestopper {
 			if(world.player2IsDead == false)
 			{
 				Vector2 player2Pos = player2.getPosition(); //get position of player 2
-				if(player2Pos.x > CURR_CENTER_X - IMAGE_RADIUS_X && player2Pos.x < CURR_CENTER_X + IMAGE_RADIUS_X)  //if player2 is within 30 radius.x of this item
+				if(player2.getCurrentXPos() > CURR_CENTER_X - IMAGE_RADIUS_X && player2Pos.x < CURR_CENTER_X + IMAGE_RADIUS_X)  //if player2 is within 30 radius.x of this item
 				{
-					if(player2Pos.y > CURR_CENTER_Y - IMAGE_RADIUS_Y && player2Pos.y < CURR_CENTER_Y + IMAGE_RADIUS_Y) //if player2 is within 30 radius.y of this item
+					if(player2.getCurrentYPos() > CURR_CENTER_Y - IMAGE_RADIUS_Y && player2Pos.y < CURR_CENTER_Y + IMAGE_RADIUS_Y) //if player2 is within 30 radius.y of this item
 					{
 						world.timestop = 250;
 						isItemPickUp = true;
