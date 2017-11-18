@@ -11,7 +11,7 @@ public class Player1 {
     public static final int DIRECTION_DOWN = 3;
     public static final int DIRECTION_LEFT = 4;
     public static final int DIRECTION_STILL = 0;
-    public int faceDir = DIRECTION_UP;
+    public int faceDir;
     private int PLAYER_MOVE_SPEED = 4;
     public Vector2 currPos;
  
@@ -34,6 +34,7 @@ public class Player1 {
     };
     
     public Player1(World world , int x, int y) { //when first init give spawn position to player 1
+    	faceDir = DIRECTION_UP;
         currPos = new Vector2(x,y);
         currCenter_X = currPos.x + GET_CENTER_X;
         currCenter_Y = currPos.y + GET_CENTER_Y;
@@ -77,5 +78,11 @@ public class Player1 {
     	currCenter_X = currPos.x + GET_CENTER_X;
     	currCenter_Y = currPos.y + GET_CENTER_Y;
         // first [dir] is chose which {,} to use, second [] chose first para or second para in {,}
+    }
+    
+    public void update(float delta)
+    {
+    	getCurrentXPos();
+    	getCurrentYPos();
     }
 }

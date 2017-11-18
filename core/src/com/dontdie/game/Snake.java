@@ -268,13 +268,13 @@ public class Snake {
 		if(world.player1IsDead == false)
 		{
 			Vector2 player1Pos = player1.getPosition(); //get position of player 1
-			if(player1Pos.x > currCenter_X - IMAGE_RADIUS_X && player1Pos.x < currCenter_X + IMAGE_RADIUS_X)  //if player1 is within 20 radius.x of this enemy
+			if(player1.getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && player1.getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player1 is within 20 radius.x of this enemy
 			{
-				if(player1Pos.y > currCenter_Y - IMAGE_RADIUS_Y && player1Pos.y < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this enemy
+				if(player1.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player2.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this enemy
 				{
-					//pushPlayer(1);
-					world.killPlayer1();
-					world.somePlayerIsDead(); //for snake it will change player to chase
+					pushPlayer(1);
+					//world.killPlayer1();
+					//world.somePlayerIsDead(); //for snake it will change player to chase
 				}
 			}
 		}
@@ -282,13 +282,13 @@ public class Snake {
 		if(world.player2IsDead == false)
 		{
 			Vector2 player2Pos = player2.getPosition(); //get position of player 1
-			if(player2Pos.x > currCenter_X - IMAGE_RADIUS_X && player2Pos.x < currCenter_X + IMAGE_RADIUS_X)  //if player2 is within 20 radius.x of this enemy
+			if(player2.getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && player2.getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player2 is within 20 radius.x of this enemy
 			{
-				if(player2Pos.y > currCenter_Y - IMAGE_RADIUS_Y && player2Pos.y < currCenter_Y + IMAGE_RADIUS_Y) //if player2 is within 20 radius.y of this enemy
+				if(player2.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player2.getCurrentYPos()< currCenter_Y + IMAGE_RADIUS_Y) //if player2 is within 20 radius.y of this enemy
 				{
-					//pushPlayer(2);
-					world.killPlayer2();
-					world.somePlayerIsDead(); //for snake it will change player to chase
+					pushPlayer(2);
+					//world.killPlayer2();
+					//world.somePlayerIsDead(); //for snake it will change player to chase
 				}
 			}
 		}
