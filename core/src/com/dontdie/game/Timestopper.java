@@ -9,6 +9,17 @@ public class Timestopper {
 	private Player1 player2;
 	private boolean isItemPickUp;
 	
+	//timestopper image size is 40*40
+	private float IMAGE_SIZE_X = 40;
+  	private float IMAGE_SIZE_Y = 40;
+  	private float GET_CENTER_X = IMAGE_SIZE_X/2;
+  	private float GET_CENTER_Y = IMAGE_SIZE_Y/2;
+  	private float IMAGE_RADIUS_X = IMAGE_SIZE_X/2;
+  	private float IMAGE_RADIUS_Y = IMAGE_SIZE_Y/2;
+  	private float CURR_CENTER_X;
+  	private float CURR_CENTER_Y;
+	
+	
 	public Timestopper(World world, int x, int y) { // do this method all time
 		this.world = world;
 		currPos = new Vector2(x,y);
