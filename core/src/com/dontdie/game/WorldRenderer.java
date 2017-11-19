@@ -61,20 +61,6 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		backgroundImg = new Texture("background.jpg");
 		player1 = world.getPlayer1();
 		player2 = world.getPlayer2();
-		
-		healthBarImg_100 = new Texture("healthbar_100.png");
-		healthBarImg_90 = new Texture("healthbar_90.png");
-		healthBarImg_80 = new Texture("healthbar_80.png");
-		healthBarImg_60 = new Texture("healthbar_60.png");
-		healthBarImg_50 = new Texture("healthbar_50.png");
-		healthBarImg_40 = new Texture("healthbar_40.png");
-		healthBarImg_20 = new Texture("healthbar_20.png");
-		healthBarImg_10 = new Texture("healthbar_10.png");
-		healthBarImg_5 = new Texture("healthbar_5.png");
-		healthBarImg_0 = new Texture("healthbar_0.png");
-		
-		healthBarImg = new Texture("healthbar_" + player1.hpScale + ".png");
-		
 		swordAni_LeftImg = new Texture("sword_ani_left.png");
 		
 		snakeImg = new Texture ("snake.png");
@@ -108,6 +94,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
         		batch.draw(player1DownImg, player1Pos.x, player1Pos.y);
         	}
         }
+        
         if(player2.isPlayerDead == false)
         {
         	Vector2 player2Pos = player2.getPosition(); //get position of player 2 to draw it
@@ -139,6 +126,9 @@ public class WorldRenderer { //what happen to the game world will be draw here
     	{
         	batch.draw(timestopperImg, world.timestopper_list.get(i).getPosition().x, world.timestopper_list.get(i).getPosition().y);
     	}
+        
+		healthBarImg = new Texture("healthbar_"+player1.hpScale+".png");
+        batch.draw(healthBarImg, -80,-100);
         batch.end();
     }
 	
@@ -150,14 +140,6 @@ public class WorldRenderer { //what happen to the game world will be draw here
         Vector2 player2Pos = player2.getPosition();
         batch.begin();
         batch.draw(swordAni_LeftImg, player1Pos.x-35, player1Pos.y-15);
-        batch.end();
-	}
-	public void render_player1_HP(float delta)
-	{ // this draw game animation to window
-		world.update(delta); //this make the world update which will order enemy and object to update afterward
-        SpriteBatch batch = dontdieGame.batch; //what is this line??
-        batch.begin();
-        batch.draw(healthBarImg, 10,10);
         batch.end();
 	}
 	

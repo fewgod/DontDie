@@ -15,10 +15,10 @@ public class Player1 {
     private int PLAYER_MOVE_SPEED = 4;
     public Vector2 currPos;
     private World world;
-    private int MAX_HITPOINTS = 3;
-    private int hitPoints; //should be private but for test will let it be public
-    private float hpPercentage; //for draw hp bar
-    public int hpScale = Math.round(hpPercentage/10);
+    private double MAX_HITPOINTS = 10;
+    public double hitPoints; //should be private but for test will let it be public
+    public double hpPercentage; //for draw hp bar
+    public long hpScale;
  
   //snake image size is 22*41
   	private float IMAGE_SIZE_X = 22;
@@ -49,6 +49,7 @@ public class Player1 {
         isPlayerDead = false;
         hitPoints = MAX_HITPOINTS;
         hpPercentage = (hitPoints / MAX_HITPOINTS)*100 ;
+        hpScale = Math.round(hpPercentage/10);
     }    
  
     public Vector2 getPosition() { // for other class to get current position of player1
@@ -110,7 +111,8 @@ public class Player1 {
     
     public void update(float delta)
     {
-    	
+    	hpPercentage = (hitPoints / MAX_HITPOINTS)*100 ;
+        hpScale = Math.round(hpPercentage/10);
     	getCurrentXPos();
     	getCurrentYPos();
     }
