@@ -25,17 +25,8 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Texture backgroundImg;
 	
 	//health bar images
-	private Texture healthBarImg_100;
-	private Texture healthBarImg_90;
-	private Texture healthBarImg_80;
-	private Texture healthBarImg_60;
-	private Texture healthBarImg_50;
-	private Texture healthBarImg_40;
-	private Texture healthBarImg_20;
-	private Texture healthBarImg_10;
-	private Texture healthBarImg_5;
-	private Texture healthBarImg_0;
-	private Texture healthBarImg;
+	private Texture healthBar1Img;
+	private Texture healthBar2Img;
 	
 	private Texture swordAni_LeftImg;
 	
@@ -127,8 +118,10 @@ public class WorldRenderer { //what happen to the game world will be draw here
         	batch.draw(timestopperImg, world.timestopper_list.get(i).getPosition().x, world.timestopper_list.get(i).getPosition().y);
     	}
         
-		healthBarImg = new Texture("healthbar_"+player1.hpScale+".png");
-        batch.draw(healthBarImg, -80,-100);
+        healthBar1Img = new Texture("healthbar_"+player1.hpScale+".png");
+        healthBar2Img = new Texture("healthbar_"+player2.hpScale+".png");
+        batch.draw(healthBar1Img, 10 ,15);
+        batch.draw(healthBar2Img, 590 ,15);
         batch.end();
     }
 	

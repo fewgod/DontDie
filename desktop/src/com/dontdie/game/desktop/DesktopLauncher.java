@@ -14,5 +14,3 @@ public class DesktopLauncher {
 		new LwjglApplication(new DontDieGame(), config);
 	}
 }
-
-// need 70&30 health bar images and resize all of them
