@@ -24,6 +24,8 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Texture timestopperImg;
 	private Texture backgroundImg;
 	
+	private Texture swordAni_LeftImg;
+	
 	private Snake snake1;
 	private Texture snakeImg;
 	public WorldRenderer(DontDieGame dontdieGame, World world) {
@@ -44,8 +46,10 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		timestopperImg = new Texture("stopwatch.png");
 		
 		backgroundImg = new Texture("background.jpg");
-			player1 = world.getPlayer1();
-			player2 = world.getPlayer2();
+		player1 = world.getPlayer1();
+		player2 = world.getPlayer2();
+		
+		swordAni_LeftImg = new Texture("sword_ani_left.png");
 		
 		snakeImg = new Texture ("snake.png");
 	}
