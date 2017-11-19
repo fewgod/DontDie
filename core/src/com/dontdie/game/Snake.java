@@ -39,7 +39,7 @@ public class Snake {
 	private Random rand = new Random(); // to random chance to face player
 	
 	private int cooldown_movetime; // if less than 0 will be able to move
-	private int MAX_HITPOINTS = 3;
+	private int MAX_HITPOINTS = 2;
     private int hitPoints;
 	
 	
@@ -152,9 +152,14 @@ public class Snake {
 		{
 			currPos.x += SNAKE_MOVE_SPEED * DIR_OFFSETS[faceDir][0];
 			currPos.y += SNAKE_MOVE_SPEED * DIR_OFFSETS[faceDir][1];
-			currCenter_X = currPos.x + GET_CENTER_X;
-			currCenter_Y = currPos.y + GET_CENTER_Y;
 		}
+		else if (world.timestop >= 0 && world.timestop <= 75) //add breaking timestop animation when timestop is running out
+		{
+			currPos.x += rand.nextInt(3);
+			currPos.x -= rand.nextInt(3);
+		}
+		currCenter_X = currPos.x + GET_CENTER_X;
+		currCenter_Y = currPos.y + GET_CENTER_Y;
 		cooldown_movetime -=1;
 	}
 	
