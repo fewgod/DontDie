@@ -121,7 +121,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
         healthBar1Img = new Texture("healthbar_"+player1.hpScale+".png");
         healthBar2Img = new Texture("healthbar_"+player2.hpScale+".png");
         batch.draw(healthBar1Img, 10 ,15);
-        batch.draw(healthBar2Img, 590 ,15);
+        batch.draw(healthBar2Img, 610 ,15);
         batch.end();
     }
 	

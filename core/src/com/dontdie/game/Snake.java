@@ -308,6 +308,6 @@ public class Snake {
 			world.player2.currPos.x += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][0];
 			world.player2.currPos.y += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][1];
 		}
-		cooldown_movetime = 6;
+		cooldown_movetime = 10;
 	}
 }
