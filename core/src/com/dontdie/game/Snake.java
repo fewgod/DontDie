@@ -18,7 +18,7 @@ public class Snake {
 	private float currCenter_X;
 	private float currCenter_Y;
 	
-	private Vector2 currPos;
+	public Vector2 currPos;
 	private World world;
 	private Player1 player1;
 	private Player1 player2;

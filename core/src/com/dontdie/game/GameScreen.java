@@ -67,6 +67,10 @@ public class GameScreen extends ScreenAdapter {
             player1.faceDir = Player1.DIRECTION_LEFT;
             player1.move(Player1.DIRECTION_LEFT);
         }
+        if(Gdx.input.isKeyPressed(Keys.E)) 
+        {
+    		world.attack_list.add( new Attack(world, player1.getCurrentXPos() , player1.getCurrentYPos()));
+        }
     }
     
     private void moveplayer2()//input for player2 movement
@@ -90,6 +94,10 @@ public class GameScreen extends ScreenAdapter {
         {
         	player2.faceDir = Player1.DIRECTION_LEFT;
             player2.move(Player1.DIRECTION_LEFT);
+        }
+        if(Gdx.input.isKeyPressed(Keys.R)) 
+        {
+    		world.attack_list.add( new Attack(world, player2.getCurrentXPos() , player2.getCurrentYPos()));
         }
     }
 }

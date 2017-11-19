@@ -28,6 +28,7 @@ public class Attack {
   	private float IMAGE_RADIUS_Y = GET_CENTER_Y;
   	private float currCenter_X;
   	private float currCenter_Y;
+	private int availableTime;
     
     private static final int [][] DIR_OFFSETS = new int [][] { // for use with move method
         {0,0},
@@ -37,11 +38,12 @@ public class Attack {
         {-1,0}
     };
     
-    public Attack(World world , int x, int y) { //when first init give spawn position to player 1
+    public Attack(World world , float f, float g) { //when first init give spawn position to player 1
     	this.world = world;
-        currPos = new Vector2(x,y);
+        currPos = new Vector2(f,g);
         currCenter_X = currPos.x + GET_CENTER_X;
         currCenter_Y = currPos.y + GET_CENTER_Y;
+        availableTime = 10;
     }    
  
     public Vector2 getPosition() { // for other class to get current position of player1
@@ -74,6 +76,7 @@ public class Attack {
     	getCurrentXPos();
     	getCurrentYPos();
     	checkIfHitEnemy();
+    	dissapearTime();
     }
     
     private void checkIfHitEnemy()
@@ -93,8 +96,16 @@ public class Attack {
     
     private void pushEnemy(Snake snake) 
 	{
-		world.player1.currPos.x += ATTACK_PUSH_POWER * DIR_OFFSETS[faceDir][0];
-		world.player1.currPos.y += ATTACK_PUSH_POWER * DIR_OFFSETS[faceDir][1];
+    	snake.currPos.x += ATTACK_PUSH_POWER * DIR_OFFSETS[faceDir][0];
+    	snake.currPos.y += ATTACK_PUSH_POWER * DIR_OFFSETS[faceDir][1];
 	}
     
+    private void dissapearTime()
+    {
+    	availableTime -=1;
+    	if(availableTime <= 0)
+    	{
+    		world.attack_list.remove(this);
+    	}
+    }
 }

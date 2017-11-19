@@ -13,10 +13,9 @@ public class Player1 {
     public static final int DIRECTION_STILL = 0;
     public int faceDir;
     private int PLAYER_MOVE_SPEED = 4;
-    public int PLAYER_PUSH_POWER = PLAYER_MOVE_SPEED * 7;
     public Vector2 currPos;
     private World world;
-    private double MAX_HITPOINTS = 100;
+    private double MAX_HITPOINTS = 10;
     private double hitPoints; //should be private but for test will let it be public
     private double hpPercentage; //for draw hp bar
     public long hpScale;

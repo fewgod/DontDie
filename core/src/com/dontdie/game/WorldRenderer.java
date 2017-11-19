@@ -28,7 +28,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Texture healthBar1Img;
 	private Texture healthBar2Img;
 	
-	private Texture swordAni_LeftImg;
+	private Texture attackImg;
 	
 	private Snake snake1;
 	private Texture snakeImg;
@@ -52,7 +52,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		backgroundImg = new Texture("background.jpg");
 		player1 = world.getPlayer1();
 		player2 = world.getPlayer2();
-		swordAni_LeftImg = new Texture("sword_ani_left.png");
+		attackImg = new Texture("sword_ani_left.png");
 		
 		snakeImg = new Texture ("snake.png");
 	}
@@ -108,6 +108,11 @@ public class WorldRenderer { //what happen to the game world will be draw here
         	}
         }
         
+        for(int i =0;i< world.attack_list.size(); i++) //draw every currently available attack
+    	{
+        	batch.draw(attackImg, world.attack_list.get(i).getPosition().x, world.attack_list.get(i).getPosition().y);
+    	}
+        
         for(int i =0;i< world.snake_list.size(); i++) //draw every snake in snake_list
     	{
         	batch.draw(snakeImg, world.snake_list.get(i).getPosition().x, world.snake_list.get(i).getPosition().y);
@@ -132,7 +137,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
         Vector2 player1Pos = player1.getPosition();
         Vector2 player2Pos = player2.getPosition();
         batch.begin();
-        batch.draw(swordAni_LeftImg, player1Pos.x-35, player1Pos.y-15);
+        batch.draw(attackImg, player1Pos.x-35, player1Pos.y-15);
         batch.end();
 	}
 	

@@ -14,6 +14,7 @@ public class World { // what happen to the game will be create here
     
     public int timestop  = 0; //init the time stop count to 0
     public ArrayList<Timestopper> timestopper_list = new ArrayList<Timestopper>();
+    public ArrayList<Attack> attack_list = new ArrayList<Attack>();
     
     public World world;
     
@@ -74,6 +75,11 @@ public class World { // what happen to the game will be create here
     {
     	player1.update(delta);
     	player2.update(delta);
+    	
+    	for(int i =0 ; i< attack_list.size() ; i++) //update every snake in snake_list
+    	{
+    		attack_list.get(i).update(delta);
+    	}
     	
     	for(int i =0 ; i< snake_list.size() ; i++) //update every snake in snake_list
     	{
