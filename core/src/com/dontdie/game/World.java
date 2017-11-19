@@ -24,6 +24,11 @@ public class World { // what happen to the game will be create here
 	public boolean chose2Player;
 	private Random rand = new Random(); //for random things such as number
 	
+	private static final int DIRECTION_UP = 1;
+    private static final int DIRECTION_RIGHT = 2;
+    private static final int DIRECTION_DOWN = 3;
+    private static final int DIRECTION_LEFT = 4;
+	
     public World(DontDieGame dontdieGame) {
     	world = this;
         this.dontdieGame = dontdieGame; //? why must use this and why it must be 'this.dontdieGame = dontdieGame';
@@ -33,10 +38,7 @@ public class World { // what happen to the game will be create here
         
         timestopper_list.add( new Timestopper(world, rand.nextInt(600)+50 , rand.nextInt(500)+50));//add 1 timestopper item to the world
         
-        for(int i = 0 ; i< rand.nextInt(5) + 1 ; i++)  //add i number of snake 
-        {
-        	snake_list.add( new Snake(world, rand.nextInt(600)+50 , rand.nextInt(500)+50)); //add 1 snake to snake_list at random position
-        }
+        spawnSnake(5);
     }
  
     Player1 getPlayer1() {
@@ -68,6 +70,30 @@ public class World { // what happen to the game will be create here
     	for(int i =0 ; i< snake_list.size() ; i++) //update every snake in snake_list
     	{
     		snake_list.get(i).init(); //force every snake to chase the other after player1 is dead;
+    	}
+    }
+    
+    private void spawnSnake(int numberofSnake) 
+    {
+    	for(int i =0 ; i< numberofSnake ; i++) 
+    	{
+    		int laneNumber = rand.nextInt(4)+1;
+    		if(laneNumber == DIRECTION_UP)
+    		{
+    			snake_list.add( new Snake(world, rand.nextInt(900) , 750));
+    		}
+    		if(laneNumber == DIRECTION_DOWN)
+    		{
+    			snake_list.add( new Snake(world, rand.nextInt(900) , -50));
+    		}
+    		if(laneNumber == DIRECTION_LEFT)
+    		{
+    			snake_list.add( new Snake(world, -50 , rand.nextInt(700)));
+    		}
+    		if(laneNumber == DIRECTION_RIGHT)
+    		{
+    			snake_list.add( new Snake(world, 950 , rand.nextInt(700)));
+    		}
     	}
     }
     

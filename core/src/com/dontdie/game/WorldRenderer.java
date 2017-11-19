@@ -110,7 +110,8 @@ public class WorldRenderer { //what happen to the game world will be draw here
         
         for(int i =0;i< world.attack_list.size(); i++) //draw every currently available attack
     	{
-        	batch.draw(attackImg, world.attack_list.get(i).getPosition().x, world.attack_list.get(i).getPosition().y);
+        	Vector2 attack_i = world.attack_list.get(i).getPosition();
+        	batch.draw(attackImg, attack_i.x, attack_i.y); //change from draw current center to draw current position
     	}
         
         for(int i =0;i< world.snake_list.size(); i++) //draw every snake in snake_list
@@ -129,16 +130,5 @@ public class WorldRenderer { //what happen to the game world will be draw here
         batch.draw(healthBar2Img, 610 ,15);
         batch.end();
     }
-	
-	public void render_animation(float delta)
-	{ // this draw game animation to window
-		world.update(delta); //this make the world update which will order enemy and object to update afterward
-        SpriteBatch batch = dontdieGame.batch; //what is this line??
-        Vector2 player1Pos = player1.getPosition();
-        Vector2 player2Pos = player2.getPosition();
-        batch.begin();
-        batch.draw(attackImg, player1Pos.x-35, player1Pos.y-15);
-        batch.end();
-	}
 	
 }

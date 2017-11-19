@@ -15,13 +15,13 @@ public class Attack {
     public static final int DIRECTION_STILL = 0;
     public int faceDir;
     private int ATTACK_MOVE_SPEED = 4;
-    private int ATTACK_PUSH_POWER = ATTACK_MOVE_SPEED * 7;
+    private int ATTACK_PUSH_POWER = ATTACK_MOVE_SPEED * 15;
     public Vector2 currPos;
     private World world;
  
-  //attack image size is 22*41
-  	private float IMAGE_SIZE_X = 22;
-  	private float IMAGE_SIZE_Y = 41;
+  //attack image size is 50*75
+  	private float IMAGE_SIZE_X = 50;
+  	private float IMAGE_SIZE_Y = 75;
   	private float GET_CENTER_X = IMAGE_SIZE_X/2;
   	private float GET_CENTER_Y = IMAGE_SIZE_Y/2;
   	private float IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
@@ -38,12 +38,13 @@ public class Attack {
         {-1,0}
     };
     
-    public Attack(World world , float f, float g) { //when first init give spawn position to player 1
+    public Attack(World world ,int playerDirection, float f, float g) { //when first init give spawn position to player 1
     	this.world = world;
         currPos = new Vector2(f,g);
         currCenter_X = currPos.x + GET_CENTER_X;
         currCenter_Y = currPos.y + GET_CENTER_Y;
         availableTime = 10;
+        faceDir = playerDirection;
     }    
  
     public Vector2 getPosition() { // for other class to get current position of player1

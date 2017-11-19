@@ -39,7 +39,7 @@ public class Snake {
 	private Random rand = new Random(); // to random chance to face player
 	
 	private int cooldown_movetime; // if less than 0 will be able to move
-	private int MAX_HITPOINTS = 1;
+	private int MAX_HITPOINTS = 3;
     private int hitPoints;
 	
 	

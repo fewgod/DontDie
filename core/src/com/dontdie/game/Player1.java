@@ -19,6 +19,7 @@ public class Player1 {
     private double hitPoints; //should be private but for test will let it be public
     private double hpPercentage; //for draw hp bar
     public long hpScale;
+    public int attackCoolDown;
  
   //snake image size is 22*41
   	private float IMAGE_SIZE_X = 22;
@@ -47,6 +48,7 @@ public class Player1 {
         currCenter_Y = currPos.y + GET_CENTER_Y;
         
         isPlayerDead = false;
+        attackCoolDown = 0;
         hitPoints = MAX_HITPOINTS;
         hpPercentage = (hitPoints / MAX_HITPOINTS)*100 ;
         hpScale = Math.round(hpPercentage/10);
@@ -86,22 +88,6 @@ public class Player1 {
     }
     
     public void move(int dir) { 
-    	/*if(currCenter_X < 0) // prevent player walk off screen
-    	{
-    		currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[2][0];
-    	}
-    	if(currCenter_X > SCREEN_WIDTH - 0)
-    	{
-    		currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[4][0];
-    	}
-    	if(currCenter_Y < 0)
-    	{
-    		currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[1][1];
-    	}
-    	if(currCenter_Y > SCREEN_HEIGHT - 0)
-    	{
-    		currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[3][1];
-    	}*/
     	currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[dir][0];
     	currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[dir][1];
     	currCenter_X = currPos.x + GET_CENTER_X;
@@ -129,6 +115,7 @@ public class Player1 {
     	}
     	hpPercentage = (hitPoints / MAX_HITPOINTS)*100 ;
         hpScale = Math.round(hpPercentage/10);
+        attackCoolDown -=1;
     	getCurrentXPos();
     	getCurrentYPos();
     }
