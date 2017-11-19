@@ -178,13 +178,13 @@ public class Snake {
 	private void shouldItTurnTowardPlayer() 
 	{
 		if(chasingPlayer1 == true && player1.isPlayerDead == false)
-		{	if(rand.nextInt(100)< 11) //if less got less than x number will turn toward player1
+		{	if(rand.nextInt(100)<= 9) //if less got less than x number will turn toward player1
 			{
 				checkWhereIsPlayer1();
 			}
 		}
 		if(chasingPlayer2 == true && player2.isPlayerDead == false)
-		{	if(rand.nextInt(100)< 11) //if less got less than x number will turn toward player2
+		{	if(rand.nextInt(100)<= 9) //if less got less than x number will turn toward player2
 			{
 				checkWhereIsPlayer2();
 			}
@@ -311,13 +311,19 @@ public class Snake {
 		int playerNumber = player;
 		if(playerNumber == 1)
 		{
-			world.player1.currPos.x += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][0];
-			world.player1.currPos.y += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][1];
+			if(world.player1.invisibleTime <= 0)
+			{
+				world.player1.currPos.x += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][0];
+				world.player1.currPos.y += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][1];
+			}
 		}
 		if(playerNumber == 2)
 		{
-			world.player2.currPos.x += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][0];
-			world.player2.currPos.y += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][1];
+			if(world.player2.invisibleTime <= 0)
+			{
+				world.player2.currPos.x += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][0];
+				world.player2.currPos.y += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][1];
+			}
 		}
 		cooldown_movetime = 10;
 	}

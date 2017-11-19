@@ -20,6 +20,7 @@ public class Player1 {
     private double hpPercentage; //for draw hp bar
     public long hpScale;
     public int attackCoolDown;
+    public int invisibleTime;
  
   //snake image size is 22*41
   	private float IMAGE_SIZE_X = 22;
@@ -52,6 +53,7 @@ public class Player1 {
         hitPoints = MAX_HITPOINTS;
         hpPercentage = (hitPoints / MAX_HITPOINTS)*100 ;
         hpScale = Math.round(hpPercentage/10);
+        invisibleTime = 0;
     }    
  
     public Vector2 getPosition() { // for other class to get current position of player1
@@ -71,8 +73,12 @@ public class Player1 {
     }
     
     public void takeDamage(int damageReceive) {
-    	hitPoints -= damageReceive;
-    	checkIfAlive();
+    	if(invisibleTime <=0)
+    	{
+    		hitPoints -= damageReceive;
+    		checkIfAlive();
+    		invisibleTime = 15;
+    	}
     }
     
     public void checkIfAlive() {
@@ -116,6 +122,7 @@ public class Player1 {
     	hpPercentage = (hitPoints / MAX_HITPOINTS)*100 ;
         hpScale = Math.round(hpPercentage/10);
         attackCoolDown -=1;
+        invisibleTime -=1;
     	getCurrentXPos();
     	getCurrentYPos();
     }

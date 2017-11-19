@@ -38,7 +38,7 @@ public class World { // what happen to the game will be create here
         
         timestopper_list.add( new Timestopper(world, rand.nextInt(600)+50 , rand.nextInt(500)+50));//add 1 timestopper item to the world
         
-        spawnSnake(5);
+        //spawnSnake(5);
     }
  
     Player1 getPlayer1() {
@@ -97,6 +97,16 @@ public class World { // what happen to the game will be create here
     	}
     }
     
+    private void randomSpawnEnemy() 
+    {
+    	if(timestop <= 0)
+    	{
+    		if(rand.nextInt(100) <= 2) //gradually spawn snake by random number
+    		{
+    			spawnSnake(1);
+    		}
+    	}
+    }
     public void update(float delta) //for make every object update itself
     {
     	player1.update(delta);
@@ -115,6 +125,7 @@ public class World { // what happen to the game will be create here
     	{
     		timestopper_list.get(i).update(delta);
     	}
+    	randomSpawnEnemy();
     	timestop -= 1; //test time stop count down timer
     }
 }
