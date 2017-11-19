@@ -24,10 +24,20 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Texture timestopperImg;
 	private Texture backgroundImg;
 	
+	//health bar images
+	private Texture healthBarImg_100;
+	private Texture healthBarImg_90;
+	private Texture healthBarImg_80;
+	private Texture healthBarImg_60;
+	private Texture healthBarImg_50;
+	private Texture healthBarImg_40;
+	private Texture healthBarImg_20;
+	private Texture healthBarImg_10;
+	private Texture healthBarImg_5;
+	private Texture healthBarImg_0;
+	private Texture healthBarImg;
+	
 	private Texture swordAni_LeftImg;
-	private Texture swordBlue_LeftImg;
-	private Texture swordBlue_ULImg;
-	private Texture swordBlue_DLImg;
 	
 	private Snake snake1;
 	private Texture snakeImg;
@@ -52,10 +62,20 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		player1 = world.getPlayer1();
 		player2 = world.getPlayer2();
 		
+		healthBarImg_100 = new Texture("healthbar_100.png");
+		healthBarImg_90 = new Texture("healthbar_90.png");
+		healthBarImg_80 = new Texture("healthbar_80.png");
+		healthBarImg_60 = new Texture("healthbar_60.png");
+		healthBarImg_50 = new Texture("healthbar_50.png");
+		healthBarImg_40 = new Texture("healthbar_40.png");
+		healthBarImg_20 = new Texture("healthbar_20.png");
+		healthBarImg_10 = new Texture("healthbar_10.png");
+		healthBarImg_5 = new Texture("healthbar_5.png");
+		healthBarImg_0 = new Texture("healthbar_0.png");
+		
+		healthBarImg = new Texture("healthbar_" + player1.hpScale + ".png");
+		
 		swordAni_LeftImg = new Texture("sword_ani_left.png");
-		swordBlue_LeftImg = new Texture("sword_blue_l.png");
-		swordBlue_ULImg = new Texture("sword_blue_ul.png");
-		swordBlue_DLImg = new Texture("sword_blue_dl.png");
 		
 		snakeImg = new Texture ("snake.png");
 	}
@@ -130,9 +150,15 @@ public class WorldRenderer { //what happen to the game world will be draw here
         Vector2 player2Pos = player2.getPosition();
         batch.begin();
         batch.draw(swordAni_LeftImg, player1Pos.x-35, player1Pos.y-15);
-        /*batch.draw(swordBlue_DLImg, player1Pos.x-60, player1Pos.y-15);
-        batch.draw(swordBlue_LeftImg, player1Pos.x-60, player1Pos.y-15);
-        batch.draw(swordBlue_ULImg, player1Pos.x-60, player1Pos.y-15);*/
         batch.end();
 	}
+	public void render_player1_HP(float delta)
+	{ // this draw game animation to window
+		world.update(delta); //this make the world update which will order enemy and object to update afterward
+        SpriteBatch batch = dontdieGame.batch; //what is this line??
+        batch.begin();
+        batch.draw(healthBarImg, 10,10);
+        batch.end();
+	}
+	
 }

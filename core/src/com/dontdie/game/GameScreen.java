@@ -1,7 +1,9 @@
 package com.dontdie.game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -31,7 +33,7 @@ public class GameScreen extends ScreenAdapter {
         worldRender.render(delta);
         update(delta);
     }
-
+    
     private void update(float delta) 
     {
     	if(player1.isPlayerDead == false)
@@ -41,10 +43,6 @@ public class GameScreen extends ScreenAdapter {
     	if(player2.isPlayerDead == false)
         {
     		moveplayer2();
-        }
-    	if(Gdx.input.isKeyPressed(Keys.E)) 
-        {
-    		worldRender.render_animation(delta);
         }
     }
     private void moveplayer1()//input for player1 movement
