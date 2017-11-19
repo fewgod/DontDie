@@ -13,11 +13,12 @@ public class Player1 {
     public static final int DIRECTION_STILL = 0;
     public int faceDir;
     private int PLAYER_MOVE_SPEED = 4;
+    public int PLAYER_PUSH_POWER = PLAYER_MOVE_SPEED * 7;
     public Vector2 currPos;
     private World world;
-    private double MAX_HITPOINTS = 10;
-    public double hitPoints; //should be private but for test will let it be public
-    public double hpPercentage; //for draw hp bar
+    private double MAX_HITPOINTS = 100;
+    private double hitPoints; //should be private but for test will let it be public
+    private double hpPercentage; //for draw hp bar
     public long hpScale;
  
   //snake image size is 22*41
@@ -86,6 +87,31 @@ public class Player1 {
     }
     
     public void move(int dir) { 
+    	/*if(currCenter_X < 0) // prevent player walk off screen
+    	{
+    		currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[2][0];
+    	}
+    	if(currCenter_X > SCREEN_WIDTH - 0)
+    	{
+    		currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[4][0];
+    	}
+    	if(currCenter_Y < 0)
+    	{
+    		currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[1][1];
+    	}
+    	if(currCenter_Y > SCREEN_HEIGHT - 0)
+    	{
+    		currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[3][1];
+    	}*/
+    	currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[dir][0];
+    	currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[dir][1];
+    	currCenter_X = currPos.x + GET_CENTER_X;
+    	currCenter_Y = currPos.y + GET_CENTER_Y;
+        // first [dir] is chose which {,} to use, second [] chose first para or second para in {,}
+    }
+    
+    public void update(float delta)
+    {
     	if(currCenter_X < 0) // prevent player walk off screen
     	{
     		currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[2][0];
@@ -102,15 +128,6 @@ public class Player1 {
     	{
     		currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[3][1];
     	}
-    	currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[dir][0];
-    	currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[dir][1];
-    	currCenter_X = currPos.x + GET_CENTER_X;
-    	currCenter_Y = currPos.y + GET_CENTER_Y;
-        // first [dir] is chose which {,} to use, second [] chose first para or second para in {,}
-    }
-    
-    public void update(float delta)
-    {
     	hpPercentage = (hitPoints / MAX_HITPOINTS)*100 ;
         hpScale = Math.round(hpPercentage/10);
     	getCurrentXPos();

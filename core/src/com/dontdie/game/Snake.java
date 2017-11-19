@@ -39,6 +39,9 @@ public class Snake {
 	private Random rand = new Random(); // to random chance to face player
 	
 	private int cooldown_movetime; // if less than 0 will be able to move
+	private int MAX_HITPOINTS = 1;
+    private int hitPoints;
+	
 	
 	//when first init decide which player is to chase
 	
@@ -63,6 +66,7 @@ public class Snake {
 		player1 = world.getPlayer1();
 		player2 = world.getPlayer2();
 		cooldown_movetime = 0;
+		hitPoints = MAX_HITPOINTS;
 	}
 
 	public void init() //run this method every time snake is created or every time someone is dead
@@ -91,6 +95,17 @@ public class Snake {
 		}
 	}
 	
+	public void takeDamage(int damageReceive) {
+    	hitPoints -= damageReceive;
+    	checkIfAlive();
+    }
+	
+	public void checkIfAlive() {
+		if(hitPoints <=0)
+		{
+			world.snake_list.remove(this);
+		}
+	}
 	public Vector2 getPosition() { // for other class to get current position of snake
 		currCenter_X = currPos.x + GET_CENTER_X;
 		currCenter_Y = currPos.y + GET_CENTER_Y;
@@ -273,8 +288,6 @@ public class Snake {
 				{
 					pushPlayer(1);
 					player1.takeDamage(1);
-					//world.killPlayer1();
-					//world.somePlayerIsDead(); //for snake it will change player to chase
 				}
 			}
 		}
@@ -288,8 +301,6 @@ public class Snake {
 				{
 					pushPlayer(2);
 					player2.takeDamage(1);
-					//world.killPlayer2();
-					//world.somePlayerIsDead(); //for snake it will change player to chase
 				}
 			}
 		}
