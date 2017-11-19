@@ -25,10 +25,11 @@ public class GameScreen extends ScreenAdapter {
     
     @Override
     public void render(float delta) {
-    	update(delta);
+    	//update(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         worldRender.render(delta);
+        update(delta);
     }
 
     private void update(float delta) 
@@ -40,6 +41,10 @@ public class GameScreen extends ScreenAdapter {
     	if(player2.isPlayerDead == false)
         {
     		moveplayer2();
+        }
+    	if(Gdx.input.isKeyPressed(Keys.E)) 
+        {
+    		worldRender.render_animation(delta);
         }
     }
     private void moveplayer1()//input for player1 movement

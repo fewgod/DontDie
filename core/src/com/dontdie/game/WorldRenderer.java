@@ -25,6 +25,9 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Texture backgroundImg;
 	
 	private Texture swordAni_LeftImg;
+	private Texture swordBlue_LeftImg;
+	private Texture swordBlue_ULImg;
+	private Texture swordBlue_DLImg;
 	
 	private Snake snake1;
 	private Texture snakeImg;
@@ -50,6 +53,9 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		player2 = world.getPlayer2();
 		
 		swordAni_LeftImg = new Texture("sword_ani_left.png");
+		swordBlue_LeftImg = new Texture("sword_blue_l.png");
+		swordBlue_ULImg = new Texture("sword_blue_ul.png");
+		swordBlue_DLImg = new Texture("sword_blue_dl.png");
 		
 		snakeImg = new Texture ("snake.png");
 	}
@@ -59,7 +65,6 @@ public class WorldRenderer { //what happen to the game world will be draw here
         SpriteBatch batch = dontdieGame.batch; //what is this line??
         batch.begin();
         batch.draw(backgroundImg, 0, 0);
-        
         
         //when draw:draw currPos position, but when calculate, use CURR_CENTER so hit box of that object will always be at center of image
         if(player1.isPlayerDead == false)
@@ -116,4 +121,18 @@ public class WorldRenderer { //what happen to the game world will be draw here
     	}
         batch.end();
     }
+	
+	public void render_animation(float delta)
+	{ // this draw game animation to window
+		world.update(delta); //this make the world update which will order enemy and object to update afterward
+        SpriteBatch batch = dontdieGame.batch; //what is this line??
+        Vector2 player1Pos = player1.getPosition();
+        Vector2 player2Pos = player2.getPosition();
+        batch.begin();
+        batch.draw(swordAni_LeftImg, player1Pos.x-35, player1Pos.y-15);
+        /*batch.draw(swordBlue_DLImg, player1Pos.x-60, player1Pos.y-15);
+        batch.draw(swordBlue_LeftImg, player1Pos.x-60, player1Pos.y-15);
+        batch.draw(swordBlue_ULImg, player1Pos.x-60, player1Pos.y-15);*/
+        batch.end();
+	}
 }
