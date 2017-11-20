@@ -52,6 +52,13 @@ public class Timestopper {
 		checkIfCollideWithPlayer();
     }
 	
+	public void timestop() 
+	{
+		world.timestop = 250;
+		isItemPickUp = true;
+		world.timestopper_list.remove(this);
+	}
+	
 	private void checkIfCollideWithPlayer() //player1 test only
 	{
 		if(isItemPickUp == false)
@@ -63,9 +70,7 @@ public class Timestopper {
 				{
 					if(player1.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player1.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this item
 					{
-						world.timestop = 250;
-        				isItemPickUp = true;
-        				world.timestopper_list.remove(this);
+						timestop();
 					}
 				}
 			}
@@ -77,9 +82,7 @@ public class Timestopper {
 				{
 					if(player2.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player2.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player2 is within 30 radius.y of this item
 					{
-						world.timestop = 250;
-						isItemPickUp = true;
-						world.timestopper_list.remove(this);
+						timestop();
 					}
 				}
         	}

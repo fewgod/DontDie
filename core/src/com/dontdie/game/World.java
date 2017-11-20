@@ -37,8 +37,8 @@ public class World { // what happen to the game will be create here
         player1 = new Player1(world, 300,150); // create class in class??
         player2 = new Player1(world, 600,150);
         
-        timestopper_list.add( new Timestopper(world, rand.nextInt(600)+50 , rand.nextInt(500)+50));//add 1 timestopper item to the world
-        
+        timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
+        potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
         //spawnSnake(5);
     }
  
@@ -81,19 +81,19 @@ public class World { // what happen to the game will be create here
     		int laneNumber = rand.nextInt(4)+1;
     		if(laneNumber == DIRECTION_UP)
     		{
-    			snake_list.add( new Snake(world, rand.nextInt(900) , dontdieGame.SCREEN_HEIGHT +50));
+    			snake_list.add( new Snake(world, rand.nextInt(dontdieGame.SCREEN_WIDTH) , dontdieGame.SCREEN_HEIGHT +50));
     		}
     		if(laneNumber == DIRECTION_DOWN)
     		{
-    			snake_list.add( new Snake(world, rand.nextInt(900) ,dontdieGame.SCREEN_HEIGHT -50));
+    			snake_list.add( new Snake(world, rand.nextInt(dontdieGame.SCREEN_WIDTH) ,dontdieGame.SCREEN_HEIGHT -50));
     		}
     		if(laneNumber == DIRECTION_LEFT)
     		{
-    			snake_list.add( new Snake(world,dontdieGame.SCREEN_WIDTH -50 , rand.nextInt(700)));
+    			snake_list.add( new Snake(world,dontdieGame.SCREEN_WIDTH -50 , rand.nextInt(dontdieGame.SCREEN_HEIGHT)));
     		}
     		if(laneNumber == DIRECTION_RIGHT)
     		{
-    			snake_list.add( new Snake(world, dontdieGame.SCREEN_WIDTH +50 , rand.nextInt(700)));
+    			snake_list.add( new Snake(world, dontdieGame.SCREEN_WIDTH +50 , rand.nextInt(dontdieGame.SCREEN_HEIGHT)));
     		}
     	}
     }
@@ -108,6 +108,19 @@ public class World { // what happen to the game will be create here
     		}
     	}
     }
+    
+    private void randomSpawnItem() //gradually spawn item by random number
+    {
+    	if(rand.nextInt(10000) <= 5) //for healing potion
+		{
+    		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
+		}
+    	if(rand.nextInt(10000) <= 7) //for time stop item
+		{
+    		timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
+		}
+    }
+    
     public void update(float delta) //for make every object update itself
     {
     	player1.update(delta);
@@ -131,6 +144,7 @@ public class World { // what happen to the game will be create here
     		potion_heal_list.get(i).update(delta);
     	}
     	randomSpawnEnemy();
+    	randomSpawnItem();
     	timestop -= 1; //test time stop count down timer
     }
 }

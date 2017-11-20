@@ -13,6 +13,8 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Player1 player1;
 	private Player1 player2;
 	//image
+	private Texture backgroundImg;
+	
 	private Texture player1RightImg;
 	private Texture player1LeftImg;
 	private Texture player1UpImg;
@@ -21,8 +23,6 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Texture player2LeftImg;
 	private Texture player2UpImg;
 	private Texture player2DownImg;
-	private Texture timestopperImg;
-	private Texture backgroundImg;
 	
 	//health bar images
 	private Texture healthBar1Img;
@@ -32,6 +32,10 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Texture attackRight_Img;
 	private Texture attackDown_Img;
 	private Texture attackUp_Img;
+	
+	private Texture timestopperImg;
+	private Texture potionHealOneImg;
+	private Texture potionHealAllImg;
 	
 	private Snake snake1;
 	private Texture snakeImg;
@@ -51,6 +55,8 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		player2DownImg = new Texture("Player2_Down.png");
 		
 		timestopperImg = new Texture("stopwatch.png");
+		potionHealOneImg = new Texture("potion_healOne.png");
+		potionHealAllImg = new Texture("potion_healAll.png");
 		
 		backgroundImg = new Texture("background.jpg");
 		player1 = world.getPlayer1();
@@ -148,7 +154,14 @@ public class WorldRenderer { //what happen to the game world will be draw here
     	}
         for(int i =0;i< world.potion_heal_list.size(); i++) //draw every potion item in potion_healOne_list
     	{
-        	batch.draw(timestopperImg, world.potion_heal_list.get(i).getPosition().x, world.timestopper_list.get(i).getPosition().y);
+        	if(world.potion_heal_list.get(i).isThisItemHealOne == true)
+        	{
+        		batch.draw(potionHealOneImg, world.potion_heal_list.get(i).getPosition().x, world.potion_heal_list.get(i).getPosition().y);
+        	}
+        	else
+        	{
+        		batch.draw(potionHealAllImg, world.potion_heal_list.get(i).getPosition().x, world.potion_heal_list.get(i).getPosition().y);
+        	}
     	}
         
         

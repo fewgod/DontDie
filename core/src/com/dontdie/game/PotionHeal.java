@@ -18,8 +18,9 @@ public class PotionHeal {
   	private float IMAGE_RADIUS_Y = GET_CENTER_Y;
   	private float currCenter_X;
   	private float currCenter_Y;
-  	private int HEALING_POTENCY = 5;
-	
+  	private int HEALING_POTENCY_ONE = 5;
+  	private int HEALING_POTENCY_ALL = 3;
+  	public boolean isThisItemHealOne;
 	
 	public PotionHeal(World world,boolean isHealone, int x, int y) { // do this method all time
 		this.world = world;
@@ -29,6 +30,7 @@ public class PotionHeal {
 		
 		player1 = world.getPlayer1();
 		player2 = world.getPlayer2();
+		isThisItemHealOne = isHealone;
 		isItemPickUp = false;
 	}
 	
@@ -53,6 +55,28 @@ public class PotionHeal {
 		checkIfCollideWithPlayer();
     }
 	
+	public void heal(int whichPlayerPick)  // do healing function here
+	{
+		if(isThisItemHealOne == true)  // is this item heal the one who pick or heal both players?
+		{
+			if(whichPlayerPick ==1)
+			{
+				player1.healPlayer(HEALING_POTENCY_ONE);
+			}
+			else
+			{
+				player2.healPlayer(HEALING_POTENCY_ONE);
+			}
+		}
+		else
+		{
+			player1.healPlayer(HEALING_POTENCY_ALL);
+			player2.healPlayer(HEALING_POTENCY_ALL);
+		}
+		isItemPickUp = true;
+		world.potion_heal_list.remove(this);
+	}
+	
 	private void checkIfCollideWithPlayer() //player1 test only
 	{
 		if(isItemPickUp == false)
@@ -64,9 +88,7 @@ public class PotionHeal {
 				{
 					if(player1.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player1.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this item
 					{
-						player1.healPlayer(HEALING_POTENCY);
-        				isItemPickUp = true;
-        				world.potion_heal_list.remove(this);
+						heal(1);
 					}
 				}
 			}
@@ -78,9 +100,7 @@ public class PotionHeal {
 				{
 					if(player2.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player2.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player2 is within 30 radius.y of this item
 					{
-						player2.healPlayer(HEALING_POTENCY);
-        				isItemPickUp = true;
-        				world.potion_heal_list.remove(this);
+						heal(2);
 					}
 				}
         	}
