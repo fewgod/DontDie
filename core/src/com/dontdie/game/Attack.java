@@ -38,9 +38,9 @@ public class Attack {
         {-1,0}
     };
     
-    public Attack(World world ,int playerDirection, float f, float g) { //when first init give spawn position to player 1
+    public Attack(World world ,int playerDirection, float playerCenterX, float playerCenterY) { //when first init give spawn position to player 1
     	this.world = world;
-        currPos = new Vector2(f,g);
+        currPos = new Vector2(playerCenterX,playerCenterY);
         currCenter_X = currPos.x + GET_CENTER_X;
         currCenter_Y = currPos.y + GET_CENTER_Y;
         availableTime = 10;
@@ -63,6 +63,10 @@ public class Attack {
     	return currCenter_Y = currPos.y + GET_CENTER_Y;
     }
 
+    public int getCurrentFace() 
+    {
+    	return faceDir;
+    }
     
     public void move(int dir) { 
     	currPos.x += ATTACK_MOVE_SPEED * DIR_OFFSETS[dir][0];

@@ -3,9 +3,7 @@ package com.dontdie.game;
 import com.badlogic.gdx.math.Vector2; //how to create position at the center of image (right now it's bottom left)
 
 public class Player1 {
-	public static final int SCREEN_WIDTH = 900;
-	public static final int SCREEN_HEIGHT = 700;
-	
+
 	public static final int DIRECTION_UP = 1;
     public static final int DIRECTION_RIGHT = 2;
     public static final int DIRECTION_DOWN = 3;
@@ -107,7 +105,7 @@ public class Player1 {
     	{
     		currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[2][0];
     	}
-    	if(currCenter_X > SCREEN_WIDTH - 0)
+    	if(currCenter_X > DontDieGame.SCREEN_WIDTH - 0)
     	{
     		currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[4][0];
     	}
@@ -115,7 +113,7 @@ public class Player1 {
     	{
     		currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[1][1];
     	}
-    	if(currCenter_Y > SCREEN_HEIGHT - 0)
+    	if(currCenter_Y > DontDieGame.SCREEN_HEIGHT )
     	{
     		currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[3][1];
     	}
