@@ -111,13 +111,13 @@ public class World { // what happen to the game will be create here
     
     private void randomSpawnItem() //gradually spawn item by random number
     {
-    	if(rand.nextInt(10000) <= 5) //for healing potion
+    	if(rand.nextInt(10000) <= 4) //for healing potion
 		{
-    		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
+    		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -40) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -40) +30));
 		}
-    	if(rand.nextInt(10000) <= 7) //for time stop item
+    	if(rand.nextInt(10000) <= 6) //for time stop item
 		{
-    		timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
+    		timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -40) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -40) +30));
 		}
     }
     

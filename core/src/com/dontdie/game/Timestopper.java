@@ -9,9 +9,9 @@ public class Timestopper {
 	private Player1 player2;
 	private boolean isItemPickUp;
 	
-	//timestopper image size is 40*40
-	private float IMAGE_SIZE_X = 40;
-  	private float IMAGE_SIZE_Y = 40;
+	//timestopper image size is 34*34
+	private float IMAGE_SIZE_X = 34;
+  	private float IMAGE_SIZE_Y = 34;
   	private float GET_CENTER_X = IMAGE_SIZE_X/2;
   	private float GET_CENTER_Y = IMAGE_SIZE_Y/2;
   	private float IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
