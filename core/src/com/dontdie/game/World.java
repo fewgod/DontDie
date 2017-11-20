@@ -38,7 +38,7 @@ public class World { // what happen to the game will be create here
         
         timestopper_list.add( new Timestopper(world, rand.nextInt(600)+50 , rand.nextInt(500)+50));//add 1 timestopper item to the world
         
-        //spawnSnake(5);
+        spawnSnake(5);
     }
  
     Player1 getPlayer1() {
@@ -125,7 +125,7 @@ public class World { // what happen to the game will be create here
     	{
     		timestopper_list.get(i).update(delta);
     	}
-    	randomSpawnEnemy();
+    	//randomSpawnEnemy();
     	timestop -= 1; //test time stop count down timer
     }
 }

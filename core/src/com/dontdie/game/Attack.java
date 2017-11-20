@@ -9,23 +9,23 @@ public class Attack {
 	public static final int SCREEN_HEIGHT = 700;
 	
 	public static final int DIRECTION_UP = 1;
-    public static final int DIRECTION_RIGHT = 2;
-    public static final int DIRECTION_DOWN = 3;
-    public static final int DIRECTION_LEFT = 4;
-    public static final int DIRECTION_STILL = 0;
+	public static final int DIRECTION_RIGHT = 2;
+	public static final int DIRECTION_DOWN = 3;
+	public static final int DIRECTION_LEFT = 4;
+	public static final int DIRECTION_STILL = 0;
     public int faceDir;
     private int ATTACK_MOVE_SPEED = 4;
     private int ATTACK_PUSH_POWER = ATTACK_MOVE_SPEED * 15;
     public Vector2 currPos;
     private World world;
  
-  //attack image size is 50*75
-  	private float IMAGE_SIZE_X = 50;
-  	private float IMAGE_SIZE_Y = 75;
-  	private float GET_CENTER_X = IMAGE_SIZE_X/2;
-  	private float GET_CENTER_Y = IMAGE_SIZE_Y/2;
-  	private float IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
-  	private float IMAGE_RADIUS_Y = GET_CENTER_Y;
+  //attack image size is 50*75 for left swing
+  	private float IMAGE_SIZE_X;
+  	private float IMAGE_SIZE_Y;
+  	private float GET_CENTER_X;
+  	private float GET_CENTER_Y;
+  	private float IMAGE_RADIUS_X; //just different name for easier use and understanding
+  	private float IMAGE_RADIUS_Y;
   	private float currCenter_X;
   	private float currCenter_Y;
 	private int availableTime;
@@ -40,11 +40,55 @@ public class Attack {
     
     public Attack(World world ,int playerDirection, float playerCenterX, float playerCenterY) { //when first init give spawn position to player 1
     	this.world = world;
+    	faceDir = playerDirection;
         currPos = new Vector2(playerCenterX,playerCenterY);
-        currCenter_X = currPos.x + GET_CENTER_X;
-        currCenter_Y = currPos.y + GET_CENTER_Y;
-        availableTime = 10;
-        faceDir = playerDirection;
+        availableTime = 7; //time for this swing will appear
+        if(faceDir == DIRECTION_LEFT)
+        {
+        	IMAGE_SIZE_X = 50;
+          	IMAGE_SIZE_Y = 75;
+          	GET_CENTER_X = IMAGE_SIZE_X/2;
+          	GET_CENTER_Y = IMAGE_SIZE_Y/2;
+          	IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
+          	IMAGE_RADIUS_Y = GET_CENTER_Y;
+          	currPos.x -= 53;
+        	currPos.y -= 43;
+        }
+        if(faceDir == DIRECTION_RIGHT)
+        {
+        	IMAGE_SIZE_X = 50;
+          	IMAGE_SIZE_Y = 75;
+          	GET_CENTER_X = IMAGE_SIZE_X/2;
+          	GET_CENTER_Y = IMAGE_SIZE_Y/2;
+          	IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
+          	IMAGE_RADIUS_Y = GET_CENTER_Y;
+          	currPos.x += 0;
+        	currPos.y -= 43;
+        }
+        if(faceDir == DIRECTION_UP)
+        {
+        	IMAGE_SIZE_X = 75;
+          	IMAGE_SIZE_Y = 50;
+          	GET_CENTER_X = IMAGE_SIZE_X/2;
+          	GET_CENTER_Y = IMAGE_SIZE_Y/2;
+          	IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
+          	IMAGE_RADIUS_Y = GET_CENTER_Y;
+          	currPos.x -= 35;
+        	currPos.y += 10;
+        }
+        if(faceDir == DIRECTION_DOWN)
+        {
+        	IMAGE_SIZE_X = 75;
+          	IMAGE_SIZE_Y = 50;
+          	GET_CENTER_X = IMAGE_SIZE_X/2;
+          	GET_CENTER_Y = IMAGE_SIZE_Y/2;
+          	IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
+          	IMAGE_RADIUS_Y = GET_CENTER_Y;
+          	currPos.x -= 43;
+        	currPos.y -= 60;
+        }
+    	currCenter_X = currPos.x + GET_CENTER_X;
+    	currCenter_Y = currPos.y + GET_CENTER_Y;
     }    
  
     public Vector2 getPosition() { // for other class to get current position of player1

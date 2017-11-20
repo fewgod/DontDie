@@ -28,7 +28,10 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Texture healthBar1Img;
 	private Texture healthBar2Img;
 	
-	private Texture attackImg;
+	private Texture attackLeft_Img;
+	private Texture attackRight_Img;
+	private Texture attackDown_Img;
+	private Texture attackUp_Img;
 	
 	private Snake snake1;
 	private Texture snakeImg;
@@ -52,7 +55,10 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		backgroundImg = new Texture("background.jpg");
 		player1 = world.getPlayer1();
 		player2 = world.getPlayer2();
-		attackImg = new Texture("sword_ani_left.png");
+		attackLeft_Img = new Texture("sword_ani_left.png");
+		attackRight_Img = new Texture("sword_ani_right.png");
+		attackUp_Img = new Texture("sword_ani_up.png");
+		attackDown_Img = new Texture("sword_ani_down.png");
 		
 		snakeImg = new Texture ("snake.png");
 	}
@@ -111,7 +117,22 @@ public class WorldRenderer { //what happen to the game world will be draw here
         for(int i =0;i< world.attack_list.size(); i++) //draw every currently available attack
     	{
         	Vector2 attack_i = world.attack_list.get(i).getPosition();
-        	batch.draw(attackImg, attack_i.x, attack_i.y); //change from draw current center to draw current position
+        	if(world.attack_list.get(i).getCurrentFace() == world.attack_list.get(i).DIRECTION_LEFT)
+        	{	
+        		batch.draw(attackLeft_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
+        	}
+        	if(world.attack_list.get(i).getCurrentFace() == world.attack_list.get(i).DIRECTION_RIGHT)
+        	{	
+        		batch.draw(attackRight_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
+        	}
+        	if(world.attack_list.get(i).getCurrentFace() == world.attack_list.get(i).DIRECTION_UP)
+        	{	
+        		batch.draw(attackUp_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
+        	}
+        	if(world.attack_list.get(i).getCurrentFace() == world.attack_list.get(i).DIRECTION_DOWN)
+        	{	
+        		batch.draw(attackDown_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
+        	}
     	}
         
         for(int i =0;i< world.snake_list.size(); i++) //draw every snake in snake_list

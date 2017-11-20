@@ -67,12 +67,12 @@ public class GameScreen extends ScreenAdapter {
             player1.faceDir = Player1.DIRECTION_LEFT;
             player1.move(Player1.DIRECTION_LEFT);
         }
-        if(Gdx.input.isKeyPressed(Keys.E)) 
+        if(Gdx.input.isKeyPressed(Keys.SPACE)) 
         {
         	if(player1.attackCoolDown <= 0)
         	{
         		world.attack_list.add( new Attack(world,player1.faceDir, player1.getCurrentXPos() , player1.getCurrentYPos())); //draw from center of player1.
-        		player1.attackCoolDown = 15;
+        		player1.attackCoolDown = 20;
         	}
         }
     }
@@ -104,7 +104,7 @@ public class GameScreen extends ScreenAdapter {
         	if(player2.attackCoolDown <= 0)
         	{
         		world.attack_list.add( new Attack(world, player2.faceDir , player2.getCurrentXPos() , player2.getCurrentYPos())); //draw from center of player2.
-        		player2.attackCoolDown = 15;
+        		player2.attackCoolDown = 20;
         	}
         }
     }
