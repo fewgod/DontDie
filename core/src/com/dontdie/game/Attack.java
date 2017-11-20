@@ -42,7 +42,7 @@ public class Attack {
     	this.world = world;
     	faceDir = playerDirection;
         currPos = new Vector2(playerCenterX,playerCenterY);
-        availableTime = 7; //time for this swing will appear
+        availableTime = 8; //time for this swing will appear
         if(faceDir == DIRECTION_LEFT)
         {
         	IMAGE_SIZE_X = 50;

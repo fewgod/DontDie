@@ -51,6 +51,10 @@ public class GameScreen extends ScreenAdapter {
         		player2.isPlayerDead = false;
         		player2.healPlayer(5);
         }
+    	if(Gdx.input.isKeyPressed(Keys.E)) 
+        {
+    			world.timestop =300;
+        }
     }
     private void moveplayer1()//input for player1 movement
     {

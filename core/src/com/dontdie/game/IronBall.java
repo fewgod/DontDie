@@ -30,7 +30,7 @@ public class IronBall {
     private static final int DIRECTION_STILL = 0;
 	private int faceDir;
 	private Random rand = new Random();
-	public boolean gotAttack;
+	public int gotAttack;
 	
 	private static final int [][] DIR_OFFSETS = new int [][] { // for spawn
         {0,0}, //still
@@ -46,7 +46,7 @@ public class IronBall {
 		faceDir = dir;
 		currCenter_X = currPos.x + GET_CENTER_X;
 		currCenter_Y = currPos.y + GET_CENTER_Y;
-		gotAttack = false;
+		gotAttack = 0;
 		player1 = world.getPlayer1();
 		player2 = world.getPlayer2();
 	}
@@ -75,6 +75,7 @@ public class IronBall {
 	
 	public void update(float delta) //make snake do things
     {
+
 		move();
 		checkIfCollideWithPlayer();
 		checkIfOutBound();
@@ -87,7 +88,12 @@ public class IronBall {
 			currPos.x += BALL_MOVE_SPEED * DIR_OFFSETS[faceDir][0];
 			currPos.y += BALL_MOVE_SPEED * DIR_OFFSETS[faceDir][1];
 		}
-		else if (world.timestop >= 0 && world.timestop <= 75) //add breaking timestop animation when timestop is running out
+		else if(world.timestop >= 0 && gotAttack > 0) //if got attack will move regardless of timestop or not
+		{
+			currPos.x += BALL_MOVE_SPEED * DIR_OFFSETS[faceDir][0];
+			currPos.y += BALL_MOVE_SPEED * DIR_OFFSETS[faceDir][1];
+		}
+		else if (world.timestop > 0 && world.timestop <= 75 && gotAttack == 0) //add breaking timestop animation when timestop is running out
 		{
 			currPos.x += rand.nextInt(3);
 			currPos.x -= rand.nextInt(3);
@@ -149,6 +155,7 @@ public class IronBall {
 
 	public void changeDirection(int dirToChangeTo) {
 		faceDir = dirToChangeTo;
+		gotAttack +=1;
 		
 	}
 }
