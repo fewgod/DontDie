@@ -48,63 +48,87 @@ public class GameScreen extends ScreenAdapter {
     private void moveplayer1()//input for player1 movement
     {
     	if(Gdx.input.isKeyPressed(Keys.W)) 
-        {
+    	{
     		player1.faceDir = Player1.DIRECTION_UP;
-            player1.move(Player1.DIRECTION_UP);
-        }
-        if(Gdx.input.isKeyPressed(Keys.D)) 
-        {
-            player1.faceDir = Player1.DIRECTION_RIGHT;
-            player1.move(Player1.DIRECTION_RIGHT);
-        }
-        if(Gdx.input.isKeyPressed(Keys.S)) 
-        {
-            player1.faceDir = Player1.DIRECTION_DOWN;
-            player1.move(Player1.DIRECTION_DOWN);
-        }
-        if(Gdx.input.isKeyPressed(Keys.A)) 
-        {
-            player1.faceDir = Player1.DIRECTION_LEFT;
-            player1.move(Player1.DIRECTION_LEFT);
+    		if(player1.attackCoolDown <= 0) //cannot move while attacking or just attack
+    	    {
+    			player1.move(Player1.DIRECTION_UP);
+    	    }
+    	}
+    	if(Gdx.input.isKeyPressed(Keys.D)) 
+    	{
+    		player1.faceDir = Player1.DIRECTION_RIGHT;
+    		if(player1.attackCoolDown <= 0) //cannot move while attacking or just attack
+        	{
+        		player1.move(Player1.DIRECTION_RIGHT);
+        	}
+    	}
+    	if(Gdx.input.isKeyPressed(Keys.S)) 
+    	{
+    		player1.faceDir = Player1.DIRECTION_DOWN;
+    		if(player1.attackCoolDown <= 0) //cannot move while attacking or just attack
+        	{
+        		player1.move(Player1.DIRECTION_DOWN);
+        	}
+    	}
+    	if(Gdx.input.isKeyPressed(Keys.A)) 
+    	{
+    		player1.faceDir = Player1.DIRECTION_LEFT;
+    		if(player1.attackCoolDown <= 0) //cannot move while attacking or just attack
+        	{
+        		player1.move(Player1.DIRECTION_LEFT);
+        	}
         }
         if(Gdx.input.isKeyPressed(Keys.SPACE)) 
         {
         	if(player1.attackCoolDown <= 0)
         	{
         		world.attack_list.add( new Attack(world,player1.faceDir, player1.getCurrentXPos() , player1.getCurrentYPos())); //draw from center of player1.
-        		player1.attackCoolDown = 20;
+        		player1.attackCoolDown = 18;
         	}
         }
     }
     
     private void moveplayer2()//input for player2 movement
     {
-        if(Gdx.input.isKeyPressed(Keys.UP)) 
-        {
-        	player2.faceDir = Player1.DIRECTION_UP;
-            player2.move(Player1.DIRECTION_UP);
-        }
-        if(Gdx.input.isKeyPressed(Keys.RIGHT)) 
-        {
-        	player2.faceDir = Player1.DIRECTION_RIGHT;
-            player2.move(Player1.DIRECTION_RIGHT);
-        }
-        if(Gdx.input.isKeyPressed(Keys.DOWN)) 
-        {
-        	player2.faceDir = Player1.DIRECTION_DOWN;
-            player2.move(Player1.DIRECTION_DOWN);
-        }
-        if(Gdx.input.isKeyPressed(Keys.LEFT)) 
-        {
-        	player2.faceDir = Player1.DIRECTION_LEFT;
-            player2.move(Player1.DIRECTION_LEFT);
-        }
-        if(Gdx.input.isKeyPressed(Keys.R)) 
-        {
-        	if(player2.attackCoolDown <= 0)
+    	if(Gdx.input.isKeyPressed(Keys.UP)) 
+    	{
+    		player2.faceDir = Player1.DIRECTION_UP;
+    		if(player2.attackCoolDown <= 0) //cannot move while attacking or just attack
+    	    {
+    			player2.move(Player1.DIRECTION_UP);
+    	    }
+    	}
+    	if(Gdx.input.isKeyPressed(Keys.RIGHT)) 
+    	{
+    		player2.faceDir = Player1.DIRECTION_RIGHT;
+    		if(player2.attackCoolDown <= 0) //cannot move while attacking or just attack
         	{
+        		player2.move(Player1.DIRECTION_RIGHT);
+        	}
+    	}
+    	if(Gdx.input.isKeyPressed(Keys.DOWN)) 
+    	{
+    		player2.faceDir = Player1.DIRECTION_DOWN;
+    		if(player2.attackCoolDown <= 0) //cannot move while attacking or just attack
+        	{
+        		player2.move(Player1.DIRECTION_DOWN);
+        	}
+    	}
+    	if(Gdx.input.isKeyPressed(Keys.LEFT)) 
+    	{
+    		player2.faceDir = Player1.DIRECTION_LEFT;
+    		if(player2.attackCoolDown <= 0) //cannot move while attacking or just attack
+        	{
+        		player2.move(Player1.DIRECTION_LEFT);
+        	}
+        }
+    	if(Gdx.input.isKeyPressed(Keys.R)) 
+    	{
+    			if(player2.attackCoolDown <= 0)
+    		{
         		world.attack_list.add( new Attack(world, player2.faceDir , player2.getCurrentXPos() , player2.getCurrentYPos())); //draw from center of player2.
-        		player2.attackCoolDown = 20;
+        		player2.attackCoolDown = 18;
         	}
         }
     }

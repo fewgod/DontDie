@@ -117,19 +117,19 @@ public class WorldRenderer { //what happen to the game world will be draw here
         for(int i =0;i< world.attack_list.size(); i++) //draw every currently available attack
     	{
         	Vector2 attack_i = world.attack_list.get(i).getPosition();
-        	if(world.attack_list.get(i).getCurrentFace() == world.attack_list.get(i).DIRECTION_LEFT)
+        	if(world.attack_list.get(i).getCurrentFace() == Attack.DIRECTION_LEFT)
         	{	
         		batch.draw(attackLeft_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
         	}
-        	if(world.attack_list.get(i).getCurrentFace() == world.attack_list.get(i).DIRECTION_RIGHT)
+        	if(world.attack_list.get(i).getCurrentFace() == Attack.DIRECTION_RIGHT)
         	{	
         		batch.draw(attackRight_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
         	}
-        	if(world.attack_list.get(i).getCurrentFace() == world.attack_list.get(i).DIRECTION_UP)
+        	if(world.attack_list.get(i).getCurrentFace() == Attack.DIRECTION_UP)
         	{	
         		batch.draw(attackUp_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
         	}
-        	if(world.attack_list.get(i).getCurrentFace() == world.attack_list.get(i).DIRECTION_DOWN)
+        	if(world.attack_list.get(i).getCurrentFace() == Attack.DIRECTION_DOWN)
         	{	
         		batch.draw(attackDown_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
         	}
