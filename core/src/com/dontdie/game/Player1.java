@@ -76,6 +76,10 @@ public class Player1 {
     	if(invisibleTime <=0)
     	{
     		hitPoints -= damageReceive;
+    		if(hitPoints < 0)
+    		{
+    			hitPoints = 0;
+    		}
     		checkIfAlive();
     		invisibleTime = 15;
     	}

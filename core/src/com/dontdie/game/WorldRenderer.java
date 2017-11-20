@@ -37,8 +37,9 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Texture potionHealOneImg;
 	private Texture potionHealAllImg;
 	
-	private Snake snake1;
 	private Texture snakeImg;
+	private Texture ballImg;
+	
 	public WorldRenderer(DontDieGame dontdieGame, World world) {
 		this.dontdieGame = dontdieGame;
 		batch = dontdieGame.batch;
@@ -67,6 +68,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		attackDown_Img = new Texture("sword_ani_down.png");
 		
 		snakeImg = new Texture ("snake.png");
+		ballImg = new Texture ("ball.png");
 	}
 	
 	public void render(float delta) { // this draw game animation to window
@@ -145,7 +147,10 @@ public class WorldRenderer { //what happen to the game world will be draw here
     	{
         	batch.draw(snakeImg, world.snake_list.get(i).getPosition().x, world.snake_list.get(i).getPosition().y);
     	}
-        
+        for(int i =0 ; i< world.ball_list.size() ; i++) //update every ball
+    	{
+        	batch.draw(ballImg, world.ball_list.get(i).getPosition().x, world.ball_list.get(i).getPosition().y);
+    	}
         
         /////draw item////
         for(int i =0;i< world.timestopper_list.size(); i++) //draw every timestopper item in timestopper_list 

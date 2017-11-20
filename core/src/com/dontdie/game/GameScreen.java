@@ -76,6 +76,14 @@ public class GameScreen extends ScreenAdapter {
         		player1.slowDownTime = 20;
         	}
         }
+        if(Gdx.input.isKeyPressed(Keys.Q)) 
+        {
+        	if(player1.attackCoolDown <= 0)
+        	{
+        		player2.isPlayerDead = false;
+        		player2.healPlayer(5);
+        	}
+        }
     }
     
     private void moveplayer2()//input for player2 movement

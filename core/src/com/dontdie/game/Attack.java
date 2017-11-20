@@ -130,7 +130,7 @@ public class Attack {
     
     private void checkIfHitEnemy()
     {
-    	for(int i =0 ; i< world.snake_list.size() ; i++) //update every snake in snake_list
+    	for(int i =0 ; i< world.snake_list.size() ; i++) //if hit snake in snake in snake_list
     	{
     		if(world.snake_list.get(i).getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && world.snake_list.get(i).getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player1 is within 20 radius.x of this enemy
 			{

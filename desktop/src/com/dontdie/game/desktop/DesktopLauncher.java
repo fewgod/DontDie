@@ -12,5 +12,3 @@ public class DesktopLauncher {
 		new LwjglApplication(new DontDieGame(), config);
 	}
 }
-
-//need face direction for attack & recenter attack position and spawn point
