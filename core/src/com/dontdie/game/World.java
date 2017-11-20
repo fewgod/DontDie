@@ -71,7 +71,7 @@ public class World { // what happen to the game will be create here
     	//wont run unless being call
     	for(int i =0 ; i< snake_list.size() ; i++) //update every snake in snake_list
     	{
-    		snake_list.get(i).init(); //force every snake to chase the other after player1 is dead;
+    		snake_list.get(i).init(); //force every snake to chase the other after that one is dead;
     	}
     }
     
@@ -127,11 +127,11 @@ public class World { // what happen to the game will be create here
     {
     	if(timestop <= 0)
     	{
-    		/*if(rand.nextInt(1000) <= 10) //gradually spawn snake by random number
+    		if(rand.nextInt(1000) <= 11) //gradually spawn snake by random number
     		{
     			spawnSnake(1);
-    		}*/
-    		if(rand.nextInt(100) <= 7) //gradually spawn iron ball by random number
+    		}
+    		if(rand.nextInt(1000) <= 7) //gradually spawn iron ball by random number
     		{
     			spawnBall(1);
     		}

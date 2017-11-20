@@ -50,6 +50,7 @@ public class GameScreen extends ScreenAdapter {
     			player1.healPlayer(5);
         		player2.isPlayerDead = false;
         		player2.healPlayer(5);
+        		world.somePlayerIsDead();
         }
     	if(Gdx.input.isKeyPressed(Keys.E)) 
         {
