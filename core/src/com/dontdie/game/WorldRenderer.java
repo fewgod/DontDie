@@ -134,16 +134,23 @@ public class WorldRenderer { //what happen to the game world will be draw here
         		batch.draw(attackDown_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
         	}
     	}
-        
+        /////draw enemy////////
         for(int i =0;i< world.snake_list.size(); i++) //draw every snake in snake_list
     	{
         	batch.draw(snakeImg, world.snake_list.get(i).getPosition().x, world.snake_list.get(i).getPosition().y);
     	}
         
+        
+        /////draw item////
         for(int i =0;i< world.timestopper_list.size(); i++) //draw every timestopper item in timestopper_list 
     	{
         	batch.draw(timestopperImg, world.timestopper_list.get(i).getPosition().x, world.timestopper_list.get(i).getPosition().y);
     	}
+        for(int i =0;i< world.potion_heal_list.size(); i++) //draw every potion item in potion_healOne_list
+    	{
+        	batch.draw(timestopperImg, world.potion_heal_list.get(i).getPosition().x, world.timestopper_list.get(i).getPosition().y);
+    	}
+        
         
         healthBar1Img = new Texture("healthbar_"+player1.hpScale+".png");
         healthBar2Img = new Texture("healthbar_"+player2.hpScale+".png");

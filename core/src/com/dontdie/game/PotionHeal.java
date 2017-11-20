@@ -2,14 +2,14 @@ package com.dontdie.game;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class Timestopper {
+public class PotionHeal {
 	private Vector2 currPos;
 	private World world;
 	private Player1 player1;
 	private Player1 player2;
 	private boolean isItemPickUp;
 	
-	//timestopper image size is 40*40
+	//Potion_HealOne image size is 40*40
 	private float IMAGE_SIZE_X = 40;
   	private float IMAGE_SIZE_Y = 40;
   	private float GET_CENTER_X = IMAGE_SIZE_X/2;
@@ -18,9 +18,10 @@ public class Timestopper {
   	private float IMAGE_RADIUS_Y = GET_CENTER_Y;
   	private float currCenter_X;
   	private float currCenter_Y;
+  	private int HEALING_POTENCY = 5;
 	
 	
-	public Timestopper(World world, int x, int y) { // do this method all time
+	public PotionHeal(World world,boolean isHealone, int x, int y) { // do this method all time
 		this.world = world;
 		currPos = new Vector2(x,y);
 		currCenter_X = currPos.x + GET_CENTER_X;
@@ -63,9 +64,9 @@ public class Timestopper {
 				{
 					if(player1.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player1.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this item
 					{
-						world.timestop = 250;
+						player1.healPlayer(HEALING_POTENCY);
         				isItemPickUp = true;
-        				world.timestopper_list.remove(this);
+        				world.potion_heal_list.remove(this);
 					}
 				}
 			}
@@ -77,12 +78,13 @@ public class Timestopper {
 				{
 					if(player2.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player2.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player2 is within 30 radius.y of this item
 					{
-						world.timestop = 250;
-						isItemPickUp = true;
-						world.timestopper_list.remove(this);
+						player2.healPlayer(HEALING_POTENCY);
+        				isItemPickUp = true;
+        				world.potion_heal_list.remove(this);
 					}
 				}
         	}
 		}
 	}
 }
+

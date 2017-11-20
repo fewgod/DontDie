@@ -79,6 +79,17 @@ public class Player1 {
     	}
     }
     
+    public void healPlayer(int healReceive) {
+    	if(isPlayerDead == false)
+    	{
+    		hitPoints += healReceive;
+    		if(hitPoints >= MAX_HITPOINTS)
+        	{
+        		hitPoints = MAX_HITPOINTS;
+        	}
+    	}
+    }
+    
     public void checkIfAlive() {
     	if(hitPoints <= 0)
     	{

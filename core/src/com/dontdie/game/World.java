@@ -10,10 +10,11 @@ public class World { // what happen to the game will be create here
     public Player1 player1;
     public Player1 player2;
     private DontDieGame dontdieGame;
-    public ArrayList<Snake> snake_list = new ArrayList<Snake>();
-    
     public int timestop  = 0; //init the time stop count to 0
+    
+    public ArrayList<Snake> snake_list = new ArrayList<Snake>();
     public ArrayList<Timestopper> timestopper_list = new ArrayList<Timestopper>();
+    public ArrayList<PotionHeal> potion_heal_list = new ArrayList<PotionHeal>();
     public ArrayList<Attack> attack_list = new ArrayList<Attack>();
     
     public World world;
@@ -38,7 +39,7 @@ public class World { // what happen to the game will be create here
         
         timestopper_list.add( new Timestopper(world, rand.nextInt(600)+50 , rand.nextInt(500)+50));//add 1 timestopper item to the world
         
-        spawnSnake(5);
+        //spawnSnake(5);
     }
  
     Player1 getPlayer1() {
@@ -101,7 +102,7 @@ public class World { // what happen to the game will be create here
     {
     	if(timestop <= 0)
     	{
-    		if(rand.nextInt(100) <= 2) //gradually spawn snake by random number
+    		if(rand.nextInt(100) <= 1) //gradually spawn snake by random number
     		{
     			spawnSnake(1);
     		}
@@ -125,7 +126,11 @@ public class World { // what happen to the game will be create here
     	{
     		timestopper_list.get(i).update(delta);
     	}
-    	//randomSpawnEnemy();
+    	for(int i =0 ; i< potion_heal_list.size() ; i++) //update every time stopper item in the list
+    	{
+    		potion_heal_list.get(i).update(delta);
+    	}
+    	randomSpawnEnemy();
     	timestop -= 1; //test time stop count down timer
     }
 }
