@@ -19,6 +19,7 @@ public class Player1 {
     public long hpScale;
     public int attackCoolDown;
     public int invisibleTime;
+    public int slowDownTime;
  
   //snake image size is 22*41
   	private float IMAGE_SIZE_X = 22;
@@ -52,6 +53,7 @@ public class Player1 {
         hpPercentage = (hitPoints / MAX_HITPOINTS)*100 ;
         hpScale = Math.round(hpPercentage/10);
         invisibleTime = 0;
+        slowDownTime = 0;
     }    
  
     public Vector2 getPosition() { // for other class to get current position of player1
@@ -103,8 +105,16 @@ public class Player1 {
     }
     
     public void move(int dir) { 
-    	currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[dir][0];
-    	currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[dir][1];
+    	if(slowDownTime <=0)
+    	{
+    		currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[dir][0];
+    		currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[dir][1];
+    	}
+    	else
+    	{
+    		currPos.x += (PLAYER_MOVE_SPEED/2) * DIR_OFFSETS[dir][0];
+    		currPos.y += (PLAYER_MOVE_SPEED/2) * DIR_OFFSETS[dir][1];
+    	}
     	currCenter_X = currPos.x + GET_CENTER_X;
     	currCenter_Y = currPos.y + GET_CENTER_Y;
         // first [dir] is chose which {,} to use, second [] chose first para or second para in {,}
@@ -130,8 +140,9 @@ public class Player1 {
     	}
     	hpPercentage = (hitPoints / MAX_HITPOINTS)*100 ;
         hpScale = Math.round(hpPercentage/10);
-        attackCoolDown -=1;
-        invisibleTime -=1;
+        attackCoolDown -= 1;
+        slowDownTime -= 1;
+        invisibleTime -= 1;
     	getCurrentXPos();
     	getCurrentYPos();
     }
