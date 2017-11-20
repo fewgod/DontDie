@@ -80,19 +80,19 @@ public class World { // what happen to the game will be create here
     		int laneNumber = rand.nextInt(4)+1;
     		if(laneNumber == DIRECTION_UP)
     		{
-    			snake_list.add( new Snake(world, rand.nextInt(900) , 750));
+    			snake_list.add( new Snake(world, rand.nextInt(900) , dontdieGame.SCREEN_HEIGHT +50));
     		}
     		if(laneNumber == DIRECTION_DOWN)
     		{
-    			snake_list.add( new Snake(world, rand.nextInt(900) , -50));
+    			snake_list.add( new Snake(world, rand.nextInt(900) ,dontdieGame.SCREEN_HEIGHT -50));
     		}
     		if(laneNumber == DIRECTION_LEFT)
     		{
-    			snake_list.add( new Snake(world, -50 , rand.nextInt(700)));
+    			snake_list.add( new Snake(world,dontdieGame.SCREEN_WIDTH -50 , rand.nextInt(700)));
     		}
     		if(laneNumber == DIRECTION_RIGHT)
     		{
-    			snake_list.add( new Snake(world, 950 , rand.nextInt(700)));
+    			snake_list.add( new Snake(world, dontdieGame.SCREEN_WIDTH +50 , rand.nextInt(700)));
     		}
     	}
     }

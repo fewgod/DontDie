@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class DontDieGame extends Game {
 	public SpriteBatch batch;
+	public static final int SCREEN_WIDTH = 900;
+	public static final int SCREEN_HEIGHT = 700;
 	
 	@Override
 	public void create () {
