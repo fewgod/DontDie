@@ -141,6 +141,16 @@ public class Attack {
 				}
 			}
     	}
+    	for(int i =0 ; i< world.ball_list.size() ; i++) //if hit snake in snake in snake_list
+    	{
+    		if(world.ball_list.get(i).getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && world.ball_list.get(i).getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player1 is within 20 radius.x of this enemy
+			{
+				if(world.ball_list.get(i).getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && world.ball_list.get(i).getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this enemy
+				{
+					world.ball_list.get(i).changeDirection(faceDir);
+				}
+			}
+    	}
     }
     
     private void pushEnemy(Snake snake) 

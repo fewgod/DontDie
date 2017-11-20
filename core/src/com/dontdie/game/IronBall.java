@@ -8,9 +8,9 @@ public class IronBall {
 	private int BALL_MOVE_SPEED = 11;
 	private int BALL_PUSH_POWER = BALL_MOVE_SPEED * 9;
 	
-	//snake image size is 50*50
-	private float IMAGE_SIZE_X = 50;
-	private float IMAGE_SIZE_Y = 50;
+	//snake image size is 60*60
+	private float IMAGE_SIZE_X = 60;
+	private float IMAGE_SIZE_Y = 60;
 	private float GET_CENTER_X = IMAGE_SIZE_X/2;
 	private float GET_CENTER_Y = IMAGE_SIZE_Y/2;
 	private float IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
@@ -28,10 +28,11 @@ public class IronBall {
     private static final int DIRECTION_BOTTOM = 3;
     private static final int DIRECTION_LEFT = 4;
     private static final int DIRECTION_STILL = 0;
-	private int spawnDir;
+	private int faceDir;
 	private Random rand = new Random();
+	public boolean gotAttack;
 	
-	private static final int [][] DIR_OFFSETS = new int [][] { // for use with move method
+	private static final int [][] DIR_OFFSETS = new int [][] { // for spawn
         {0,0}, //still
         {0,1}, //move up
         {1,0}, // move right
@@ -42,10 +43,10 @@ public class IronBall {
 	public IronBall(World world,int dir, int x, int y) { // do this method all time
 		this.world = world;
 		currPos = new Vector2(x,y);
-		spawnDir = dir;
+		faceDir = dir;
 		currCenter_X = currPos.x + GET_CENTER_X;
 		currCenter_Y = currPos.y + GET_CENTER_Y;
-		
+		gotAttack = false;
 		player1 = world.getPlayer1();
 		player2 = world.getPlayer2();
 	}
@@ -83,8 +84,8 @@ public class IronBall {
 	{
 		if(world.timestop <= 0) //check if whether the time is stop and is it in unmovable state? , if not it can move.
 		{
-			currPos.x -= BALL_MOVE_SPEED * DIR_OFFSETS[spawnDir][0];
-			currPos.y -= BALL_MOVE_SPEED * DIR_OFFSETS[spawnDir][1]; //spawn which corner will move opposite corner
+			currPos.x += BALL_MOVE_SPEED * DIR_OFFSETS[faceDir][0];
+			currPos.y += BALL_MOVE_SPEED * DIR_OFFSETS[faceDir][1];
 		}
 		else if (world.timestop >= 0 && world.timestop <= 75) //add breaking timestop animation when timestop is running out
 		{
@@ -132,17 +133,22 @@ public class IronBall {
 		{
 			if(world.player1.invisibleTime <= 0)
 			{
-				world.player1.currPos.x -= BALL_PUSH_POWER * DIR_OFFSETS[spawnDir][0];
-				world.player1.currPos.y -= BALL_PUSH_POWER * DIR_OFFSETS[spawnDir][1];
+				world.player1.currPos.x += BALL_PUSH_POWER * DIR_OFFSETS[faceDir][0];
+				world.player1.currPos.y += BALL_PUSH_POWER * DIR_OFFSETS[faceDir][1];
 			}
 		}
 		if(playerNumber == 2)
 		{
 			if(world.player2.invisibleTime <= 0)
 			{
-				world.player2.currPos.x -= BALL_PUSH_POWER * DIR_OFFSETS[spawnDir][0];
-				world.player2.currPos.y -= BALL_PUSH_POWER * DIR_OFFSETS[spawnDir][1];
+				world.player2.currPos.x += BALL_PUSH_POWER * DIR_OFFSETS[faceDir][0];
+				world.player2.currPos.y += BALL_PUSH_POWER * DIR_OFFSETS[faceDir][1];
 			}
 		}
+	}
+
+	public void changeDirection(int dirToChangeTo) {
+		faceDir = dirToChangeTo;
+		
 	}
 }

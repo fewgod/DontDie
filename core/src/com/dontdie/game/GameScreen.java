@@ -44,6 +44,13 @@ public class GameScreen extends ScreenAdapter {
         {
     		moveplayer2();
         }
+    	if(Gdx.input.isKeyPressed(Keys.Q)) 
+        {
+    			player1.isPlayerDead = false;
+    			player1.healPlayer(5);
+        		player2.isPlayerDead = false;
+        		player2.healPlayer(5);
+        }
     }
     private void moveplayer1()//input for player1 movement
     {
@@ -74,14 +81,6 @@ public class GameScreen extends ScreenAdapter {
         		world.attack_list.add( new Attack(world,player1.faceDir, player1.getCurrentXPos() , player1.getCurrentYPos())); //draw from center of player1.
         		player1.attackCoolDown = 18;
         		player1.slowDownTime = 20;
-        	}
-        }
-        if(Gdx.input.isKeyPressed(Keys.Q)) 
-        {
-        	if(player1.attackCoolDown <= 0)
-        	{
-        		player2.isPlayerDead = false;
-        		player2.healPlayer(5);
         	}
         }
     }

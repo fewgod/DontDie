@@ -104,21 +104,21 @@ public class World { // what happen to the game will be create here
     	for(int i =0 ; i< numberofBall ; i++) 
     	{
     		int laneNumber = rand.nextInt(4)+1;
-    		if(laneNumber == DIRECTION_UP)
+    		if(laneNumber == DIRECTION_UP) //spawn from down and go up
     		{
-    			ball_list.add( new IronBall(world,DIRECTION_UP, rand.nextInt(dontdieGame.SCREEN_WIDTH) , dontdieGame.SCREEN_HEIGHT));
+    			ball_list.add( new IronBall(world,DIRECTION_UP,rand.nextInt(dontdieGame.SCREEN_WIDTH) , 0));
     		}
-    		if(laneNumber == DIRECTION_DOWN)
+    		if(laneNumber == DIRECTION_DOWN) //spawn from up and go down
     		{
-    			ball_list.add( new IronBall(world,DIRECTION_DOWN, rand.nextInt(dontdieGame.SCREEN_WIDTH) ,0));
+    			ball_list.add( new IronBall(world,DIRECTION_DOWN, rand.nextInt(dontdieGame.SCREEN_WIDTH) , dontdieGame.SCREEN_HEIGHT));
     		}
-    		if(laneNumber == DIRECTION_LEFT)
+    		if(laneNumber == DIRECTION_LEFT) // spawn from right and go left
     		{
-    			ball_list.add( new IronBall(world,DIRECTION_LEFT, 0, rand.nextInt(dontdieGame.SCREEN_HEIGHT)));
+    			ball_list.add( new IronBall(world,DIRECTION_LEFT,dontdieGame.SCREEN_WIDTH, rand.nextInt(dontdieGame.SCREEN_HEIGHT)));
     		}
-    		if(laneNumber == DIRECTION_RIGHT)
+    		if(laneNumber == DIRECTION_RIGHT)//spawn from left and go right
     		{
-    			ball_list.add( new IronBall(world,DIRECTION_RIGHT, dontdieGame.SCREEN_WIDTH, rand.nextInt(dontdieGame.SCREEN_HEIGHT)));
+    			ball_list.add( new IronBall(world,DIRECTION_RIGHT,  0, rand.nextInt(dontdieGame.SCREEN_HEIGHT)));
     		}
     	}
     }
