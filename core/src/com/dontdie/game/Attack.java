@@ -73,15 +73,18 @@ public class Attack {
           	currPos.x -= 43;
         	currPos.y -= 60;
         }
-        if(attackType ==1)
+        
+        if(attackType == 1)
         {
         	availableTime = 8; //time for this swing will appear
         }
         else
         {
         	availableTime = 40;
-        	IMAGE_SIZE_X = 75;
-          	IMAGE_SIZE_Y = 50;
+        	IMAGE_SIZE_X = 60;
+          	IMAGE_SIZE_Y = 60;
+          	currPos.x += 15;
+          	currPos.y += 10;
         }
       	GET_CENTER_X = IMAGE_SIZE_X/2;
       	GET_CENTER_Y = IMAGE_SIZE_Y/2;
@@ -113,8 +116,8 @@ public class Attack {
     }
     
     public void move(int dir) { 
-    	currPos.x += ATTACK_MOVE_SPEED * DIR_OFFSETS[dir][0];
-    	currPos.y += ATTACK_MOVE_SPEED * DIR_OFFSETS[dir][1];
+    	currPos.x += ATTACK_MOVE_SPEED*1.2 * DIR_OFFSETS[dir][0];
+    	currPos.y += ATTACK_MOVE_SPEED*1.2 * DIR_OFFSETS[dir][1];
     	currCenter_X = currPos.x + GET_CENTER_X;
     	currCenter_Y = currPos.y + GET_CENTER_Y;
         // first [dir] is chose which {,} to use, second [] chose first para or second para in {,}

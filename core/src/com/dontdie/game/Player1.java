@@ -20,7 +20,7 @@ public class Player1 {
     public int attackCoolDown;
     public int skillCastingTime;
     public static int SKILL_REVIVE_MAX_CAST_TIME = 200;
-    public static int SKILL_FIREBALL_MAX_CAST_TIME = 80;
+    public static int SKILL_FIREBALL_MAX_CAST_TIME = 70;
     public int maxSkillCastTime;
     public int invisibleTime;
     public int slowDownTime;
