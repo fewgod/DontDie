@@ -183,13 +183,13 @@ public class Snake {
 	private void shouldItTurnTowardPlayer() 
 	{
 		if(chasingPlayer1 == true && player1.isPlayerDead == false)
-		{	if(rand.nextInt(100)<= 9) //if less got less than x number will turn toward player1
+		{	if(rand.nextInt(100)<= 7) //if less got less than x number will turn toward player1
 			{
 				checkWhereIsPlayer1();
 			}
 		}
 		if(chasingPlayer2 == true && player2.isPlayerDead == false)
-		{	if(rand.nextInt(100)<= 9) //if less got less than x number will turn toward player2
+		{	if(rand.nextInt(100)<= 7) //if less got less than x number will turn toward player2
 			{
 				checkWhereIsPlayer2();
 			}

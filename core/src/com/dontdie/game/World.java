@@ -38,6 +38,10 @@ public class World { // what happen to the game will be create here
     long tEnd;
     long tRes;
     long timeSec;
+    int timePotion;
+    int timeStopItem;
+    int maxtimePotion;
+    int maxtimeStopItem;
     
     public World(DontDieGame dontdieGame) {
     	world = this;
@@ -46,12 +50,14 @@ public class World { // what happen to the game will be create here
         player1 = new Player1(world, 300,150); // create class in class??
         player2 = new Player1(world, 600,150);
         
-        timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
-        potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
+        //timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
+        //potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
         //spawnSnake(5); for instantly spawn 5 snake
         tStart = System.nanoTime();
         waveNumber = 0;
         nextWaveTime = 1;
+        maxtimePotion = 11 + rand.nextInt(5);
+        maxtimeStopItem = 8 + rand.nextInt(2);
     }
  
     Player1 getPlayer1() {
@@ -63,18 +69,6 @@ public class World { // what happen to the game will be create here
     Snake getSnake(int i) 
     { //return type is snake
         return snake_list.get(i);
-    }
-
-    public void killPlayer()
-    {
-    	if(player1.isPlayerDead == true)
-    	{
-    		world.player1 = null;
-    	}
-    	if(player2.isPlayerDead == true)
-    	{
-    		world.player2 = null;
-    	}
     }
 
     public void somePlayerIsDead() { //or somePlayer being revived 
@@ -91,7 +85,7 @@ public class World { // what happen to the game will be create here
 		if(timeSec == nextWaveTime) 
 		{
 			long currStartWaveTime = timeSec; //time that start this wave
-			int numberofEnemy = 2*this.waveNumber + rand.nextInt(this.waveNumber + 2);
+			int numberofEnemy = 2*this.waveNumber + rand.nextInt(this.waveNumber + 1) +1;
 			spawnSnake(numberofEnemy);
 			if(this.waveNumber % 3 == 2) 
 			{
@@ -102,19 +96,49 @@ public class World { // what happen to the game will be create here
 		}
     }
     
-   /* private void timeSpawnEnemy() { // like spawn ball every 10 sec when time is more than 20 sec
-    	
-    }*/
+    private void timeSpawnItem()
+    { 
+    	timePotion = Math.round(timeSec);
+    	timeStopItem = Math.round(timeSec);
+    	if(timePotion >= maxtimePotion)
+    	{
+    		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -40) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -40) +40));
+    		maxtimePotion = timePotion + 13 + rand.nextInt(7);
+    	}
+    	if(timeStopItem >= maxtimeStopItem)
+    	{
+    		timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -40) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -40) +40));
+    		maxtimeStopItem = timePotion + 11 + rand.nextInt(10);
+    	}
+    }
+    
+    private void timeSpawnEnemy() // like spawn ball every 10 sec when time is more than 20 sec
+    { 
+    	if(timeSec >= 17)
+    	{
+    		if(rand.nextInt(1000) <= waveNumber*1.9) //gradually spawn iron ball by random number
+    		{
+    			spawnBall(1);
+    		}
+    	}
+    	if(timeSec >= 20)
+    	{
+    		if(rand.nextInt(1000) <= waveNumber*2.2) //gradually spawn iron ball by random number
+    		{
+    			spawnSnake(1);
+    		}
+    	}
+    }
     
     private void randomSpawnEnemy() 
     {
     	if(timestop <= 0)
     	{
-    		if(rand.nextInt(1000) <= 9) //gradually spawn snake by random number
+    		if(rand.nextInt(1000) <= 11) //gradually spawn snake by random number
     		{
     			spawnSnake(1);
     		}
-    		if(rand.nextInt(1000) <= 6) //gradually spawn iron ball by random number
+    		if(rand.nextInt(1000) <= 8) //gradually spawn iron ball by random number
     		{
     			spawnBall(1);
     		}
@@ -171,13 +195,13 @@ public class World { // what happen to the game will be create here
     
     private void randomSpawnItem() 
     { //gradually spawn item by random number
-    	if(rand.nextInt(10000) <= 2) //for healing potion
+    	if(rand.nextInt(15000) <= 4) //for healing potion
 		{
-    		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -40) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -40) +30));
+    		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -40) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -40) +40));
 		}
-    	if(rand.nextInt(10000) <= 4) //for time stop item
+    	if(rand.nextInt(15000) <= 6) //for time stop item
 		{
-    		timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -40) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -40) +30));
+    		timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -40) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -40) +40));
 		}
     }
     
@@ -219,8 +243,10 @@ public class World { // what happen to the game will be create here
     	{
     		potion_heal_list.get(i).update(delta);
     	}
-    	waveSpawnEnemy(waveNumber);
-    	//randomSpawnEnemy();
-    	randomSpawnItem();
+    	waveSpawnEnemy(waveNumber); //for wave mode
+    	timeSpawnEnemy(); // for wave mode
+    	randomSpawnEnemy(); // for survival mode
+    	randomSpawnItem();//for both mode
+    	timeSpawnItem(); //for both mode
     }
 }
