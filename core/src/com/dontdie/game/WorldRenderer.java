@@ -170,7 +170,8 @@ public class WorldRenderer { //what happen to the game world will be draw here
         		batch.draw(potionHealAllImg, world.potion_heal_list.get(i).getPosition().x, world.potion_heal_list.get(i).getPosition().y);
         	}
     	}
-        font.draw(batch,"" +world.timeSec,100,100);
+        font.draw(batch,"Wave: " +world.waveNumber,DontDieGame.SCREEN_WIDTH -100,DontDieGame.SCREEN_HEIGHT - 25);
+        font.draw(batch,"Time: " +world.timeSec + "  sec",DontDieGame.SCREEN_WIDTH -100,DontDieGame.SCREEN_HEIGHT - 50);
         
         healthBar1Img = new Texture("healthbar_"+player1.hpScale+".png");
         healthBar2Img = new Texture("healthbar_"+player2.hpScale+".png");

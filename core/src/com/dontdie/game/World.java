@@ -31,6 +31,8 @@ public class World { // what happen to the game will be create here
     private static final int DIRECTION_DOWN = 3;
     private static final int DIRECTION_LEFT = 4;
 	
+    public int waveNumber;
+    
     long tStart;
     long tEnd;
     long tRes;
@@ -47,6 +49,7 @@ public class World { // what happen to the game will be create here
         potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
         //spawnSnake(5);
         tStart = System.nanoTime();
+        waveNumber +=1;
     }
  
     Player1 getPlayer1() {
@@ -81,8 +84,11 @@ public class World { // what happen to the game will be create here
     	}
     }
     
-    private void randomSpawnEnemy() 
-    {
+    private void TimespawnEnemy() {
+    	
+    }
+    
+    private void randomSpawnEnemy() {
     	if(timestop <= 0)
     	{
     		if(rand.nextInt(1000) <= 9) //gradually spawn snake by random number
@@ -96,8 +102,7 @@ public class World { // what happen to the game will be create here
     	}
     }
     
-    private void spawnSnake(int numberofSnake) 
-    {
+    private void spawnSnake(int numberofSnake) {
     	for(int i =0 ; i< numberofSnake ; i++) 
     	{
     		int laneNumber = rand.nextInt(4)+1;
@@ -120,8 +125,7 @@ public class World { // what happen to the game will be create here
     	}
     }
     
-    private void spawnBall(int numberofBall) 
-    {
+    private void spawnBall(int numberofBall) {
     	for(int i =0 ; i< numberofBall ; i++) 
     	{
     		int laneNumber = rand.nextInt(4)+1;
@@ -144,8 +148,7 @@ public class World { // what happen to the game will be create here
     	}
     }
     
-    private void randomSpawnItem() //gradually spawn item by random number
-    {
+    private void randomSpawnItem() { //gradually spawn item by random number
     	if(rand.nextInt(10000) <= 4) //for healing potion
 		{
     		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -40) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -40) +30));
@@ -156,8 +159,16 @@ public class World { // what happen to the game will be create here
 		}
     }
     
-    public void update(float delta) //for make every object update itself
-    {
+    public void timeUpdate () {
+    	timestop -= 1; //test time stop count down timer
+    	tEnd = System.nanoTime();
+    	if(player1.isPlayerDead == false || player2.isPlayerDead == false) { //time will only count if some of player is still alive
+    		tRes = tEnd - tStart;
+    	}
+    	timeSec = tRes/1000000000; //make time unit from nano second into second
+    }
+    
+    public void update(float delta){//for make every object update itself
     	player1.update(delta);
     	player2.update(delta);
     	
@@ -186,9 +197,6 @@ public class World { // what happen to the game will be create here
     	}
     	randomSpawnEnemy();
     	randomSpawnItem();
-    	timestop -= 1; //test time stop count down timer
-    	tEnd = System.nanoTime();
-    	tRes = tEnd - tStart;
-    	timeSec = tRes/1000000000;
+    	timeUpdate();
     }
 }
