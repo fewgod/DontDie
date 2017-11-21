@@ -3,6 +3,8 @@ package com.dontdie.game;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 
@@ -12,6 +14,10 @@ public class World { // what happen to the game will be create here
     private DontDieGame dontdieGame;
     public int timestop; //init the time stop count to 0
     public int provokeTime;
+    
+    Sound bgm = Gdx.audio.newSound(Gdx.files.internal("bgm.mp3"));
+    Sound enemydead = Gdx.audio.newSound(Gdx.files.internal("enemydead.wav"));
+    
     
     public ArrayList<Snake> snake_list = new ArrayList<Snake>();
     public ArrayList<IronBall> ball_list = new ArrayList<IronBall>();
@@ -63,6 +69,7 @@ public class World { // what happen to the game will be create here
         timestop = 0;
         waveNumber = 0;
         nextWaveTime = 1;
+        bgm.play(0.7f); //1.0f is for volumn 1.0 for maximum possible
         maxtimePotion = 11 + rand.nextInt(5);
         maxtimeStopItem = 8 + rand.nextInt(2);
     }
