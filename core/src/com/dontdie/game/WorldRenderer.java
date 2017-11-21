@@ -170,6 +170,25 @@ public class WorldRenderer { //what happen to the game world will be draw here
         		batch.draw(potionHealAllImg, world.potion_heal_list.get(i).getPosition().x, world.potion_heal_list.get(i).getPosition().y);
         	}
     	}
+        
+        //draw skill animation draw 1 for caster and 1 for downer
+        /*if(player1.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/3 && player1.skillCastingTime < Player1.SKILL_MAX_CAST_TIME/2)
+        {
+        	
+        }
+        if(player1.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/2 && player1.skillCastingTime < Player1.SKILL_MAX_CAST_TIME)
+        {
+        	
+        }
+        if(player2.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/3 && player2.skillCastingTime < Player1.SKILL_MAX_CAST_TIME/2)
+        {
+        	
+        }
+        if(player2.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/2 && player2.skillCastingTime < Player1.SKILL_MAX_CAST_TIME)
+        {
+        	
+        }*/
+        
         font.draw(batch,"Wave: " +world.waveNumber,DontDieGame.SCREEN_WIDTH -100,DontDieGame.SCREEN_HEIGHT - 25);
         font.draw(batch,"Time: " +world.timeSec + "  sec",DontDieGame.SCREEN_WIDTH -100,DontDieGame.SCREEN_HEIGHT - 50);
         
