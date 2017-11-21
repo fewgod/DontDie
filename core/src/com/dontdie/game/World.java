@@ -18,6 +18,9 @@ public class World { // what happen to the game will be create here
     public ArrayList<Timestopper> timestopper_list = new ArrayList<Timestopper>();
     public ArrayList<PotionHeal> potion_heal_list = new ArrayList<PotionHeal>();
     public ArrayList<Attack> attack_list = new ArrayList<Attack>();
+    public int score;
+    public static int hiScore;
+    private float gainingScoreTime;
     
     public World world;
     
@@ -27,6 +30,7 @@ public class World { // what happen to the game will be create here
 	public boolean chose2Player;
 	private Random rand = new Random(); //for random things such as number
 	
+	private static final int SCORE_BY_TIME = 1;
 	private static final int DIRECTION_UP = 1;
     private static final int DIRECTION_RIGHT = 2;
     private static final int DIRECTION_DOWN = 3;
@@ -96,6 +100,7 @@ public class World { // what happen to the game will be create here
 			}
 			nextWaveTime = currStartWaveTime + 2 * numberofEnemy + this.waveNumber *3; //if player use too much time will go to next wave
 			world.waveNumber += 1;
+			score += (this.waveNumber-1)*20;
 		}
     }
     
@@ -219,6 +224,23 @@ public class World { // what happen to the game will be create here
     	timeSec = tRes/1000000000; //make time unit from nano second into second
     }
     
+    public void scoreFunction() 
+    {
+    	if(player1.isPlayerDead == false || player2.isPlayerDead == false)
+    	{
+    		gainingScoreTime += 1;
+    		if(gainingScoreTime == 60)
+    		{
+    			gainingScoreTime =0;
+    			score +=1;
+    		}
+    	}
+    	if(score > hiScore)
+    	{
+    		hiScore = score;
+    	}
+    }
+    
     public void update(float delta){//for make every object update itself
     	timeUpdate();
     	player1.update(delta);
@@ -251,6 +273,8 @@ public class World { // what happen to the game will be create here
     	{
     		potion_heal_list.get(i).update(delta);
     	}
+    	
+    	scoreFunction();
     	waveSpawnEnemy(waveNumber); //for wave mode
     	timeSpawnEnemy(); // for wave mode
     	randomSpawnEnemy(); // for survival mode

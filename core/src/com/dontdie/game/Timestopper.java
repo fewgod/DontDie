@@ -18,7 +18,7 @@ public class Timestopper {
   	private float IMAGE_RADIUS_Y = GET_CENTER_Y;
   	private float currCenter_X;
   	private float currCenter_Y;
-  	private int TIME_STOP_POTENCY = 250;
+  	private int TIME_STOP_POTENCY = 265;
 	
 	
 	public Timestopper(World world, int x, int y) { // do this method all time
@@ -80,6 +80,7 @@ public class Timestopper {
 					if(player1.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player1.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this item
 					{
 						timestop();
+						world.score += 5;
 					}
 				}
 			}
@@ -92,6 +93,7 @@ public class Timestopper {
 					if(player2.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player2.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player2 is within 30 radius.y of this item
 					{
 						timestop();
+						world.score += 5;
 					}
 				}
         	}

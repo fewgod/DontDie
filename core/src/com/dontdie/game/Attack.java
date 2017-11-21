@@ -81,16 +81,16 @@ public class Attack {
         else if(attackType ==2)
         {
         	availableTime = 30;
-        	IMAGE_SIZE_X = 60;
-          	IMAGE_SIZE_Y = 60;
+        	IMAGE_SIZE_X = 50;
+          	IMAGE_SIZE_Y = 50;
           	currPos.x += 15;
           	currPos.y += 10;
         }
         else if(attackType == 3)
         {
-        	availableTime = 270;
-        	IMAGE_SIZE_X = 60;
-          	IMAGE_SIZE_Y = 60;
+        	availableTime = 277;
+        	IMAGE_SIZE_X = 75;
+          	IMAGE_SIZE_Y = 75;
           	currPos.x += 15;
           	currPos.y += 10;
         }
@@ -171,6 +171,7 @@ public class Attack {
 				if(world.ball_list.get(i).getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && world.ball_list.get(i).getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this enemy
 				{
 					world.ball_list.get(i).changeDirection(faceDir);
+					world.score += 5;
 				}
 			}
     	}

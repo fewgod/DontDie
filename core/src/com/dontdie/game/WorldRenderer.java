@@ -36,6 +36,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Texture attackDown_Img;
 	private Texture attackUp_Img;
 	private Texture fireball_Img;
+	private Texture fireball_Big_Img;
 	private Texture provoke_Img;
 	
 	private Texture skillcasting1_Img;
@@ -79,6 +80,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		attackUp_Img = new Texture("sword_ani_up.png");
 		attackDown_Img = new Texture("sword_ani_down.png");
 		fireball_Img = new Texture("fireball.png");
+		fireball_Big_Img = new Texture("fireballBig.png");
 		provoke_Img = new Texture("provoke.png");
 		
 		skillcasting1_Img = new Texture("skillcasting1.png");
@@ -118,7 +120,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
         {
         	batch.draw(skillcasting2_Img, player2Pos.x-17, player2Pos.y-8);
         }
-        if(world.provokeTime > 100)
+        if(world.provokeTime > 100 && player1.isPlayerDead == false)
         {
         	batch.draw(provoke_Img, player1Pos.x-15, player1Pos.y-6);
         }
@@ -214,9 +216,13 @@ public class WorldRenderer { //what happen to the game world will be draw here
         			batch.draw(attackDown_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
         		}
         	}
+        	else if(world.attack_list.get(i).attackType == 2)
+        	{
+        		batch.draw(fireball_Img, attack_i.x , attack_i.y +5);
+        	}
         	else
         	{
-        		batch.draw(fireball_Img, attack_i.x, attack_i.y);
+        		batch.draw(fireball_Big_Img, attack_i.x -10, attack_i.y);
         	}
     	}
         
@@ -246,10 +252,16 @@ public class WorldRenderer { //what happen to the game world will be draw here
     	{
         	batch.draw(ballImg, world.ball_list.get(i).getPosition().x, world.ball_list.get(i).getPosition().y);
     	}
-        
+        if(player1.provokeCoolDown > 0)
+        {
+        	batch.draw(provoke_Img, 18,39);
+        	font.draw(batch,"Ready in: " +player1.provokeCoolDown/60 +"  sec",65,65);
+        }
         
         font.draw(batch,"Wave: " +world.waveNumber,DontDieGame.SCREEN_WIDTH -100,DontDieGame.SCREEN_HEIGHT - 25);
         font.draw(batch,"Time: " +world.timeSec + "  sec",DontDieGame.SCREEN_WIDTH -100,DontDieGame.SCREEN_HEIGHT - 50);
+        font.draw(batch,"Score: " +world.score, 50 , DontDieGame.SCREEN_HEIGHT - 25);
+        font.draw(batch,"Hi-Score: " +world.hiScore,50 ,DontDieGame.SCREEN_HEIGHT - 50);
         
         healthBar1Img = new Texture("healthbar_"+player1.hpScale+".png");
         healthBar2Img = new Texture("healthbar_"+player2.hpScale+".png");

@@ -125,6 +125,7 @@ public class Snake {
 		if(hitPoints <=0)
 		{
 			world.snake_list.remove(this);
+			world.score += 3;
 		}
 	}
 	public Vector2 getPosition() { // for other class to get current position of snake

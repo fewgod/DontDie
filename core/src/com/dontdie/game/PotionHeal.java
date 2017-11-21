@@ -89,6 +89,7 @@ public class PotionHeal {
 					if(player1.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player1.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this item
 					{
 						heal(1);
+						world.score += 5;
 					}
 				}
 			}
@@ -101,6 +102,7 @@ public class PotionHeal {
 					if(player2.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player2.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player2 is within 30 radius.y of this item
 					{
 						heal(2);
+						world.score += 5;
 					}
 				}
         	}

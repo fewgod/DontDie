@@ -21,7 +21,7 @@ public class Player1 {
     public int skillCastingTime;
     private int SKILL_REVIVE_MAX_CAST_TIME = 200;
     private int SKILL_FIREBALL_MAX_CAST_TIME = 40;
-    private int SKILL_PROVOKE_MAX_CAST_TIME = 37;
+    private int SKILL_PROVOKE_MAX_CAST_TIME = 33;
     public int maxSkillCastTime;
     public int invisibleTime;
     public int slowDownTime;
@@ -158,7 +158,7 @@ public class Player1 {
     }
     public void castSkillSlowFireBall(int whichPlayerIsCasting)
     {
-    	maxSkillCastTime = SKILL_FIREBALL_MAX_CAST_TIME + 65;
+    	maxSkillCastTime = SKILL_FIREBALL_MAX_CAST_TIME + 73;
     	skillCastingTime += 1;
     	if(skillCastingTime >= maxSkillCastTime)
     	{
