@@ -32,6 +32,7 @@ public class World { // what happen to the game will be create here
     private static final int DIRECTION_LEFT = 4;
 	
     public int waveNumber;
+    private long nextWaveTime;
     
     long tStart;
     long tEnd;
@@ -47,9 +48,10 @@ public class World { // what happen to the game will be create here
         
         timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
         potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
-        //spawnSnake(5);
+        //spawnSnake(5); for instantly spawn 5 snake
         tStart = System.nanoTime();
-        waveNumber +=1;
+        waveNumber = 0;
+        nextWaveTime = 1;
     }
  
     Player1 getPlayer1() {
@@ -84,11 +86,28 @@ public class World { // what happen to the game will be create here
     	}
     }
     
-    private void TimespawnEnemy() {
-    	
+    private void waveSpawnEnemy(int waveNumber) 
+    {
+		if(timeSec == nextWaveTime) 
+		{
+			long currStartWaveTime = timeSec; //time that start this wave
+			int numberofEnemy = 2*this.waveNumber + rand.nextInt(this.waveNumber + 2);
+			spawnSnake(numberofEnemy);
+			if(this.waveNumber % 3 == 2) 
+			{
+				spawnBall(rand.nextInt(this.waveNumber * rand.nextInt(3)+1)- this.waveNumber + 2);
+			}
+			nextWaveTime = currStartWaveTime + 2 * numberofEnemy + this.waveNumber *3; //if player use too much time will go to next wave
+			world.waveNumber += 1;
+		}
     }
     
-    private void randomSpawnEnemy() {
+   /* private void timeSpawnEnemy() { // like spawn ball every 10 sec when time is more than 20 sec
+    	
+    }*/
+    
+    private void randomSpawnEnemy() 
+    {
     	if(timestop <= 0)
     	{
     		if(rand.nextInt(1000) <= 9) //gradually spawn snake by random number
@@ -102,7 +121,8 @@ public class World { // what happen to the game will be create here
     	}
     }
     
-    private void spawnSnake(int numberofSnake) {
+    private void spawnSnake(int numberofSnake) 
+    {
     	for(int i =0 ; i< numberofSnake ; i++) 
     	{
     		int laneNumber = rand.nextInt(4)+1;
@@ -125,7 +145,8 @@ public class World { // what happen to the game will be create here
     	}
     }
     
-    private void spawnBall(int numberofBall) {
+    private void spawnBall(int numberofBall) 
+    {
     	for(int i =0 ; i< numberofBall ; i++) 
     	{
     		int laneNumber = rand.nextInt(4)+1;
@@ -148,18 +169,20 @@ public class World { // what happen to the game will be create here
     	}
     }
     
-    private void randomSpawnItem() { //gradually spawn item by random number
-    	if(rand.nextInt(10000) <= 4) //for healing potion
+    private void randomSpawnItem() 
+    { //gradually spawn item by random number
+    	if(rand.nextInt(10000) <= 2) //for healing potion
 		{
     		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -40) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -40) +30));
 		}
-    	if(rand.nextInt(10000) <= 6) //for time stop item
+    	if(rand.nextInt(10000) <= 4) //for time stop item
 		{
     		timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -40) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -40) +30));
 		}
     }
     
-    public void timeUpdate () {
+    public void timeUpdate () 
+    {
     	timestop -= 1; //test time stop count down timer
     	tEnd = System.nanoTime();
     	if(player1.isPlayerDead == false || player2.isPlayerDead == false) { //time will only count if some of player is still alive
@@ -169,6 +192,7 @@ public class World { // what happen to the game will be create here
     }
     
     public void update(float delta){//for make every object update itself
+    	timeUpdate();
     	player1.update(delta);
     	player2.update(delta);
     	
@@ -195,8 +219,8 @@ public class World { // what happen to the game will be create here
     	{
     		potion_heal_list.get(i).update(delta);
     	}
-    	randomSpawnEnemy();
+    	waveSpawnEnemy(waveNumber);
+    	//randomSpawnEnemy();
     	randomSpawnItem();
-    	timeUpdate();
     }
 }
