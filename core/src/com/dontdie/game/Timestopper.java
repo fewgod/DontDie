@@ -18,6 +18,7 @@ public class Timestopper {
   	private float IMAGE_RADIUS_Y = GET_CENTER_Y;
   	private float currCenter_X;
   	private float currCenter_Y;
+  	private int TIME_STOP_POTENCY = 250;
 	
 	
 	public Timestopper(World world, int x, int y) { // do this method all time
@@ -54,20 +55,20 @@ public class Timestopper {
 	
 	public void timestop() 
 	{
-		world.timestop = 250;
+		world.timestop = TIME_STOP_POTENCY;
 		if(player1.isPlayerDead == false)
 		{
-			player1.invisibleTime = world.timestop = 250;
+			player1.invisibleTime = world.timestop = TIME_STOP_POTENCY;
 		}
 		if(player2.isPlayerDead == false)
 		{
-			player2.invisibleTime = world.timestop = 250;
+			player2.invisibleTime = world.timestop = TIME_STOP_POTENCY;
 		}
 		isItemPickUp = true;
 		world.timestopper_list.remove(this);
 	}
 	
-	private void checkIfCollideWithPlayer() //player1 test only
+	private void checkIfCollideWithPlayer()
 	{
 		if(isItemPickUp == false)
 		{

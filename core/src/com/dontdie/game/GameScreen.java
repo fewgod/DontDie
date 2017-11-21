@@ -46,7 +46,7 @@ public class GameScreen extends ScreenAdapter {
         }
     	if(Gdx.input.isKeyPressed(Keys.Q)) 
         {
-    		world.timestop = 300;
+    		world.timestop = 250;
         }
     }
     private void moveplayer1()//input for player1 movement
@@ -124,12 +124,17 @@ public class GameScreen extends ScreenAdapter {
         		player2.slowDownTime = 20;
         	}
         }
-    	if(Gdx.input.isKeyPressed(Keys.S)) 
+    	if(Gdx.input.isKeyPressed(Keys.M)) 
         {
     			if(world.player1.isPlayerDead == true)
     			{
     				world.player2.castSkillRevive(2);
     			}
         }
+    	else
+        {
+        	world.player2.skillCastingTime = 0;
+        }
+    		
     }
 }

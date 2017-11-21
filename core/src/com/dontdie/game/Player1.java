@@ -75,6 +75,7 @@ public class Player1 {
     }
     
     public void takeDamage(int damageReceive) {
+    	skillCastingTime = 0;
     	if(invisibleTime <=0)
     	{
     		hitPoints -= damageReceive;
