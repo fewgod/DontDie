@@ -19,7 +19,7 @@ public class Player1 {
     public long hpScale;
     public int attackCoolDown;
     public int skillCastingTime;
-    public int SKILL_MAX_CAST_TIME = 200;
+    public static int SKILL_MAX_CAST_TIME = 200;
     public int invisibleTime;
     public int slowDownTime;
  
@@ -101,11 +101,7 @@ public class Player1 {
     public void castSkillRevive(int whichPlayerIsCasting) 
     {
     	faceDir = DIRECTION_DOWN;
-    	if(skillCastingTime <=0)
-    	{
-    		skillCastingTime = 0;
-    	}
-    	skillCastingTime += 2;
+    	skillCastingTime += 1;
     	if(skillCastingTime >= SKILL_MAX_CAST_TIME)
     	{
     		if(whichPlayerIsCasting == 1) //if player 1 is casting
@@ -139,12 +135,12 @@ public class Player1 {
     }
     
     public void move(int dir) { 
-    	if(slowDownTime <=0 && skillCastingTime < 0) //if dont cast skill and dont slow
+    	if(slowDownTime <=0 && skillCastingTime == 0) //if dont cast skill and dont slow
     	{
     		currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[dir][0];
     		currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[dir][1];
     	}
-    	else if(slowDownTime > 0 && skillCastingTime < 0) // if slow only
+    	else if(slowDownTime > 0 && skillCastingTime == 0) // if slow only
     	{
     		currPos.x += (PLAYER_MOVE_SPEED/2) * DIR_OFFSETS[dir][0];
     		currPos.y += (PLAYER_MOVE_SPEED/2) * DIR_OFFSETS[dir][1];
@@ -182,7 +178,6 @@ public class Player1 {
         attackCoolDown -= 1;
         slowDownTime -= 1;
         invisibleTime -= 1;
-        skillCastingTime -= 1;
     	getCurrentXPos();
     	getCurrentYPos();
     }

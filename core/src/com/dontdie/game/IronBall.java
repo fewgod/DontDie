@@ -52,7 +52,7 @@ public class IronBall {
 	}
 	
 	public void checkIfOutBound() {
-		if(currCenter_X < 0 || currCenter_X > DontDieGame.SCREEN_WIDTH || currCenter_Y < 0 || currCenter_Y > DontDieGame.SCREEN_HEIGHT)
+		if(currCenter_X < 60 || currCenter_X > DontDieGame.SCREEN_WIDTH +60 || currCenter_Y < -60 || currCenter_Y > DontDieGame.SCREEN_HEIGHT+60)
 		{
 			world.ball_list.remove(this);
 		}

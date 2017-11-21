@@ -10,7 +10,7 @@ public class World { // what happen to the game will be create here
     public Player1 player1;
     public Player1 player2;
     private DontDieGame dontdieGame;
-    public int timestop  = 0; //init the time stop count to 0
+    public int timestop; //init the time stop count to 0
     
     public ArrayList<Snake> snake_list = new ArrayList<Snake>();
     public ArrayList<IronBall> ball_list = new ArrayList<IronBall>();
@@ -54,6 +54,7 @@ public class World { // what happen to the game will be create here
         //potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
         //spawnSnake(5); for instantly spawn 5 snake
         tStart = System.nanoTime();
+        timestop = 0;
         waveNumber = 0;
         nextWaveTime = 1;
         maxtimePotion = 11 + rand.nextInt(5);
@@ -176,19 +177,19 @@ public class World { // what happen to the game will be create here
     		int laneNumber = rand.nextInt(4)+1;
     		if(laneNumber == DIRECTION_UP) //spawn from down and go up
     		{
-    			ball_list.add( new IronBall(world,DIRECTION_UP,rand.nextInt(dontdieGame.SCREEN_WIDTH) , 0));
+    			ball_list.add( new IronBall(world,DIRECTION_UP,rand.nextInt(dontdieGame.SCREEN_WIDTH) , -50));
     		}
     		if(laneNumber == DIRECTION_DOWN) //spawn from up and go down
     		{
-    			ball_list.add( new IronBall(world,DIRECTION_DOWN, rand.nextInt(dontdieGame.SCREEN_WIDTH) , dontdieGame.SCREEN_HEIGHT));
+    			ball_list.add( new IronBall(world,DIRECTION_DOWN, rand.nextInt(dontdieGame.SCREEN_WIDTH) , dontdieGame.SCREEN_HEIGHT+50));
     		}
     		if(laneNumber == DIRECTION_LEFT) // spawn from right and go left
     		{
-    			ball_list.add( new IronBall(world,DIRECTION_LEFT,dontdieGame.SCREEN_WIDTH, rand.nextInt(dontdieGame.SCREEN_HEIGHT)));
+    			ball_list.add( new IronBall(world,DIRECTION_LEFT,dontdieGame.SCREEN_WIDTH+50, rand.nextInt(dontdieGame.SCREEN_HEIGHT)));
     		}
     		if(laneNumber == DIRECTION_RIGHT)//spawn from left and go right
     		{
-    			ball_list.add( new IronBall(world,DIRECTION_RIGHT,  0, rand.nextInt(dontdieGame.SCREEN_HEIGHT)));
+    			ball_list.add( new IronBall(world,DIRECTION_RIGHT,  -50, rand.nextInt(dontdieGame.SCREEN_HEIGHT)));
     		}
     	}
     }
@@ -248,5 +249,6 @@ public class World { // what happen to the game will be create here
     	randomSpawnEnemy(); // for survival mode
     	randomSpawnItem();//for both mode
     	timeSpawnItem(); //for both mode
+    	
     }
 }

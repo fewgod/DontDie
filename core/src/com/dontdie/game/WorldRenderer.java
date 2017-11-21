@@ -34,6 +34,8 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Texture attackRight_Img;
 	private Texture attackDown_Img;
 	private Texture attackUp_Img;
+	private Texture skillcasting1_Img;
+	private Texture skillcasting2_Img;
 	
 	private Texture timestopperImg;
 	private Texture potionHealOneImg;
@@ -68,6 +70,8 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		attackRight_Img = new Texture("sword_ani_right.png");
 		attackUp_Img = new Texture("sword_ani_up.png");
 		attackDown_Img = new Texture("sword_ani_down.png");
+		skillcasting1_Img = new Texture("skillcasting1.png");
+		skillcasting2_Img = new Texture("skillcasting2.png");
 		
 		snakeImg = new Texture ("snake.png");
 		ballImg = new Texture ("ball.png");
@@ -78,11 +82,32 @@ public class WorldRenderer { //what happen to the game world will be draw here
         SpriteBatch batch = dontdieGame.batch; //what is this line??
         batch.begin();
         batch.draw(backgroundImg, 0, 0);
+       
+        Vector2 player1Pos = player1.getPosition(); //get position of player 1 to draw it
+        Vector2 player2Pos = player2.getPosition(); //get position of player 2 to draw it
         
         //when draw:draw currPos position, but when calculate, use CURR_CENTER so hit box of that object will always be at center of image
+        
+        //draw skill animation draw 1 for caster and 1 for downer
+        if(player1.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/6 && player1.skillCastingTime < Player1.SKILL_MAX_CAST_TIME/2.5)
+        {
+        	batch.draw(skillcasting1_Img, player1Pos.x-15, player1Pos.y-6);
+        }
+        if(player1.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/2.5 && player1.skillCastingTime < Player1.SKILL_MAX_CAST_TIME)
+        {
+        	batch.draw(skillcasting2_Img, player1Pos.x-17, player1Pos.y-8);
+        }
+        if(player2.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/3 && player2.skillCastingTime < Player1.SKILL_MAX_CAST_TIME/2.5)
+        {
+        	batch.draw(skillcasting1_Img, player2Pos.x-15, player2Pos.y-6);
+        }
+        if(player2.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/2.5 && player2.skillCastingTime < Player1.SKILL_MAX_CAST_TIME)
+        {
+        	batch.draw(skillcasting2_Img, player2Pos.x-17, player2Pos.y-8);
+        }
+        
         if(player1.isPlayerDead == false)
         {
-        	Vector2 player1Pos = player1.getPosition(); //get position of player 1 to draw it
         	//render player1 face
         	if(player1.faceDir == player1.DIRECTION_RIGHT)
         	{
@@ -104,7 +129,6 @@ public class WorldRenderer { //what happen to the game world will be draw here
         
         if(player2.isPlayerDead == false)
         {
-        	Vector2 player2Pos = player2.getPosition(); //get position of player 2 to draw it
         	//render player2 face
         	if(player2.faceDir == player2.DIRECTION_RIGHT)
         	{
@@ -170,24 +194,6 @@ public class WorldRenderer { //what happen to the game world will be draw here
         		batch.draw(potionHealAllImg, world.potion_heal_list.get(i).getPosition().x, world.potion_heal_list.get(i).getPosition().y);
         	}
     	}
-        
-        //draw skill animation draw 1 for caster and 1 for downer
-        /*if(player1.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/3 && player1.skillCastingTime < Player1.SKILL_MAX_CAST_TIME/2)
-        {
-        	
-        }
-        if(player1.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/2 && player1.skillCastingTime < Player1.SKILL_MAX_CAST_TIME)
-        {
-        	
-        }
-        if(player2.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/3 && player2.skillCastingTime < Player1.SKILL_MAX_CAST_TIME/2)
-        {
-        	
-        }
-        if(player2.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/2 && player2.skillCastingTime < Player1.SKILL_MAX_CAST_TIME)
-        {
-        	
-        }*/
         
         font.draw(batch,"Wave: " +world.waveNumber,DontDieGame.SCREEN_WIDTH -100,DontDieGame.SCREEN_HEIGHT - 25);
         font.draw(batch,"Time: " +world.timeSec + "  sec",DontDieGame.SCREEN_WIDTH -100,DontDieGame.SCREEN_HEIGHT - 50);

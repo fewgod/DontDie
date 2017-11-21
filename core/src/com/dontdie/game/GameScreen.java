@@ -46,11 +46,7 @@ public class GameScreen extends ScreenAdapter {
         }
     	if(Gdx.input.isKeyPressed(Keys.Q)) 
         {
-    			player1.isPlayerDead = false;
-    			player1.healPlayer(5);
-        		player2.isPlayerDead = false;
-        		player2.healPlayer(5);
-        		world.somePlayerIsDead();
+    		world.timestop = 300;
         }
     }
     private void moveplayer1()//input for player1 movement
@@ -90,6 +86,10 @@ public class GameScreen extends ScreenAdapter {
     			{
     				world.player1.castSkillRevive(1);
     			}
+        }
+        else
+        {
+        	world.player1.skillCastingTime = 0;
         }
     }
     
