@@ -11,6 +11,7 @@ public class World { // what happen to the game will be create here
     public Player1 player2;
     private DontDieGame dontdieGame;
     public int timestop; //init the time stop count to 0
+    public int provokeTime;
     
     public ArrayList<Snake> snake_list = new ArrayList<Snake>();
     public ArrayList<IronBall> ball_list = new ArrayList<IronBall>();
@@ -210,6 +211,7 @@ public class World { // what happen to the game will be create here
     public void timeUpdate () 
     {
     	timestop -= 1; //test time stop count down timer
+    	provokeTime -=1;
     	tEnd = System.nanoTime();
     	if(player1.isPlayerDead == false || player2.isPlayerDead == false) { //time will only count if some of player is still alive
     		tRes = tEnd - tStart;
@@ -220,6 +222,10 @@ public class World { // what happen to the game will be create here
     public void update(float delta){//for make every object update itself
     	timeUpdate();
     	player1.update(delta);
+    	if(provokeTime > 0 && provokeTime % 150 == 0) //while in provoke duration
+    	{
+    		player1.healPlayer(1);
+    	}
     	player2.update(delta);
     	
     	for(int i =0 ; i< attack_list.size() ; i++) //update every attack

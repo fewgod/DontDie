@@ -78,9 +78,17 @@ public class Attack {
         {
         	availableTime = 8; //time for this swing will appear
         }
-        else
+        else if(attackType ==2)
         {
-        	availableTime = 40;
+        	availableTime = 30;
+        	IMAGE_SIZE_X = 60;
+          	IMAGE_SIZE_Y = 60;
+          	currPos.x += 15;
+          	currPos.y += 10;
+        }
+        else if(attackType == 3)
+        {
+        	availableTime = 270;
         	IMAGE_SIZE_X = 60;
           	IMAGE_SIZE_Y = 60;
           	currPos.x += 15;
@@ -116,8 +124,16 @@ public class Attack {
     }
     
     public void move(int dir) { 
-    	currPos.x += ATTACK_MOVE_SPEED*1.2 * DIR_OFFSETS[dir][0];
-    	currPos.y += ATTACK_MOVE_SPEED*1.2 * DIR_OFFSETS[dir][1];
+    	if(attackType == 3)
+    	{
+    		currPos.x += ATTACK_MOVE_SPEED*0.5 * DIR_OFFSETS[dir][0];
+    		currPos.y += ATTACK_MOVE_SPEED*0.5 * DIR_OFFSETS[dir][1];
+    	}
+    	else if(attackType == 2)
+    	{
+    		currPos.x += ATTACK_MOVE_SPEED*1.3 * DIR_OFFSETS[dir][0];
+    		currPos.y += ATTACK_MOVE_SPEED*1.3 * DIR_OFFSETS[dir][1];
+    	}
     	currCenter_X = currPos.x + GET_CENTER_X;
     	currCenter_Y = currPos.y + GET_CENTER_Y;
         // first [dir] is chose which {,} to use, second [] chose first para or second para in {,}
@@ -127,7 +143,7 @@ public class Attack {
     {
     	getCurrentXPos();
     	getCurrentYPos();
-    	if(attackType == 2)
+    	if(attackType > 1)
     	{
     		move(faceDir);
     	}

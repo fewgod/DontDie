@@ -36,6 +36,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Texture attackDown_Img;
 	private Texture attackUp_Img;
 	private Texture fireball_Img;
+	private Texture provoke_Img;
 	
 	private Texture skillcasting1_Img;
 	private Texture skillcasting2_Img;
@@ -78,6 +79,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		attackUp_Img = new Texture("sword_ani_up.png");
 		attackDown_Img = new Texture("sword_ani_down.png");
 		fireball_Img = new Texture("fireball.png");
+		provoke_Img = new Texture("provoke.png");
 		
 		skillcasting1_Img = new Texture("skillcasting1.png");
 		skillcasting2_Img = new Texture("skillcasting2.png");
@@ -115,6 +117,10 @@ public class WorldRenderer { //what happen to the game world will be draw here
         else if(player2.skillCastingTime >= player2.maxSkillCastTime/2.5 && player2.skillCastingTime < player2.maxSkillCastTime)
         {
         	batch.draw(skillcasting2_Img, player2Pos.x-17, player2Pos.y-8);
+        }
+        if(world.provokeTime > 100)
+        {
+        	batch.draw(provoke_Img, player1Pos.x-15, player1Pos.y-6);
         }
         
         if(player1.isPlayerDead == false)

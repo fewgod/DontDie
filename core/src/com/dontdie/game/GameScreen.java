@@ -80,13 +80,17 @@ public class GameScreen extends ScreenAdapter {
         		player1.slowDownTime = 20;
         	}
         }
-        if(Gdx.input.isKeyPressed(Keys.E)) 
+        else if(Gdx.input.isKeyPressed(Keys.E)) 
         {
     			if(world.player2.isPlayerDead == true)
     			{
     				world.player1.castSkillRevive(1);
     				world.revivingSomeone = true;
     			}
+    			else if(world.player1.provokeCoolDown <= 0)
+            	{
+            		world.player1.castSkillProvoke(); //provoke can only be use when both is alive
+            	}
         }
         else
         {
@@ -138,6 +142,10 @@ public class GameScreen extends ScreenAdapter {
     			{
     				world.player2.castSkillRevive(2);
     				world.revivingSomeone = true;
+    			}
+    			else 
+    			{
+    				world.player2.castSkillSlowFireBall(2); //this skill can only be use when both is alive
     			}
         }
     	else

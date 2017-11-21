@@ -19,12 +19,14 @@ public class Player1 {
     public long hpScale;
     public int attackCoolDown;
     public int skillCastingTime;
-    public static int SKILL_REVIVE_MAX_CAST_TIME = 200;
-    public static int SKILL_FIREBALL_MAX_CAST_TIME = 70;
+    private int SKILL_REVIVE_MAX_CAST_TIME = 200;
+    private int SKILL_FIREBALL_MAX_CAST_TIME = 40;
+    private int SKILL_PROVOKE_MAX_CAST_TIME = 37;
     public int maxSkillCastTime;
     public int invisibleTime;
     public int slowDownTime;
- 
+    public int provokeCoolDown;
+    
   //snake image size is 22*41
   	private float IMAGE_SIZE_X = 22;
   	private float IMAGE_SIZE_Y = 41;
@@ -154,6 +156,40 @@ public class Player1 {
     		skillCastingTime = 0;
     	}
     }
+    public void castSkillSlowFireBall(int whichPlayerIsCasting)
+    {
+    	maxSkillCastTime = SKILL_FIREBALL_MAX_CAST_TIME + 65;
+    	skillCastingTime += 1;
+    	if(skillCastingTime >= maxSkillCastTime)
+    	{
+    		if(whichPlayerIsCasting == 1) //if player 1 is casting
+    		{
+    			world.attack_list.add( new Attack(world, world.player1.faceDir , 3, world.player1.getCurrentXPos() , world.player1.getCurrentYPos()));
+    		}
+    		if(whichPlayerIsCasting == 2) //if player 2 is casting
+    		{
+    			world.attack_list.add( new Attack(world, world.player2.faceDir , 3, world.player2.getCurrentXPos() , world.player2.getCurrentYPos()));
+    		}
+    		skillCastingTime = 0;
+    	}
+    }
+    
+    public void castSkillProvoke()
+    {
+    	maxSkillCastTime = SKILL_PROVOKE_MAX_CAST_TIME;
+    	skillCastingTime += 1;
+    	if(skillCastingTime >= maxSkillCastTime)
+    	{
+    		world.provokeTime = 1300;
+    		provokeCoolDown = 4000;
+    		for(int i =0 ; i< world.snake_list.size() ; i++) //update every snake in snake_list
+        	{
+        		world.snake_list.get(i).init(); //force every snake to chase the other after that one is dead;
+        	}
+    		skillCastingTime = 0;
+    	}
+    }
+
     
     public void checkIfAlive() {
     	if(hitPoints <= 0)
@@ -211,6 +247,7 @@ public class Player1 {
         attackCoolDown -= 1;
         slowDownTime -= 1;
         invisibleTime -= 1;
+        provokeCoolDown -=1;
     	getCurrentXPos();
     	getCurrentYPos();
     }

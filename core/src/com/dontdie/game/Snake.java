@@ -22,8 +22,8 @@ public class Snake {
 	private World world;
 	private Player1 player1;
 	private Player1 player2;
-	private boolean chasingPlayer1 = false;
-	private boolean chasingPlayer2 = false;
+	boolean chasingPlayer1 = false;
+	boolean chasingPlayer2 = false;
 	private boolean initWhoToChase = false;
 	
 	public static final int DIRECTION_UP = 1;
@@ -93,6 +93,27 @@ public class Snake {
 		{
 			chasingPlayer2 = true;
 		}
+		
+		if(world.provokeTime >0 && player1.isPlayerDead == false)
+		{
+			chasingPlayer2 = false;
+			chasingPlayer1 = true;
+		}
+		if(world.provokeTime == 0)
+		{
+			if(player1.isPlayerDead == false && player2.isPlayerDead == false) // if both alive will random
+			{	
+				int randomedNumber = rand.nextInt(100);
+				if(randomedNumber < 50) //if got less than 50 will chase player 1
+				{
+					chasingPlayer1 = true;
+				}
+				else
+				{
+					chasingPlayer2 = true;
+				}
+			}
+		}
 	}
 	
 	public void takeDamage(int damageReceive) {
@@ -131,7 +152,10 @@ public class Snake {
 		}
 		if(player1.isPlayerDead == false && player2.isPlayerDead == false) // will only change target when both player is alive
 		{	
-			shouldItChangePlayerToChase();
+			if(world.provokeTime <= 0 ) //if provoke will not change target
+			{
+				shouldItChangePlayerToChase();
+			}
 		}
 		shouldItTurnTowardPlayer();
 		if(player1.isPlayerDead == false || player2.isPlayerDead == false) //if both are dead will stop moving
@@ -183,13 +207,13 @@ public class Snake {
 	private void shouldItTurnTowardPlayer() 
 	{
 		if(chasingPlayer1 == true && player1.isPlayerDead == false)
-		{	if(rand.nextInt(100)<= 7) //if less got less than x number will turn toward player1
+		{	if(rand.nextInt(100)<= 6) //if less got less than x number will turn toward player1
 			{
 				checkWhereIsPlayer1();
 			}
 		}
 		if(chasingPlayer2 == true && player2.isPlayerDead == false)
-		{	if(rand.nextInt(100)<= 7) //if less got less than x number will turn toward player2
+		{	if(rand.nextInt(100)<= 6) //if less got less than x number will turn toward player2
 			{
 				checkWhereIsPlayer2();
 			}

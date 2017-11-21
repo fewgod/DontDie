@@ -8,9 +8,9 @@ public class IronBall {
 	private int BALL_MOVE_SPEED = 11;
 	private int BALL_PUSH_POWER = BALL_MOVE_SPEED * 9;
 	
-	//snake image size is 60*60
-	private float IMAGE_SIZE_X = 60;
-	private float IMAGE_SIZE_Y = 60;
+	//snake image size is 53*53
+	private float IMAGE_SIZE_X = 53;
+	private float IMAGE_SIZE_Y = 53;
 	private float GET_CENTER_X = IMAGE_SIZE_X/2;
 	private float GET_CENTER_Y = IMAGE_SIZE_Y/2;
 	private float IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
