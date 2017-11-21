@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
@@ -17,7 +18,12 @@ public class World { // what happen to the game will be create here
     
     Sound bgm = Gdx.audio.newSound(Gdx.files.internal("bgm.mp3"));
     Sound enemydead = Gdx.audio.newSound(Gdx.files.internal("enemydead.wav"));
-    
+    Sound swordswing = Gdx.audio.newSound(Gdx.files.internal("swordswing.wav"));
+    Sound magiccasting = Gdx.audio.newSound(Gdx.files.internal("magiccasting.wav"));
+    Sound playergothit = Gdx.audio.newSound(Gdx.files.internal("playergothit.wav"));
+    Sound playerdead = Gdx.audio.newSound(Gdx.files.internal("playerdead.wav"));
+    Sound heal = Gdx.audio.newSound(Gdx.files.internal("heal.wav"));
+    Sound pickitem = Gdx.audio.newSound(Gdx.files.internal("pickitem.wav"));
     
     public ArrayList<Snake> snake_list = new ArrayList<Snake>();
     public ArrayList<IronBall> ball_list = new ArrayList<IronBall>();
@@ -61,7 +67,6 @@ public class World { // what happen to the game will be create here
         gameState = CHOOSE_PLAYER_STATE;
         player1 = new Player1(world, 300,150); // create class in class??
         player2 = new Player1(world, 600,150);
-        
         //timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
         //potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
         //spawnSnake(5); for instantly spawn 5 snake
@@ -69,9 +74,11 @@ public class World { // what happen to the game will be create here
         timestop = 0;
         waveNumber = 0;
         nextWaveTime = 1;
-        bgm.play(0.7f); //1.0f is for volumn 1.0 for maximum possible
+        long id = bgm.play(0.62f); //1.0f is for volumn 1.0 for maximum possible
+        bgm.setLooping(id, true); 
         maxtimePotion = 11 + rand.nextInt(5);
         maxtimeStopItem = 8 + rand.nextInt(2);
+        
     }
  
     Player1 getPlayer1() {

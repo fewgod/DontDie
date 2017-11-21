@@ -90,6 +90,7 @@ public class PotionHeal {
 					{
 						heal(1);
 						world.score += 5;
+						world.heal.play(0.8f);
 					}
 				}
 			}
@@ -103,6 +104,7 @@ public class PotionHeal {
 					{
 						heal(2);
 						world.score += 5;
+						world.heal.play(0.8f);
 					}
 				}
         	}

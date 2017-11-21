@@ -260,8 +260,8 @@ public class WorldRenderer { //what happen to the game world will be draw here
         
         font.draw(batch,"Wave: " +world.waveNumber,DontDieGame.SCREEN_WIDTH -100,DontDieGame.SCREEN_HEIGHT - 25);
         font.draw(batch,"Time: " +world.timeSec + "  sec",DontDieGame.SCREEN_WIDTH -100,DontDieGame.SCREEN_HEIGHT - 50);
-        font.draw(batch,"Score: " +world.score, 50 , DontDieGame.SCREEN_HEIGHT - 25);
-        font.draw(batch,"Hi-Score: " +world.hiScore,50 ,DontDieGame.SCREEN_HEIGHT - 50);
+        font.draw(batch,"Score: " +world.score, 30 , DontDieGame.SCREEN_HEIGHT - 25);
+        font.draw(batch,"Hi-Score: " +world.hiScore,30 ,DontDieGame.SCREEN_HEIGHT - 50);
         
         healthBar1Img = new Texture("healthbar_"+player1.hpScale+".png");
         healthBar2Img = new Texture("healthbar_"+player2.hpScale+".png");

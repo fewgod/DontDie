@@ -81,6 +81,7 @@ public class Timestopper {
 					{
 						timestop();
 						world.score += 5;
+						world.pickitem.play(0.8f);
 					}
 				}
 			}
@@ -94,6 +95,7 @@ public class Timestopper {
 					{
 						timestop();
 						world.score += 5;
+						world.pickitem.play(0.8f);
 					}
 				}
         	}

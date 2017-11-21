@@ -48,6 +48,18 @@ public class GameScreen extends ScreenAdapter {
         {
     		world.timestop = 250;
         }
+    	
+    	//z button for restart game is it work flawlessly?
+        if(Gdx.input.isKeyPressed(Keys.Z)) 
+        {
+        	world.bgm.stop();
+        	this.dontdieGame = dontdieGame;
+        	world = new World(dontdieGame); //create
+        	player1 = world.getPlayer1();
+            player2 = world.getPlayer2();
+            worldRender = new WorldRenderer(this.dontdieGame,world);
+        }
+        
     }
     private void moveplayer1()//input for player1 movement
     {
@@ -75,6 +87,7 @@ public class GameScreen extends ScreenAdapter {
         {
         	if(player1.attackCoolDown <= 0)
         	{
+        		world.swordswing.play(0.48f);
         		world.attack_list.add( new Attack(world,player1.faceDir, 1, player1.getCurrentXPos() , player1.getCurrentYPos())); //draw from center of player1.
         		player1.attackCoolDown = 18;
         		player1.slowDownTime = 20;
@@ -126,6 +139,7 @@ public class GameScreen extends ScreenAdapter {
     	{
     		if(player2.attackCoolDown <= 0)
     		{
+    			world.swordswing.play(0.48f);
         		world.attack_list.add( new Attack(world, player2.faceDir , 1, player2.getCurrentXPos() , player2.getCurrentYPos())); //draw from center of player2.
         		player2.attackCoolDown = 18;
         		player2.slowDownTime = 20;

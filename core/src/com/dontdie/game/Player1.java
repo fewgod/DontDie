@@ -86,6 +86,11 @@ public class Player1 {
     		if(hitPoints < 0)
     		{
     			hitPoints = 0;
+    			world.playerdead.play(0.8f);
+    		}
+    		if(hitPoints > 0)
+    		{
+    			world.playergothit.play(0.6f);
     		}
     		checkIfAlive();
     		invisibleTime = 15;
@@ -105,6 +110,7 @@ public class Player1 {
     
     private void revivePlayer(int whoToRevive) 
     {
+    	world.magiccasting.play(0.75f);
     	if(whoToRevive == 1)
     	{
     		world.player1.isPlayerDead = false;
@@ -162,6 +168,7 @@ public class Player1 {
     	skillCastingTime += 1;
     	if(skillCastingTime >= maxSkillCastTime)
     	{
+    		world.magiccasting.play(0.67f);
     		if(whichPlayerIsCasting == 1) //if player 1 is casting
     		{
     			world.attack_list.add( new Attack(world, world.player1.faceDir , 3, world.player1.getCurrentXPos() , world.player1.getCurrentYPos()));
