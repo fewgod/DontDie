@@ -29,6 +29,7 @@ public class Attack {
   	private float currCenter_X;
   	private float currCenter_Y;
 	private int availableTime;
+	public int attackType;
     
     private static final int [][] DIR_OFFSETS = new int [][] { // for use with move method
         {0,0},
@@ -38,55 +39,54 @@ public class Attack {
         {-1,0}
     };
     
-    public Attack(World world ,int playerDirection, float playerCenterX, float playerCenterY) { //when first init give spawn position to player 1
+    public Attack(World world ,int playerDirection ,int attackType , float playerCenterX, float playerCenterY) { //when first init give spawn position to player 1
     	this.world = world;
+    	this.attackType = attackType;
     	faceDir = playerDirection;
         currPos = new Vector2(playerCenterX,playerCenterY);
-        availableTime = 8; //time for this swing will appear
+        
         if(faceDir == DIRECTION_LEFT)
         {
         	IMAGE_SIZE_X = 50;
           	IMAGE_SIZE_Y = 75;
-          	GET_CENTER_X = IMAGE_SIZE_X/2;
-          	GET_CENTER_Y = IMAGE_SIZE_Y/2;
-          	IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
-          	IMAGE_RADIUS_Y = GET_CENTER_Y;
           	currPos.x -= 53;
         	currPos.y -= 43;
         }
-        if(faceDir == DIRECTION_RIGHT)
+        else if(faceDir == DIRECTION_RIGHT)
         {
         	IMAGE_SIZE_X = 50;
           	IMAGE_SIZE_Y = 75;
-          	GET_CENTER_X = IMAGE_SIZE_X/2;
-          	GET_CENTER_Y = IMAGE_SIZE_Y/2;
-          	IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
-          	IMAGE_RADIUS_Y = GET_CENTER_Y;
           	currPos.x += 0;
         	currPos.y -= 43;
         }
-        if(faceDir == DIRECTION_UP)
+        else if(faceDir == DIRECTION_UP)
         {
         	IMAGE_SIZE_X = 75;
           	IMAGE_SIZE_Y = 50;
-          	GET_CENTER_X = IMAGE_SIZE_X/2;
-          	GET_CENTER_Y = IMAGE_SIZE_Y/2;
-          	IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
-          	IMAGE_RADIUS_Y = GET_CENTER_Y;
           	currPos.x -= 35;
         	currPos.y += 10;
         }
-        if(faceDir == DIRECTION_DOWN)
+        else if(faceDir == DIRECTION_DOWN)
         {
         	IMAGE_SIZE_X = 75;
           	IMAGE_SIZE_Y = 50;
-          	GET_CENTER_X = IMAGE_SIZE_X/2;
-          	GET_CENTER_Y = IMAGE_SIZE_Y/2;
-          	IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
-          	IMAGE_RADIUS_Y = GET_CENTER_Y;
           	currPos.x -= 43;
         	currPos.y -= 60;
         }
+        if(attackType ==1)
+        {
+        	availableTime = 8; //time for this swing will appear
+        }
+        else
+        {
+        	availableTime = 40;
+        	IMAGE_SIZE_X = 75;
+          	IMAGE_SIZE_Y = 50;
+        }
+      	GET_CENTER_X = IMAGE_SIZE_X/2;
+      	GET_CENTER_Y = IMAGE_SIZE_Y/2;
+      	IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
+      	IMAGE_RADIUS_Y = GET_CENTER_Y;
     	currCenter_X = currPos.x + GET_CENTER_X;
     	currCenter_Y = currPos.y + GET_CENTER_Y;
     }    
@@ -124,6 +124,10 @@ public class Attack {
     {
     	getCurrentXPos();
     	getCurrentYPos();
+    	if(attackType == 2)
+    	{
+    		move(faceDir);
+    	}
     	checkIfHitEnemy();
     	dissapearTime();
     }

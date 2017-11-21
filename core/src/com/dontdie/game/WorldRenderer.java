@@ -35,6 +35,8 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Texture attackRight_Img;
 	private Texture attackDown_Img;
 	private Texture attackUp_Img;
+	private Texture fireball_Img;
+	
 	private Texture skillcasting1_Img;
 	private Texture skillcasting2_Img;
 	private Texture revive1_Img;
@@ -75,6 +77,8 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		attackRight_Img = new Texture("sword_ani_right.png");
 		attackUp_Img = new Texture("sword_ani_up.png");
 		attackDown_Img = new Texture("sword_ani_down.png");
+		fireball_Img = new Texture("fireball.png");
+		
 		skillcasting1_Img = new Texture("skillcasting1.png");
 		skillcasting2_Img = new Texture("skillcasting2.png");
 		revive1_Img = new Texture("revive1.png");
@@ -96,19 +100,19 @@ public class WorldRenderer { //what happen to the game world will be draw here
         //when draw:draw currPos position, but when calculate, use CURR_CENTER so hit box of that object will always be at center of image
         
         //draw skill casting animation must behind actor
-        if(player1.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/10 && player1.skillCastingTime < Player1.SKILL_MAX_CAST_TIME/2.5)
+        if(player1.skillCastingTime >= player1.maxSkillCastTime/10 && player1.skillCastingTime < player1.maxSkillCastTime/2.5)
         {
         	batch.draw(skillcasting1_Img, player1Pos.x-15, player1Pos.y-6);
         }
-        if(player1.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/2.5 && player1.skillCastingTime < Player1.SKILL_MAX_CAST_TIME)
+        else if(player1.skillCastingTime >= player1.maxSkillCastTime/2.5 && player1.skillCastingTime < player1.maxSkillCastTime)
         {
         	batch.draw(skillcasting2_Img, player1Pos.x-17, player1Pos.y-8);
         }
-        if(player2.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/10 && player2.skillCastingTime < Player1.SKILL_MAX_CAST_TIME/2.5)
+        if(player2.skillCastingTime >= player2.maxSkillCastTime/10 && player2.skillCastingTime < player2.maxSkillCastTime/2.5)
         {
         	batch.draw(skillcasting1_Img, player2Pos.x-15, player2Pos.y-6);
         }
-        if(player2.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/2.5 && player2.skillCastingTime < Player1.SKILL_MAX_CAST_TIME)
+        else if(player2.skillCastingTime >= player2.maxSkillCastTime/2.5 && player2.skillCastingTime < player2.maxSkillCastTime)
         {
         	batch.draw(skillcasting2_Img, player2Pos.x-17, player2Pos.y-8);
         }
@@ -162,41 +166,51 @@ public class WorldRenderer { //what happen to the game world will be draw here
         	batch.draw(player2KO_Img, player2Pos.x, player2Pos.y);
         }
         //draw revivng animation must be in front of actor
-        if(player1.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/6 && player1.skillCastingTime < Player1.SKILL_MAX_CAST_TIME/2.5)
+        if(world.revivingSomeone == true)
         {
-        	batch.draw(revive1_Img, player2Pos.x-5, player2Pos.y-6);
-        }
-        if(player1.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/2.5 && player1.skillCastingTime < Player1.SKILL_MAX_CAST_TIME)
-        {
-        	batch.draw(revive2_Img, player2Pos.x-5, player2Pos.y-10);
-        }
-        if(player2.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/6 && player2.skillCastingTime < Player1.SKILL_MAX_CAST_TIME/2.5)
-        {
-        	batch.draw(revive1_Img, player1Pos.x-5, player1Pos.y-6);
-        }
-        if(player2.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/2.5 && player2.skillCastingTime < Player1.SKILL_MAX_CAST_TIME)
-        {
-        	batch.draw(revive2_Img, player1Pos.x-5, player1Pos.y-10);
+        	if(player1.skillCastingTime >= player1.maxSkillCastTime/6 && player1.skillCastingTime < player1.maxSkillCastTime/2.5)
+        	{
+        		batch.draw(revive1_Img, player2Pos.x-5, player2Pos.y-6);
+        	}
+        	else if(player1.skillCastingTime >= player1.maxSkillCastTime/2.5 && player1.skillCastingTime < player1.maxSkillCastTime)
+        	{
+        		batch.draw(revive2_Img, player2Pos.x-5, player2Pos.y-10);
+        	}
+        	if(player2.skillCastingTime >= player2.maxSkillCastTime/6 && player2.skillCastingTime < player2.maxSkillCastTime/2.5)
+        	{
+        		batch.draw(revive1_Img, player1Pos.x-5, player1Pos.y-6);
+        	}
+        	else if(player2.skillCastingTime >= player2.maxSkillCastTime/2.5 && player2.skillCastingTime < player2.maxSkillCastTime)
+        	{
+        		batch.draw(revive2_Img, player1Pos.x-5, player1Pos.y-10);
+        	}
         }
         
         for(int i =0;i< world.attack_list.size(); i++) //draw every currently available attack
     	{
         	Vector2 attack_i = world.attack_list.get(i).getPosition();
-        	if(world.attack_list.get(i).getCurrentFace() == Attack.DIRECTION_LEFT)
-        	{	
-        		batch.draw(attackLeft_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
+        	if(world.attack_list.get(i).attackType == 1)
+        	{
+        		if(world.attack_list.get(i).getCurrentFace() == Attack.DIRECTION_LEFT)
+        		{	
+        			batch.draw(attackLeft_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
+        		}
+        		if(world.attack_list.get(i).getCurrentFace() == Attack.DIRECTION_RIGHT)
+        		{	
+        			batch.draw(attackRight_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
+        		}
+        		if(world.attack_list.get(i).getCurrentFace() == Attack.DIRECTION_UP)
+        		{	
+        			batch.draw(attackUp_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
+        		}
+        		if(world.attack_list.get(i).getCurrentFace() == Attack.DIRECTION_DOWN)
+        		{	
+        			batch.draw(attackDown_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
+        		}
         	}
-        	if(world.attack_list.get(i).getCurrentFace() == Attack.DIRECTION_RIGHT)
-        	{	
-        		batch.draw(attackRight_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
-        	}
-        	if(world.attack_list.get(i).getCurrentFace() == Attack.DIRECTION_UP)
-        	{	
-        		batch.draw(attackUp_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
-        	}
-        	if(world.attack_list.get(i).getCurrentFace() == Attack.DIRECTION_DOWN)
-        	{	
-        		batch.draw(attackDown_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
+        	else
+        	{
+        		batch.draw(fireball_Img, attack_i.x, attack_i.y);
         	}
     	}
         

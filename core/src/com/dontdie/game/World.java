@@ -42,6 +42,7 @@ public class World { // what happen to the game will be create here
     int timeStopItem;
     int maxtimePotion;
     int maxtimeStopItem;
+	public boolean revivingSomeone;
     
     public World(DontDieGame dontdieGame) {
     	world = this;

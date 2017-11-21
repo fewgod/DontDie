@@ -19,7 +19,9 @@ public class Player1 {
     public long hpScale;
     public int attackCoolDown;
     public int skillCastingTime;
-    public static int SKILL_MAX_CAST_TIME = 200;
+    public static int SKILL_REVIVE_MAX_CAST_TIME = 200;
+    public static int SKILL_FIREBALL_MAX_CAST_TIME = 80;
+    public int maxSkillCastTime;
     public int invisibleTime;
     public int slowDownTime;
  
@@ -99,25 +101,55 @@ public class Player1 {
     	}
     }
     
-    public void castSkillRevive(int whichPlayerIsCasting) 
+    private void revivePlayer(int whoToRevive) 
     {
+    	if(whoToRevive == 1)
+    	{
+    		world.player1.isPlayerDead = false;
+			world.player1.healPlayer(2);
+			world.player1.invisibleTime = 200;
+    	}
+    	if(whoToRevive == 2)
+    	{
+    		world.player2.isPlayerDead = false;
+    		world.player2.healPlayer(2);
+    		world.player2.invisibleTime = 200;
+    	}
+		world.somePlayerIsDead();
+    }
+    
+    public void castSkillRevive(int whichPlayerIsCasting)
+    {
+    	maxSkillCastTime = SKILL_REVIVE_MAX_CAST_TIME;
     	faceDir = DIRECTION_DOWN;
     	skillCastingTime += 1;
-    	if(skillCastingTime >= SKILL_MAX_CAST_TIME)
+    	if(skillCastingTime >= maxSkillCastTime)
     	{
     		if(whichPlayerIsCasting == 1) //if player 1 is casting
     		{
-    			world.player2.isPlayerDead = false;
-    			world.player2.healPlayer(2);
-    			world.player2.invisibleTime = 200;
-    			world.somePlayerIsDead();
+    			revivePlayer(2);
     		}
     		if(whichPlayerIsCasting == 2) //if player 2 is casting
     		{
-    			world.player1.isPlayerDead = false;
-    			world.player1.healPlayer(2);
-    			world.player1.invisibleTime = 200;
-    			world.somePlayerIsDead();
+    			revivePlayer(1);
+    		}
+    		skillCastingTime = 0;
+    	}
+    }
+
+    public void castSkillFireBall(int whichPlayerIsCasting)
+    {
+    	maxSkillCastTime = SKILL_FIREBALL_MAX_CAST_TIME;
+    	skillCastingTime += 1;
+    	if(skillCastingTime >= maxSkillCastTime)
+    	{
+    		if(whichPlayerIsCasting == 1) //if player 1 is casting
+    		{
+    			world.attack_list.add( new Attack(world, world.player1.faceDir , 2, world.player1.getCurrentXPos() , world.player1.getCurrentYPos()));
+    		}
+    		if(whichPlayerIsCasting == 2) //if player 2 is casting
+    		{
+    			world.attack_list.add( new Attack(world, world.player2.faceDir , 2, world.player2.getCurrentXPos() , world.player2.getCurrentYPos()));
     		}
     		skillCastingTime = 0;
     	}
@@ -146,7 +178,7 @@ public class Player1 {
     		currPos.x += (PLAYER_MOVE_SPEED/2) * DIR_OFFSETS[dir][0];
     		currPos.y += (PLAYER_MOVE_SPEED/2) * DIR_OFFSETS[dir][1];
     	}
-    	else // if cast skill
+    	else // if casting skill
     	{
     		currPos.x += 0 * DIR_OFFSETS[dir][0];
     		currPos.y += 0 * DIR_OFFSETS[dir][1];

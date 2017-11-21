@@ -75,7 +75,7 @@ public class GameScreen extends ScreenAdapter {
         {
         	if(player1.attackCoolDown <= 0)
         	{
-        		world.attack_list.add( new Attack(world,player1.faceDir, player1.getCurrentXPos() , player1.getCurrentYPos())); //draw from center of player1.
+        		world.attack_list.add( new Attack(world,player1.faceDir, 1, player1.getCurrentXPos() , player1.getCurrentYPos())); //draw from center of player1.
         		player1.attackCoolDown = 18;
         		player1.slowDownTime = 20;
         	}
@@ -85,11 +85,13 @@ public class GameScreen extends ScreenAdapter {
     			if(world.player2.isPlayerDead == true)
     			{
     				world.player1.castSkillRevive(1);
+    				world.revivingSomeone = true;
     			}
         }
         else
         {
         	world.player1.skillCastingTime = 0;
+        	world.revivingSomeone = false;
         }
     }
     
@@ -115,25 +117,33 @@ public class GameScreen extends ScreenAdapter {
     		player2.faceDir = Player1.DIRECTION_LEFT;
         	player2.move(Player1.DIRECTION_LEFT);
         }
+    	
     	if(Gdx.input.isKeyPressed(Keys.R)) 
     	{
     		if(player2.attackCoolDown <= 0)
     		{
-        		world.attack_list.add( new Attack(world, player2.faceDir , player2.getCurrentXPos() , player2.getCurrentYPos())); //draw from center of player2.
+        		world.attack_list.add( new Attack(world, player2.faceDir , 1, player2.getCurrentXPos() , player2.getCurrentYPos())); //draw from center of player2.
         		player2.attackCoolDown = 18;
         		player2.slowDownTime = 20;
         	}
         }
-    	if(Gdx.input.isKeyPressed(Keys.M)) 
+    	//skill zone
+    	if(Gdx.input.isKeyPressed(Keys.N)) 
+        {
+    		world.player2.castSkillFireBall(2);
+        }
+    	else if(Gdx.input.isKeyPressed(Keys.M)) 
         {
     			if(world.player1.isPlayerDead == true)
     			{
     				world.player2.castSkillRevive(2);
+    				world.revivingSomeone = true;
     			}
         }
     	else
         {
         	world.player2.skillCastingTime = 0;
+        	world.revivingSomeone = false;
         }
     		
     }
