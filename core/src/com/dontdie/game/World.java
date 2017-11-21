@@ -31,6 +31,11 @@ public class World { // what happen to the game will be create here
     private static final int DIRECTION_DOWN = 3;
     private static final int DIRECTION_LEFT = 4;
 	
+    long tStart;
+    long tEnd;
+    long tRes;
+    long timeSec;
+    
     public World(DontDieGame dontdieGame) {
     	world = this;
         this.dontdieGame = dontdieGame; //? why must use this and why it must be 'this.dontdieGame = dontdieGame';
@@ -41,6 +46,7 @@ public class World { // what happen to the game will be create here
         timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
         potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
         //spawnSnake(5);
+        tStart = System.nanoTime();
     }
  
     Player1 getPlayer1() {
@@ -72,6 +78,21 @@ public class World { // what happen to the game will be create here
     	for(int i =0 ; i< snake_list.size() ; i++) //update every snake in snake_list
     	{
     		snake_list.get(i).init(); //force every snake to chase the other after that one is dead;
+    	}
+    }
+    
+    private void randomSpawnEnemy() 
+    {
+    	if(timestop <= 0)
+    	{
+    		if(rand.nextInt(1000) <= 9) //gradually spawn snake by random number
+    		{
+    			spawnSnake(1);
+    		}
+    		if(rand.nextInt(1000) <= 6) //gradually spawn iron ball by random number
+    		{
+    			spawnBall(1);
+    		}
     	}
     }
     
@@ -123,21 +144,6 @@ public class World { // what happen to the game will be create here
     	}
     }
     
-    private void randomSpawnEnemy() 
-    {
-    	if(timestop <= 0)
-    	{
-    		if(rand.nextInt(1000) <= 11) //gradually spawn snake by random number
-    		{
-    			spawnSnake(1);
-    		}
-    		if(rand.nextInt(1000) <= 7) //gradually spawn iron ball by random number
-    		{
-    			spawnBall(1);
-    		}
-    	}
-    }
-    
     private void randomSpawnItem() //gradually spawn item by random number
     {
     	if(rand.nextInt(10000) <= 4) //for healing potion
@@ -181,5 +187,8 @@ public class World { // what happen to the game will be create here
     	randomSpawnEnemy();
     	randomSpawnItem();
     	timestop -= 1; //test time stop count down timer
+    	tEnd = System.nanoTime();
+    	tRes = tEnd - tStart;
+    	timeSec = tRes/1000000000;
     }
 }

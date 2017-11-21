@@ -3,10 +3,12 @@ package com.dontdie.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public class WorldRenderer { //what happen to the game world will be draw here
+	BitmapFont font = new BitmapFont();
 	private DontDieGame dontdieGame;
 	private SpriteBatch batch;
 	private World world;
@@ -168,7 +170,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
         		batch.draw(potionHealAllImg, world.potion_heal_list.get(i).getPosition().x, world.potion_heal_list.get(i).getPosition().y);
         	}
     	}
-        
+        font.draw(batch,"" +world.timeSec,100,100);
         
         healthBar1Img = new Texture("healthbar_"+player1.hpScale+".png");
         healthBar2Img = new Texture("healthbar_"+player2.hpScale+".png");
