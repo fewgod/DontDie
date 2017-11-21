@@ -25,7 +25,8 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Texture player2LeftImg;
 	private Texture player2UpImg;
 	private Texture player2DownImg;
-	
+	private Texture player1KO_Img;
+	private Texture player2KO_Img;
 	//health bar images
 	private Texture healthBar1Img;
 	private Texture healthBar2Img;
@@ -36,6 +37,8 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Texture attackUp_Img;
 	private Texture skillcasting1_Img;
 	private Texture skillcasting2_Img;
+	private Texture revive1_Img;
+	private Texture revive2_Img;
 	
 	private Texture timestopperImg;
 	private Texture potionHealOneImg;
@@ -54,10 +57,12 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		player1LeftImg = new Texture("Player1_Left.png");
 		player1UpImg = new Texture("Player1_Up.png");
 		player1DownImg = new Texture("Player1_Down.png");
+		player1KO_Img = new Texture("Player1_KO.png");
 		player2RightImg = new Texture("Player2_Right.png");
 		player2LeftImg = new Texture("Player2_Left.png");
 		player2UpImg = new Texture("Player2_Up.png");
 		player2DownImg = new Texture("Player2_Down.png");
+		player2KO_Img = new Texture("Player2_KO.png");
 		
 		timestopperImg = new Texture("stopwatch.png");
 		potionHealOneImg = new Texture("potion_healOne.png");
@@ -72,6 +77,8 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		attackDown_Img = new Texture("sword_ani_down.png");
 		skillcasting1_Img = new Texture("skillcasting1.png");
 		skillcasting2_Img = new Texture("skillcasting2.png");
+		revive1_Img = new Texture("revive1.png");
+		revive2_Img = new Texture("revive2.png");
 		
 		snakeImg = new Texture ("snake.png");
 		ballImg = new Texture ("ball.png");
@@ -88,8 +95,8 @@ public class WorldRenderer { //what happen to the game world will be draw here
         
         //when draw:draw currPos position, but when calculate, use CURR_CENTER so hit box of that object will always be at center of image
         
-        //draw skill animation draw 1 for caster and 1 for downer
-        if(player1.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/6 && player1.skillCastingTime < Player1.SKILL_MAX_CAST_TIME/2.5)
+        //draw skill casting animation must behind actor
+        if(player1.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/10 && player1.skillCastingTime < Player1.SKILL_MAX_CAST_TIME/2.5)
         {
         	batch.draw(skillcasting1_Img, player1Pos.x-15, player1Pos.y-6);
         }
@@ -97,7 +104,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
         {
         	batch.draw(skillcasting2_Img, player1Pos.x-17, player1Pos.y-8);
         }
-        if(player2.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/3 && player2.skillCastingTime < Player1.SKILL_MAX_CAST_TIME/2.5)
+        if(player2.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/10 && player2.skillCastingTime < Player1.SKILL_MAX_CAST_TIME/2.5)
         {
         	batch.draw(skillcasting1_Img, player2Pos.x-15, player2Pos.y-6);
         }
@@ -126,7 +133,10 @@ public class WorldRenderer { //what happen to the game world will be draw here
         		batch.draw(player1DownImg, player1Pos.x, player1Pos.y);
         	}
         }
-        
+        else
+        {
+        	batch.draw(player1KO_Img, player1Pos.x, player1Pos.y);
+        }
         if(player2.isPlayerDead == false)
         {
         	//render player2 face
@@ -146,6 +156,27 @@ public class WorldRenderer { //what happen to the game world will be draw here
         	{
         		batch.draw(player2DownImg, player2Pos.x, player2Pos.y);
         	}
+        }
+        else
+        {
+        	batch.draw(player2KO_Img, player2Pos.x, player2Pos.y);
+        }
+        //draw revivng animation must be in front of actor
+        if(player1.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/6 && player1.skillCastingTime < Player1.SKILL_MAX_CAST_TIME/2.5)
+        {
+        	batch.draw(revive1_Img, player2Pos.x-5, player2Pos.y-6);
+        }
+        if(player1.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/2.5 && player1.skillCastingTime < Player1.SKILL_MAX_CAST_TIME)
+        {
+        	batch.draw(revive2_Img, player2Pos.x-5, player2Pos.y-10);
+        }
+        if(player2.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/6 && player2.skillCastingTime < Player1.SKILL_MAX_CAST_TIME/2.5)
+        {
+        	batch.draw(revive1_Img, player1Pos.x-5, player1Pos.y-6);
+        }
+        if(player2.skillCastingTime >= Player1.SKILL_MAX_CAST_TIME/2.5 && player2.skillCastingTime < Player1.SKILL_MAX_CAST_TIME)
+        {
+        	batch.draw(revive2_Img, player1Pos.x-5, player1Pos.y-10);
         }
         
         for(int i =0;i< world.attack_list.size(); i++) //draw every currently available attack
@@ -168,15 +199,6 @@ public class WorldRenderer { //what happen to the game world will be draw here
         		batch.draw(attackDown_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
         	}
     	}
-        /////draw enemy////////
-        for(int i =0;i< world.snake_list.size(); i++) //draw every snake in snake_list
-    	{
-        	batch.draw(snakeImg, world.snake_list.get(i).getPosition().x, world.snake_list.get(i).getPosition().y);
-    	}
-        for(int i =0 ; i< world.ball_list.size() ; i++) //update every ball
-    	{
-        	batch.draw(ballImg, world.ball_list.get(i).getPosition().x, world.ball_list.get(i).getPosition().y);
-    	}
         
         /////draw item////
         for(int i =0;i< world.timestopper_list.size(); i++) //draw every timestopper item in timestopper_list 
@@ -194,6 +216,17 @@ public class WorldRenderer { //what happen to the game world will be draw here
         		batch.draw(potionHealAllImg, world.potion_heal_list.get(i).getPosition().x, world.potion_heal_list.get(i).getPosition().y);
         	}
     	}
+        
+        /////draw enemy////////
+        for(int i =0;i< world.snake_list.size(); i++) //draw every snake in snake_list
+    	{
+        	batch.draw(snakeImg, world.snake_list.get(i).getPosition().x, world.snake_list.get(i).getPosition().y);
+    	}
+        for(int i =0 ; i< world.ball_list.size() ; i++) //update every ball
+    	{
+        	batch.draw(ballImg, world.ball_list.get(i).getPosition().x, world.ball_list.get(i).getPosition().y);
+    	}
+        
         
         font.draw(batch,"Wave: " +world.waveNumber,DontDieGame.SCREEN_WIDTH -100,DontDieGame.SCREEN_HEIGHT - 25);
         font.draw(batch,"Time: " +world.timeSec + "  sec",DontDieGame.SCREEN_WIDTH -100,DontDieGame.SCREEN_HEIGHT - 50);
