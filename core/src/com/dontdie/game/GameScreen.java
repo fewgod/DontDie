@@ -62,7 +62,15 @@ public class GameScreen extends ScreenAdapter {
     	//F1 button for restart game is it work flawlessly?
     	if(Gdx.input.isKeyPressed(Keys.F1)) 
         {
-        	world.bgm.stop();
+    		if(world.gameState == World.START_GAME_STATE)
+    		{
+    			world.bgm.stop();
+    		}
+    		if(world.gameState == World.GAME_OVER_STATE)
+    		{
+    			world.game_over.stop();
+    		}
+        	world.game_over.stop();
         	this.dontdieGame = dontdieGame;
         	world = new World(dontdieGame,2); //create
         	player1 = world.getPlayer1();

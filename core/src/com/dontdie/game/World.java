@@ -17,6 +17,8 @@ public class World { // what happen to the game will be create here
     public int provokeTime;
     
     Sound bgm = Gdx.audio.newSound(Gdx.files.internal("sound/game_bgm.mp3"));
+    Sound game_over = Gdx.audio.newSound(Gdx.files.internal("sound/game_over.mp3"));
+    Sound game_start = Gdx.audio.newSound(Gdx.files.internal("sound/game_start.wav"));
     Sound enemydead = Gdx.audio.newSound(Gdx.files.internal("sound/enemy_dead.wav"));
     Sound swordswing = Gdx.audio.newSound(Gdx.files.internal("sound/sword_swing.wav"));
     Sound magiccasting = Gdx.audio.newSound(Gdx.files.internal("sound/magic_casting.wav"));
@@ -39,6 +41,7 @@ public class World { // what happen to the game will be create here
     
     public static final int INSTRUCTION_STATE = 1;
     public static final int START_GAME_STATE = 2;
+    public static final int GAME_OVER_STATE = 3;
 	public int gameState;
 	public boolean chose2Player;
 	private Random rand = new Random(); //for random things such as number
@@ -73,6 +76,7 @@ public class World { // what happen to the game will be create here
         //spawnSnake(5); for instantly spawn 5 snake
         if(gameState == START_GAME_STATE)
         {
+        	game_start.play(0.9f);
         	tStart = System.nanoTime();
         	timestop = 0;
         	waveNumber = 0;
@@ -248,6 +252,16 @@ public class World { // what happen to the game will be create here
 		}
     }
     
+    private void isItGameOver()  //for make it game over and game over screen appear
+    {
+    	if(player1.isPlayerDead == true && player2.isPlayerDead == true)
+    	{
+    		bgm.stop();
+    		game_over.play(0.8f);
+    		gameState = GAME_OVER_STATE;
+    	}
+    }
+    
     public void timeUpdate () 
     {
     	timestop -= 1; //test time stop count down timer
@@ -305,7 +319,7 @@ public class World { // what happen to the game will be create here
     
     public void update(float delta)//for make every object update itself
 	{
-    	if(gameState == START_GAME_STATE)
+    	if(gameState == START_GAME_STATE || gameState == GAME_OVER_STATE)
     	{	
     		timeUpdate();
     		player1.update(delta);
@@ -320,6 +334,11 @@ public class World { // what happen to the game will be create here
     		randomSpawnEnemy(); // for survival mode
     		randomSpawnItem();//for both mode
     		timeSpawnItem(); //for both mode
+    		isItGameOver();
+    	}
+    	if(gameState == START_GAME_STATE) //to use this function only once
+    	{
+    		isItGameOver();
     	}
     }
 }

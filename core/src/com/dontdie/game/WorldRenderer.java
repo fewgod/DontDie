@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class WorldRenderer { //what happen to the game world will be draw here
 	BitmapFont font = new BitmapFont();
+	
 	private DontDieGame dontdieGame;
 	private SpriteBatch batch;
 	private World world;
@@ -17,6 +18,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	//image
 	private Texture instructionImg;
 	private Texture backgroundImg;
+	private Texture gameOverImg;
 	
 	private Texture player1RightImg;
 	private Texture player1LeftImg;
@@ -61,6 +63,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		//images here//
 		instructionImg = new Texture("Instruction.png");
 		backgroundImg = new Texture("Background.jpg");
+		gameOverImg = new Texture("GameOver.png");
 		player1RightImg = new Texture("Player1_Right.png");
 		player1LeftImg = new Texture("Player1_Left.png");
 		player1UpImg = new Texture("Player1_Up.png");
@@ -314,6 +317,14 @@ public class WorldRenderer { //what happen to the game world will be draw here
         if(world.gameState == World.INSTRUCTION_STATE)
         {
         	batch.draw(instructionImg, 100 ,100);
+        }
+        else if(world.gameState == World.GAME_OVER_STATE)
+        {
+        	batch.draw(gameOverImg, 100 ,100);
+        	font.draw(batch,"Wave: " +world.waveNumber,DontDieGame.SCREEN_WIDTH/2 -30,225);
+            font.draw(batch,"Time Survived: " +world.timeSec + "  sec",DontDieGame.SCREEN_WIDTH/2 -30, 200);
+            font.draw(batch,"Gained Score: " +world.score,DontDieGame.SCREEN_WIDTH/2 -30, 175);
+            font.draw(batch,"Highest-Score: " +world.hiScore,DontDieGame.SCREEN_WIDTH/2  -30,150);
         }
         //draw players health bar
         renderHealthBar();
