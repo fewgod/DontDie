@@ -16,15 +16,15 @@ public class World { // what happen to the game will be create here
     public int timestop; //init the time stop count to 0
     public int provokeTime;
     
-    Sound bgm = Gdx.audio.newSound(Gdx.files.internal("bgm.mp3"));
-    Sound enemydead = Gdx.audio.newSound(Gdx.files.internal("enemydead.wav"));
-    Sound swordswing = Gdx.audio.newSound(Gdx.files.internal("swordswing.wav"));
-    Sound magiccasting = Gdx.audio.newSound(Gdx.files.internal("magiccasting.wav"));
-    Sound playergothit = Gdx.audio.newSound(Gdx.files.internal("playergothit.wav"));
-    Sound playerdead = Gdx.audio.newSound(Gdx.files.internal("playerdead.mp3"));
-    Sound heal = Gdx.audio.newSound(Gdx.files.internal("heal.wav"));
-    Sound provoke = Gdx.audio.newSound(Gdx.files.internal("provoke.mp3"));
-    Sound pickitem = Gdx.audio.newSound(Gdx.files.internal("pickitem.wav"));
+    Sound bgm = Gdx.audio.newSound(Gdx.files.internal("sound/bgm.mp3"));
+    Sound enemydead = Gdx.audio.newSound(Gdx.files.internal("sound/enemydead.wav"));
+    Sound swordswing = Gdx.audio.newSound(Gdx.files.internal("sound/swordswing.wav"));
+    Sound magiccasting = Gdx.audio.newSound(Gdx.files.internal("sound/magiccasting.wav"));
+    Sound playergothit = Gdx.audio.newSound(Gdx.files.internal("sound/playergothit.wav"));
+    Sound playerdead = Gdx.audio.newSound(Gdx.files.internal("sound/playerdead.mp3"));
+    Sound heal = Gdx.audio.newSound(Gdx.files.internal("sound/heal.wav"));
+    Sound provoke = Gdx.audio.newSound(Gdx.files.internal("sound/provoke.mp3"));
+    Sound pickitem = Gdx.audio.newSound(Gdx.files.internal("sound/pickitem.wav"));
     
     public ArrayList<Snake> snake_list = new ArrayList<Snake>();
     public ArrayList<IronBall> ball_list = new ArrayList<IronBall>();
