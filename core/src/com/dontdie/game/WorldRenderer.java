@@ -94,40 +94,33 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		player2 = world.getPlayer2();
 	}
 	
-	public void render(float delta) { // this draw game animation to window
-		world.update(delta); //this make the world update which will order enemy and object to update afterward
-        SpriteBatch batch = dontdieGame.batch; //what is this line??
-        batch.begin();
-        batch.draw(backgroundImg, 0, 0);
-       
-        Vector2 player1Pos = player1.getPosition(); //get position of player 1 to draw it
-        Vector2 player2Pos = player2.getPosition(); //get position of player 2 to draw it
-        
-        //when draw:draw currPos position, but when calculate, use CURR_CENTER so hit box of that object will always be at center of image
-        
-        //draw skill casting animation must behind actor
-        if(player1.skillCastingTime >= player1.maxSkillCastTime/10 && player1.skillCastingTime < player1.maxSkillCastTime/2.5)
-        {
-        	batch.draw(skillcasting1_Img, player1Pos.x-15, player1Pos.y-6);
-        }
-        else if(player1.skillCastingTime >= player1.maxSkillCastTime/2.5 && player1.skillCastingTime < player1.maxSkillCastTime)
-        {
-        	batch.draw(skillcasting2_Img, player1Pos.x-17, player1Pos.y-8);
-        }
-        if(player2.skillCastingTime >= player2.maxSkillCastTime/10 && player2.skillCastingTime < player2.maxSkillCastTime/2.5)
-        {
-        	batch.draw(skillcasting1_Img, player2Pos.x-15, player2Pos.y-6);
-        }
-        else if(player2.skillCastingTime >= player2.maxSkillCastTime/2.5 && player2.skillCastingTime < player2.maxSkillCastTime)
-        {
-        	batch.draw(skillcasting2_Img, player2Pos.x-17, player2Pos.y-8);
-        }
-        if(world.provokeTime > 100 && player1.isPlayerDead == false)
-        {
-        	batch.draw(provoke_Img, player1Pos.x-15, player1Pos.y-6);
-        }
-        
-        if(player1.isPlayerDead == false)
+	private void renderSkillCastAnimation(Vector2 player1Pos , Vector2 player2Pos)
+	{
+		 if(player1.skillCastingTime >= player1.maxSkillCastTime/10 && player1.skillCastingTime < player1.maxSkillCastTime/2.5)
+	        {
+	        	batch.draw(skillcasting1_Img, player1Pos.x-15, player1Pos.y-6);
+	        }
+	        else if(player1.skillCastingTime >= player1.maxSkillCastTime/2.5 && player1.skillCastingTime < player1.maxSkillCastTime)
+	        {
+	        	batch.draw(skillcasting2_Img, player1Pos.x-17, player1Pos.y-8);
+	        }
+	        if(player2.skillCastingTime >= player2.maxSkillCastTime/10 && player2.skillCastingTime < player2.maxSkillCastTime/2.5)
+	        {
+	        	batch.draw(skillcasting1_Img, player2Pos.x-15, player2Pos.y-6);
+	        }
+	        else if(player2.skillCastingTime >= player2.maxSkillCastTime/2.5 && player2.skillCastingTime < player2.maxSkillCastTime)
+	        {
+	        	batch.draw(skillcasting2_Img, player2Pos.x-17, player2Pos.y-8);
+	        }
+	        if(world.provokeTime > 100 && player1.isPlayerDead == false)
+	        {
+	        	batch.draw(provoke_Img, player1Pos.x-15, player1Pos.y-6);
+	        }
+	}
+	
+	private void renderPlayers(Vector2 player1Pos , Vector2 player2Pos) 
+	{
+		if(player1.isPlayerDead == false)
         {
         	//render player1 face
         	if(player1.faceDir == player1.DIRECTION_RIGHT)
@@ -175,8 +168,11 @@ public class WorldRenderer { //what happen to the game world will be draw here
         {
         	batch.draw(player2KO_Img, player2Pos.x, player2Pos.y);
         }
-        //draw revivng animation must be in front of actor
-        if(world.revivingSomeone == true)
+	}
+	
+	private void renderReviveAnimation(Vector2 player1Pos , Vector2 player2Pos) 
+	{
+		if(world.revivingSomeone == true)
         {
         	if(player1.skillCastingTime >= player1.maxSkillCastTime/6 && player1.skillCastingTime < player1.maxSkillCastTime/2.5)
         	{
@@ -195,11 +191,14 @@ public class WorldRenderer { //what happen to the game world will be draw here
         		batch.draw(revive2_Img, player1Pos.x-5, player1Pos.y-10);
         	}
         }
-        
-        for(int i =0;i< world.attack_list.size(); i++) //draw every currently available attack
+	}
+
+	private void renderAttackAnimation(Vector2 player1Pos , Vector2 player2Pos) 
+	{
+		for(int i =0;i< world.attack_list.size(); i++) //draw every currently available attack
     	{
         	Vector2 attack_i = world.attack_list.get(i).getPosition();
-        	if(world.attack_list.get(i).attackType == 1)
+        	if(world.attack_list.get(i).attackType == 1) //draw normal attack
         	{
         		if(world.attack_list.get(i).getCurrentFace() == Attack.DIRECTION_LEFT)
         		{	
@@ -218,18 +217,20 @@ public class WorldRenderer { //what happen to the game world will be draw here
         			batch.draw(attackDown_Img, attack_i.x, attack_i.y); //change from draw current center to draw current position
         		}
         	}
-        	else if(world.attack_list.get(i).attackType == 2)
+        	else if(world.attack_list.get(i).attackType == 2) //draw small fireball
         	{
         		batch.draw(fireball_Img, attack_i.x , attack_i.y +5);
         	}
         	else
         	{
-        		batch.draw(fireball_Big_Img, attack_i.x -10, attack_i.y);
+        		batch.draw(fireball_Big_Img, attack_i.x -10, attack_i.y); //draw big fireball
         	}
     	}
-        
-        /////draw item////
-        for(int i =0;i< world.timestopper_list.size(); i++) //draw every timestopper item in timestopper_list 
+	}
+	
+	private void renderItem(Vector2 player1Pos , Vector2 player2Pos)
+	{
+		for(int i =0;i< world.timestopper_list.size(); i++) //draw every timestopper item in timestopper_list 
     	{
         	batch.draw(timestopperImg, world.timestopper_list.get(i).getPosition().x, world.timestopper_list.get(i).getPosition().y);
     	}
@@ -244,9 +245,11 @@ public class WorldRenderer { //what happen to the game world will be draw here
         		batch.draw(potionHealAllImg, world.potion_heal_list.get(i).getPosition().x, world.potion_heal_list.get(i).getPosition().y);
         	}
     	}
-        
-        /////draw enemy////////
-        for(int i =0;i< world.snake_list.size(); i++) //draw every snake in snake_list
+	}
+	
+	private void renderEnemy(Vector2 player1Pos , Vector2 player2Pos) 
+	{
+		for(int i =0;i< world.snake_list.size(); i++) //draw every snake in snake_list
     	{
         	batch.draw(snakeImg, world.snake_list.get(i).getPosition().x, world.snake_list.get(i).getPosition().y);
     	}
@@ -259,16 +262,56 @@ public class WorldRenderer { //what happen to the game world will be draw here
         	batch.draw(provoke_Img, 18,39);
         	font.draw(batch,"Ready in: " +player1.provokeCoolDown/60 +"  sec",65,65);
         }
-        
-        font.draw(batch,"Wave: " +world.waveNumber,DontDieGame.SCREEN_WIDTH -100,DontDieGame.SCREEN_HEIGHT - 25);
-        font.draw(batch,"Time: " +world.timeSec + "  sec",DontDieGame.SCREEN_WIDTH -100,DontDieGame.SCREEN_HEIGHT - 50);
-        font.draw(batch,"Score: " +world.score, 30 , DontDieGame.SCREEN_HEIGHT - 25);
-        font.draw(batch,"Hi-Score: " +world.hiScore,30 ,DontDieGame.SCREEN_HEIGHT - 50);
-        
-        healthBar1Img = new Texture("healthbar_"+player1.hpScale+".png");
+	}
+	
+	private void renderHealthBar() 
+	{
+		healthBar1Img = new Texture("healthbar_"+player1.hpScale+".png");
         healthBar2Img = new Texture("healthbar_"+player2.hpScale+".png");
         batch.draw(healthBar1Img, 10 ,15);
         batch.draw(healthBar2Img, 610 ,15);
+	}
+	
+	private void renderText() 
+	{
+		font.draw(batch,"Wave: " +world.waveNumber,DontDieGame.SCREEN_WIDTH -100,DontDieGame.SCREEN_HEIGHT - 25);
+        font.draw(batch,"Time: " +world.timeSec + "  sec",DontDieGame.SCREEN_WIDTH -100,DontDieGame.SCREEN_HEIGHT - 50);
+        font.draw(batch,"Score: " +world.score, 30 , DontDieGame.SCREEN_HEIGHT - 25);
+        font.draw(batch,"Hi-Score: " +world.hiScore,30 ,DontDieGame.SCREEN_HEIGHT - 50);
+	}
+	
+	public void render(float delta) { // this draw game animation to window
+		world.update(delta); //this make the world update which will order enemy and object to update afterward
+        SpriteBatch batch = dontdieGame.batch; //what is this line??
+        batch.begin();
+        batch.draw(backgroundImg, 0, 0);
+       
+        Vector2 player1Pos = player1.getPosition(); //get position of player 1 to draw it
+        Vector2 player2Pos = player2.getPosition(); //get position of player 2 to draw it
+        
+        //when draw:draw currPos position, but when calculate, use CURR_CENTER so hit box of that object will always be at center of image
+        
+        //draw skill casting animation must behind actor
+        renderSkillCastAnimation(player1Pos,player2Pos);
+        renderPlayers(player1Pos,player2Pos);
+        
+        //draw revivng animation must be in front of actor
+        renderReviveAnimation(player1Pos,player2Pos);
+        
+        //draw every currently available attack
+        renderAttackAnimation(player1Pos,player2Pos);
+        
+        /////draw item////
+        renderItem(player1Pos,player2Pos);
+        
+        /////draw enemy////////
+        renderEnemy(player1Pos,player2Pos);
+        
+        //draw game information
+        renderText();
+        
+        //draw players health bar
+        renderHealthBar();
         batch.end();
     }
 	

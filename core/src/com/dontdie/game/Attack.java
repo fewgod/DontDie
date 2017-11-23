@@ -80,7 +80,7 @@ public class Attack {
         }
         else if(attackType ==2)
         {
-        	availableTime = 30;
+        	availableTime = 33;
         	IMAGE_SIZE_X = 50;
           	IMAGE_SIZE_Y = 50;
           	currPos.x += 15;

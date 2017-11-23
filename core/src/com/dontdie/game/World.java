@@ -91,13 +91,21 @@ public class World { // what happen to the game will be create here
     { //return type is snake
         return snake_list.get(i);
     }
-
+    
     public void somePlayerIsDead() { //or somePlayer being revived 
     	// to let other class call this method to reconfig all enemies to change pattern and change who to chase
     	//wont run unless being call
     	for(int i =0 ; i< snake_list.size() ; i++) //update every snake in snake_list
     	{
     		snake_list.get(i).init(); //force every snake to chase the other after that one is dead;
+    	}
+    }
+    
+    private void provokeSkillPlayer1() 
+    {
+    	if(world.provokeTime > 0 && world.provokeTime % 125 == 0) //while in provoke duration
+    	{
+    		player1.healPlayer(1);
     	}
     }
     
@@ -259,24 +267,10 @@ public class World { // what happen to the game will be create here
     	{
     		hiScore = score;
     	}
-    	/*if(player1.isPlayerDead == true && player2.isPlayerDead == true) //it should memorize higest score of all time
-    	{
-    		if(lastHiScore > hiScore)
-    		{
-    			lastHiScore = hiScore;
-    		}
-    	}*/
     }
     
-    public void update(float delta){//for make every object update itself
-    	timeUpdate();
-    	player1.update(delta);
-    	if(provokeTime > 0 && provokeTime % 125 == 0) //while in provoke duration
-    	{
-    		player1.healPlayer(1);
-    	}
-    	player2.update(delta);
-    	
+    private void updateItemandEnemy(float delta)
+    {
     	for(int i =0 ; i< attack_list.size() ; i++) //update every attack
     	{
     		attack_list.get(i).update(delta);
@@ -300,6 +294,15 @@ public class World { // what happen to the game will be create here
     	{
     		potion_heal_list.get(i).update(delta);
     	}
+    }
+    
+public void update(float delta){//for make every object update itself
+    	timeUpdate();
+    	player1.update(delta);
+    	provokeSkillPlayer1();
+    	player2.update(delta);
+    	
+    	updateItemandEnemy(delta);
     	
     	scoreFunction();
     	waveSpawnEnemy(waveNumber); //for wave mode
