@@ -18,8 +18,8 @@ public class PotionHeal {
   	private float IMAGE_RADIUS_Y = GET_CENTER_Y;
   	private float currCenter_X;
   	private float currCenter_Y;
-  	private int HEALING_POTENCY_ONE = 5;
-  	private int HEALING_POTENCY_ALL = 3;
+  	private int HEALING_POTENCY_ONE = 8;
+  	private int HEALING_POTENCY_ALL = 5;
   	public boolean isThisItemHealOne;
 	
 	public PotionHeal(World world,boolean isHealone, int x, int y) { // do this method all time

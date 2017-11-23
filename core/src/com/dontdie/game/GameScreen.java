@@ -19,7 +19,7 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(DontDieGame dontdieGame) { //receive input and final drawn after receive from WorldRenderer if dont have Worldrenderer will only accept input but not draw anything
         this.dontdieGame = dontdieGame;
-        world = new World(dontdieGame); //create
+        world = new World(dontdieGame,1); //create
         player1 = world.getPlayer1();
         player2 = world.getPlayer2();
         worldRender = new WorldRenderer(this.dontdieGame,world); //what is the difference if use dontdieGame instead of this.dontdieGame
@@ -36,25 +36,35 @@ public class GameScreen extends ScreenAdapter {
     
     private void update(float delta) 
     {
-    	if(player1.isPlayerDead == false)
-        {
-    		moveplayer1();
-        }
-    	if(player2.isPlayerDead == false)
-        {
-    		moveplayer2();
-        }
-    	if(Gdx.input.isKeyPressed(Keys.F2)) 
-        {
-    		world.timestop = 250;
-        }
-    	
-    	//z button for restart game is it work flawlessly?
-        if(Gdx.input.isKeyPressed(Keys.F1)) 
+    	if(world.gameState == World.INSTRUCTION_STATE)
+    	{
+    		if(Gdx.input.isKeyPressed(Keys.ANY_KEY))
+    		{
+    			world.gameState = World.START_GAME_STATE;
+    			world.tStart = System.nanoTime();
+    		}
+    	}
+    	if(world.gameState == World.START_GAME_STATE)
+    	{
+    		if(player1.isPlayerDead == false)
+    		{
+    			moveplayer1();
+    		}
+    		if(player2.isPlayerDead == false)
+    		{
+    			moveplayer2();
+    		}
+    		if(Gdx.input.isKeyPressed(Keys.F2)) 
+    		{
+    			world.timestop = 250;
+    		}
+    	}
+    	//F1 button for restart game is it work flawlessly?
+    	if(Gdx.input.isKeyPressed(Keys.F1)) 
         {
         	world.bgm.stop();
         	this.dontdieGame = dontdieGame;
-        	world = new World(dontdieGame); //create
+        	world = new World(dontdieGame,2); //create
         	player1 = world.getPlayer1();
             player2 = world.getPlayer2();
             worldRender = new WorldRenderer(this.dontdieGame,world);

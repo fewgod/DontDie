@@ -15,6 +15,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Player1 player1;
 	private Player1 player2;
 	//image
+	private Texture instructionImg;
 	private Texture backgroundImg;
 	
 	private Texture player1RightImg;
@@ -58,6 +59,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		this.world = world;
 		
 		//images here//
+		instructionImg = new Texture("Instruction.png");
 		backgroundImg = new Texture("Background.jpg");
 		player1RightImg = new Texture("Player1_Right.png");
 		player1LeftImg = new Texture("Player1_Left.png");
@@ -309,7 +311,10 @@ public class WorldRenderer { //what happen to the game world will be draw here
         
         //draw game information
         renderText();
-        
+        if(world.gameState == World.INSTRUCTION_STATE)
+        {
+        	batch.draw(instructionImg, 100 ,100);
+        }
         //draw players health bar
         renderHealthBar();
         batch.end();

@@ -37,17 +37,17 @@ public class World { // what happen to the game will be create here
     
     public World world;
     
-    public static final int CHOOSE_PLAYER_STATE = 1;
+    public static final int INSTRUCTION_STATE = 1;
     public static final int START_GAME_STATE = 2;
 	public int gameState;
 	public boolean chose2Player;
 	private Random rand = new Random(); //for random things such as number
 	
-	private static final int SCORE_BY_TIME = 1;
 	private static final int DIRECTION_UP = 1;
     private static final int DIRECTION_RIGHT = 2;
     private static final int DIRECTION_DOWN = 3;
     private static final int DIRECTION_LEFT = 4;
+	private static final int GAME_START_STATE = 0;
 	
     public int waveNumber;
     private long nextWaveTime;
@@ -62,23 +62,30 @@ public class World { // what happen to the game will be create here
     int maxtimeStopItem;
 	public boolean revivingSomeone;
     
-    public World(DontDieGame dontdieGame) {
+    public World(DontDieGame dontdieGame , int worldState) {
     	world = this;
         this.dontdieGame = dontdieGame; //? why must use this and why it must be 'this.dontdieGame = dontdieGame';
-        gameState = CHOOSE_PLAYER_STATE;
+        gameState = worldState;
         player1 = new Player1(world, 300,150); // create class in class??
         player2 = new Player1(world, 600,150);
         //timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
         //potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
         //spawnSnake(5); for instantly spawn 5 snake
-        tStart = System.nanoTime();
-        timestop = 0;
-        waveNumber = 0;
-        nextWaveTime = 1;
+        if(gameState == START_GAME_STATE)
+        {
+        	tStart = System.nanoTime();
+        	timestop = 0;
+        	waveNumber = 0;
+        	nextWaveTime = 1;
+        	maxtimePotion = 11 + rand.nextInt(5);
+            maxtimeStopItem = 8 + rand.nextInt(2);
+            System.out.println(tStart);
+            System.out.println(tEnd);
+            System.out.println(tRes);
+            System.out.println(timeSec);
+        }
         long id = bgm.play(0.62f); //1.0f is for volumn 1.0 for maximum possible
         bgm.setLooping(id, true); 
-        maxtimePotion = 11 + rand.nextInt(5);
-        maxtimeStopItem = 8 + rand.nextInt(2);
     }
  
     Player1 getPlayer1() {
@@ -296,20 +303,23 @@ public class World { // what happen to the game will be create here
     	}
     }
     
-public void update(float delta){//for make every object update itself
-    	timeUpdate();
-    	player1.update(delta);
-    	provokeSkillPlayer1();
-    	player2.update(delta);
+    public void update(float delta)//for make every object update itself
+	{
+    	if(gameState == START_GAME_STATE)
+    	{	
+    		timeUpdate();
+    		player1.update(delta);
+    		provokeSkillPlayer1();
+    		player2.update(delta);
     	
-    	updateItemandEnemy(delta);
+    		updateItemandEnemy(delta);
     	
-    	scoreFunction();
-    	waveSpawnEnemy(waveNumber); //for wave mode
-    	timeSpawnEnemy(); // for wave mode
-    	randomSpawnEnemy(); // for survival mode
-    	randomSpawnItem();//for both mode
-    	timeSpawnItem(); //for both mode
-    	
+    		scoreFunction();
+    		waveSpawnEnemy(waveNumber); //for wave mode
+    		timeSpawnEnemy(); // for wave mode
+    		randomSpawnEnemy(); // for survival mode
+    		randomSpawnItem();//for both mode
+    		timeSpawnItem(); //for both mode
+    	}
     }
 }
