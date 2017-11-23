@@ -47,29 +47,29 @@ public class Attack {
         
         if(faceDir == DIRECTION_LEFT)
         {
-        	IMAGE_SIZE_X = 50;
-          	IMAGE_SIZE_Y = 75;
+        	IMAGE_SIZE_X = 60; //change from 60*85
+          	IMAGE_SIZE_Y = 85;
           	currPos.x -= 53;
         	currPos.y -= 43;
         }
         else if(faceDir == DIRECTION_RIGHT)
         {
-        	IMAGE_SIZE_X = 50;
-          	IMAGE_SIZE_Y = 75;
+        	IMAGE_SIZE_X = 60;
+          	IMAGE_SIZE_Y = 85;
           	currPos.x += 0;
         	currPos.y -= 43;
         }
         else if(faceDir == DIRECTION_UP)
         {
-        	IMAGE_SIZE_X = 75;
-          	IMAGE_SIZE_Y = 50;
+        	IMAGE_SIZE_X = 85;
+          	IMAGE_SIZE_Y = 60;
           	currPos.x -= 35;
         	currPos.y += 10;
         }
         else if(faceDir == DIRECTION_DOWN)
         {
-        	IMAGE_SIZE_X = 75;
-          	IMAGE_SIZE_Y = 50;
+        	IMAGE_SIZE_X = 85;
+          	IMAGE_SIZE_Y = 60;
           	currPos.x -= 43;
         	currPos.y -= 60;
         }

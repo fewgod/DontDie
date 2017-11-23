@@ -21,8 +21,9 @@ public class World { // what happen to the game will be create here
     Sound swordswing = Gdx.audio.newSound(Gdx.files.internal("swordswing.wav"));
     Sound magiccasting = Gdx.audio.newSound(Gdx.files.internal("magiccasting.wav"));
     Sound playergothit = Gdx.audio.newSound(Gdx.files.internal("playergothit.wav"));
-    Sound playerdead = Gdx.audio.newSound(Gdx.files.internal("playerdead.wav"));
+    Sound playerdead = Gdx.audio.newSound(Gdx.files.internal("playerdead.mp3"));
     Sound heal = Gdx.audio.newSound(Gdx.files.internal("heal.wav"));
+    Sound provoke = Gdx.audio.newSound(Gdx.files.internal("provoke.mp3"));
     Sound pickitem = Gdx.audio.newSound(Gdx.files.internal("pickitem.wav"));
     
     public ArrayList<Snake> snake_list = new ArrayList<Snake>();
@@ -78,7 +79,6 @@ public class World { // what happen to the game will be create here
         bgm.setLooping(id, true); 
         maxtimePotion = 11 + rand.nextInt(5);
         maxtimeStopItem = 8 + rand.nextInt(2);
-        
     }
  
     Player1 getPlayer1() {
@@ -106,8 +106,8 @@ public class World { // what happen to the game will be create here
 		if(timeSec == nextWaveTime) 
 		{
 			long currStartWaveTime = timeSec; //time that start this wave
-			int numberofEnemy = 2*this.waveNumber + rand.nextInt(this.waveNumber + 1) +1;
-			spawnSnake(numberofEnemy);
+			int numberofEnemy = 2*this.waveNumber + rand.nextInt(this.waveNumber +1) +1;
+			spawnSnake(numberofEnemy -1);
 			if(this.waveNumber % 3 == 2) 
 			{
 				spawnBall(rand.nextInt(this.waveNumber * rand.nextInt(3)+1)- this.waveNumber + 2);
@@ -138,9 +138,12 @@ public class World { // what happen to the game will be create here
     { 
     	if(timeSec >= 17)
     	{
-    		if(rand.nextInt(1000) <= waveNumber*1.9) //gradually spawn iron ball by random number
+    		if(waveNumber >=3)
     		{
-    			spawnBall(1);
+    			if(rand.nextInt(1000) <= waveNumber*1.9) //gradually spawn iron ball by random number
+    			{
+    				spawnBall(1);
+    			}
     		}
     	}
     	if(timeSec >= 20)
@@ -160,9 +163,12 @@ public class World { // what happen to the game will be create here
     		{
     			spawnSnake(1);
     		}
-    		if(rand.nextInt(1000) <= 8) //gradually spawn iron ball by random number
+    		if(waveNumber >= 3)
     		{
-    			spawnBall(1);
+    			if(rand.nextInt(1000) <= 8) //gradually spawn iron ball by random number
+    			{
+    				spawnBall(1);
+    			}
     		}
     	}
     }
@@ -253,12 +259,19 @@ public class World { // what happen to the game will be create here
     	{
     		hiScore = score;
     	}
+    	/*if(player1.isPlayerDead == true && player2.isPlayerDead == true) //it should memorize higest score of all time
+    	{
+    		if(lastHiScore > hiScore)
+    		{
+    			lastHiScore = hiScore;
+    		}
+    	}*/
     }
     
     public void update(float delta){//for make every object update itself
     	timeUpdate();
     	player1.update(delta);
-    	if(provokeTime > 0 && provokeTime % 150 == 0) //while in provoke duration
+    	if(provokeTime > 0 && provokeTime % 125 == 0) //while in provoke duration
     	{
     		player1.healPlayer(1);
     	}

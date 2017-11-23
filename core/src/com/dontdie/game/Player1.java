@@ -10,7 +10,7 @@ public class Player1 {
     public static final int DIRECTION_LEFT = 4;
     public static final int DIRECTION_STILL = 0;
     public int faceDir;
-    private int PLAYER_MOVE_SPEED = 4;
+    private int PLAYER_MOVE_SPEED = 5;
     public Vector2 currPos;
     private World world;
     private double MAX_HITPOINTS = 10;
@@ -83,7 +83,7 @@ public class Player1 {
     	if(invisibleTime <=0)
     	{
     		hitPoints -= damageReceive;
-    		if(hitPoints < 0)
+    		if(hitPoints <= 0)
     		{
     			hitPoints = 0;
     			world.playerdead.play(0.8f);
@@ -114,13 +114,13 @@ public class Player1 {
     	if(whoToRevive == 1)
     	{
     		world.player1.isPlayerDead = false;
-			world.player1.healPlayer(2);
+			world.player1.healPlayer(3);
 			world.player1.invisibleTime = 200;
     	}
     	if(whoToRevive == 2)
     	{
     		world.player2.isPlayerDead = false;
-    		world.player2.healPlayer(2);
+    		world.player2.healPlayer(3);
     		world.player2.invisibleTime = 200;
     	}
 		world.somePlayerIsDead();
@@ -189,6 +189,7 @@ public class Player1 {
     	{
     		world.provokeTime = 1300;
     		provokeCoolDown = 4000;
+    		world.provoke.play(0.80f);
     		for(int i =0 ; i< world.snake_list.size() ; i++) //update every snake in snake_list
         	{
         		world.snake_list.get(i).init(); //force every snake to chase the other after that one is dead;

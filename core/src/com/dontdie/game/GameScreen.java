@@ -44,13 +44,13 @@ public class GameScreen extends ScreenAdapter {
         {
     		moveplayer2();
         }
-    	if(Gdx.input.isKeyPressed(Keys.Q)) 
+    	if(Gdx.input.isKeyPressed(Keys.F2)) 
         {
     		world.timestop = 250;
         }
     	
     	//z button for restart game is it work flawlessly?
-        if(Gdx.input.isKeyPressed(Keys.Z)) 
+        if(Gdx.input.isKeyPressed(Keys.F1)) 
         {
         	world.bgm.stop();
         	this.dontdieGame = dontdieGame;
@@ -135,7 +135,7 @@ public class GameScreen extends ScreenAdapter {
         	player2.move(Player1.DIRECTION_LEFT);
         }
     	
-    	if(Gdx.input.isKeyPressed(Keys.R)) 
+    	if(Gdx.input.isKeyPressed(Keys.NUMPAD_1)) 
     	{
     		if(player2.attackCoolDown <= 0)
     		{
@@ -146,11 +146,11 @@ public class GameScreen extends ScreenAdapter {
         	}
         }
     	//skill zone
-    	if(Gdx.input.isKeyPressed(Keys.N)) 
+    	if(Gdx.input.isKeyPressed(Keys.NUMPAD_2)) 
         {
     		world.player2.castSkillFireBall(2);
         }
-    	else if(Gdx.input.isKeyPressed(Keys.M)) 
+    	else if(Gdx.input.isKeyPressed(Keys.NUMPAD_3)) 
         {
     			if(world.player1.isPlayerDead == true)
     			{

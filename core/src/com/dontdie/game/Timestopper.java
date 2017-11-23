@@ -18,7 +18,7 @@ public class Timestopper {
   	private float IMAGE_RADIUS_Y = GET_CENTER_Y;
   	private float currCenter_X;
   	private float currCenter_Y;
-  	private int TIME_STOP_POTENCY = 265;
+  	private int TIME_STOP_POTENCY = 285;
 	
 	
 	public Timestopper(World world, int x, int y) { // do this method all time
