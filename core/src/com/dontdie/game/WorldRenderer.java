@@ -56,7 +56,9 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		batch = dontdieGame.batch;
 
 		this.world = world;
-
+		
+		//images here//
+		backgroundImg = new Texture("Background.jpg");
 		player1RightImg = new Texture("Player1_Right.png");
 		player1LeftImg = new Texture("Player1_Left.png");
 		player1UpImg = new Texture("Player1_Up.png");
@@ -72,9 +74,6 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		potionHealOneImg = new Texture("potion_healOne.png");
 		potionHealAllImg = new Texture("potion_healAll.png");
 		
-		backgroundImg = new Texture("background.jpg");
-		player1 = world.getPlayer1();
-		player2 = world.getPlayer2();
 		attackLeft_Img = new Texture("sword_ani_left.png");
 		attackRight_Img = new Texture("sword_ani_right.png");
 		attackUp_Img = new Texture("sword_ani_up.png");
@@ -90,6 +89,9 @@ public class WorldRenderer { //what happen to the game world will be draw here
 		
 		snakeImg = new Texture ("snake.png");
 		ballImg = new Texture ("ball.png");
+		
+		player1 = world.getPlayer1();
+		player2 = world.getPlayer2();
 	}
 	
 	public void render(float delta) { // this draw game animation to window
