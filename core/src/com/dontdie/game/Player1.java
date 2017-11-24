@@ -1,6 +1,6 @@
 package com.dontdie.game;
 
-import com.badlogic.gdx.math.Vector2; //how to create position at the center of image (right now it's bottom left)
+import com.badlogic.gdx.math.Vector2;
 
 public class Player1 {
 
@@ -14,7 +14,7 @@ public class Player1 {
     public Vector2 currPos;
     private World world;
     private double MAX_HITPOINTS = 15;
-    private double hitPoints; //should be private but for test will let it be public
+    private double hitPoints;
     private double hpPercentage; //for draw hp bar
     public long hpScale;
     public int attackCoolDown;
@@ -222,7 +222,7 @@ public class Player1 {
     		currPos.x += (PLAYER_MOVE_SPEED/2) * DIR_OFFSETS[dir][0];
     		currPos.y += (PLAYER_MOVE_SPEED/2) * DIR_OFFSETS[dir][1];
     	}
-    	else // if casting skill
+    	else // if casting skill player wont be able to move
     	{
     		currPos.x += 0 * DIR_OFFSETS[dir][0];
     		currPos.y += 0 * DIR_OFFSETS[dir][1];

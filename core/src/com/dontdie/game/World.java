@@ -67,27 +67,20 @@ public class World { // what happen to the game will be create here
     
     public World(DontDieGame dontdieGame , int worldState) {
     	world = this;
-        this.dontdieGame = dontdieGame; //? why must use this and why it must be 'this.dontdieGame = dontdieGame';
+        this.dontdieGame = dontdieGame;
         gameState = worldState;
-        player1 = new Player1(world, 300,150); // create class in class??
+        player1 = new Player1(world, 300,150);
         player2 = new Player1(world, 600,150);
-        //timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
-        //potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -30) +30 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -30) +30));
-        //spawnSnake(5); for instantly spawn 5 snake
-        if(gameState == START_GAME_STATE)
+        if(gameState == START_GAME_STATE) // if finished reading instruction or after restart game will go to this state
         {
         	game_start.play(0.9f);
         	tStart = System.nanoTime();
         	timestop = 0;
         	waveNumber = 0;
         	nextWaveTime = 1;
-        	maxtimePotion = 11 + rand.nextInt(5);
-            maxtimeStopItem = 8 + rand.nextInt(2);
-            System.out.println(tStart);
-            System.out.println(tEnd);
-            System.out.println(tRes);
-            System.out.println(timeSec);
         }
+        maxtimePotion = 11 + rand.nextInt(5);
+        maxtimeStopItem = 8 + rand.nextInt(2);
         long id = bgm.play(0.62f); //1.0f is for volumn 1.0 for maximum possible
         bgm.setLooping(id, true); 
     }
@@ -143,12 +136,12 @@ public class World { // what happen to the game will be create here
     	timeStopItem = Math.round(timeSec);
     	if(timePotion >= maxtimePotion)
     	{
-    		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -40) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -40) +40));
+    		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT +40) -30));
     		maxtimePotion = timePotion + 13 + rand.nextInt(7);
     	}
     	if(timeStopItem >= maxtimeStopItem)
     	{
-    		timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -40) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -40) +40));
+    		timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT +40) -30));
     		maxtimeStopItem = timePotion + 11 + rand.nextInt(10);
     	}
     }
@@ -264,7 +257,7 @@ public class World { // what happen to the game will be create here
     
     public void timeUpdate () 
     {
-    	timestop -= 1; //test time stop count down timer
+    	timestop -= 1; 
     	provokeTime -=1;
     	tEnd = System.nanoTime();
     	if(player1.isPlayerDead == false || player2.isPlayerDead == false) { //time will only count if some of player is still alive
@@ -334,7 +327,6 @@ public class World { // what happen to the game will be create here
     		randomSpawnEnemy(); // for survival mode
     		randomSpawnItem();//for both mode
     		timeSpawnItem(); //for both mode
-    		isItGameOver();
     	}
     	if(gameState == START_GAME_STATE) //to use this function only once
     	{

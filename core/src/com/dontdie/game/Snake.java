@@ -57,7 +57,7 @@ public class Snake {
         {-1,-1} // move DL
     };
 
-	public Snake(World world, int x, int y) { // do this method all time
+	public Snake(World world, int x, int y) {
 		this.world = world;
 		currPos = new Vector2(x,y);
 		currCenter_X = currPos.x + GET_CENTER_X;
@@ -69,7 +69,7 @@ public class Snake {
 		hitPoints = MAX_HITPOINTS;
 	}
 
-	public void init() //run this method every time snake is created or every time someone is dead
+	public void init() //run this method every time snake is created or every time someone is dead or being revived
 	{
 		chasingPlayer1 = false;
 		chasingPlayer2 = false;
@@ -104,7 +104,7 @@ public class Snake {
 			if(player1.isPlayerDead == false && player2.isPlayerDead == false) // if both alive will random
 			{	
 				int randomedNumber = rand.nextInt(100);
-				if(randomedNumber < 50) //if got less than 50 will chase player 1
+				if(randomedNumber < 50)
 				{
 					chasingPlayer1 = true;
 				}
@@ -169,11 +169,6 @@ public class Snake {
 
 	private void move() 
 	{
-		/*if(faceDir >= 5) //if snake move in both axis will use trigometry to make the movement speed the same as move in 1 axis
-		{
-			currPos.x += Math.pow((Math.pow(SNAKE_MOVE_SPEED,2) + Math.pow(SNAKE_MOVE_SPEED,2)),1/2)* DIR_OFFSETS[faceDir][0];
-			currPos.y += Math.pow((Math.pow(SNAKE_MOVE_SPEED,2) + Math.pow(SNAKE_MOVE_SPEED,2)),1/2)* DIR_OFFSETS[faceDir][1];
-		}*/
 		if(world.timestop <= 0 && cooldown_movetime <= 0) //check if whether the time is stop and is it in unmovable state? , if not it can move.
 		{
 			currPos.x += SNAKE_MOVE_SPEED * DIR_OFFSETS[faceDir][0];
@@ -267,7 +262,7 @@ public class Snake {
 	private void checkWhereIsPlayer2() //make snake turn toward player1 
 	{
         if(player2.getCurrentYPos() - rand.nextInt(10) > currCenter_Y) //if player is at the top of snake 
-        { //add + - randint for more variety ways of moving.. suppose to ..?
+        { //add + - randint for more variety ways of moving..
 			if(player2.getCurrentXPos() - rand.nextInt(10) > currCenter_X) //if player2 is at the top right of snake
 	        {
 				faceDir = DIRECTION_UPPER_RIGHT;
@@ -310,9 +305,9 @@ public class Snake {
 	{
 		if(player1.isPlayerDead == false)
 		{
-			if(player1.getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && player1.getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player1 is within 20 radius.x of this enemy
+			if(player1.getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && player1.getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player1 is within radius.x of this enemy
 			{
-				if(player1.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player1.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this enemy
+				if(player1.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player1.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within radius.y of this enemy
 				{
 					pushPlayer(1);
 					player1.takeDamage(1);
@@ -322,9 +317,9 @@ public class Snake {
 		
 		if(player2.isPlayerDead== false)
 		{
-			if(player2.getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && player2.getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player2 is within 20 radius.x of this enemy
+			if(player2.getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && player2.getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player2 is within radius.x of this enemy
 			{
-				if(player2.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player2.getCurrentYPos()< currCenter_Y + IMAGE_RADIUS_Y) //if player2 is within 20 radius.y of this enemy
+				if(player2.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player2.getCurrentYPos()< currCenter_Y + IMAGE_RADIUS_Y) //if player2 is within radius.y of this enemy
 				{
 					pushPlayer(2);
 					player2.takeDamage(1);

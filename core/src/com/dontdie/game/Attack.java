@@ -28,8 +28,8 @@ public class Attack {
   	private float IMAGE_RADIUS_Y;
   	private float currCenter_X;
   	private float currCenter_Y;
-	private int availableTime;
-	public int attackType;
+	private int availableTime;  //time for this swing will appear the more the longer
+	public int attackType; //1 for normal attack ,2 for fireball ,3 for slow big fireball
     
     private static final int [][] DIR_OFFSETS = new int [][] { // for use with move method
         {0,0},
@@ -76,7 +76,7 @@ public class Attack {
         
         if(attackType == 1)
         {
-        	availableTime = 8; //time for this swing will appear
+        	availableTime = 8;
         }
         else if(attackType ==2)
         {
@@ -164,13 +164,13 @@ public class Attack {
 				}
 			}
     	}
-    	for(int i =0 ; i< world.ball_list.size() ; i++) //if hit snake in snake in snake_list
+    	for(int i =0 ; i< world.ball_list.size() ; i++) //if hit ball
     	{
     		if(world.ball_list.get(i).getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && world.ball_list.get(i).getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player1 is within 20 radius.x of this enemy
 			{
 				if(world.ball_list.get(i).getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && world.ball_list.get(i).getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this enemy
 				{
-					world.ball_list.get(i).changeDirection(faceDir);
+					world.ball_list.get(i).changeDirection(faceDir); //will make ball change direction to the direction of this attack
 					world.score += 5;
 				}
 			}

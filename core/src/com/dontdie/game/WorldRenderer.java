@@ -258,11 +258,11 @@ public class WorldRenderer { //what happen to the game world will be draw here
     	{
         	batch.draw(snakeImg, world.snake_list.get(i).getPosition().x, world.snake_list.get(i).getPosition().y);
     	}
-        for(int i =0 ; i< world.ball_list.size() ; i++) //update every ball
+        for(int i =0 ; i< world.ball_list.size() ; i++) //draw every ball
     	{
         	batch.draw(ballImg, world.ball_list.get(i).getPosition().x, world.ball_list.get(i).getPosition().y);
     	}
-        if(player1.provokeCoolDown > 0)
+        if(player1.provokeCoolDown > 0) // show player 1 provoke skill cooldown
         {
         	batch.draw(provoke_Img, 18,39);
         	font.draw(batch,"Ready in: " +player1.provokeCoolDown/60 +"  sec",65,65);
@@ -285,9 +285,9 @@ public class WorldRenderer { //what happen to the game world will be draw here
         font.draw(batch,"Hi-Score: " +world.hiScore,30 ,DontDieGame.SCREEN_HEIGHT - 50);
 	}
 	
-	public void render(float delta) { // this draw game animation to window
+	public void render(float delta) { // this is for draw game animation to window
 		world.update(delta); //this make the world update which will order enemy and object to update afterward
-        SpriteBatch batch = dontdieGame.batch; //what is this line??
+        SpriteBatch batch = dontdieGame.batch;
         batch.begin();
         batch.draw(backgroundImg, 0, 0);
        
@@ -321,10 +321,10 @@ public class WorldRenderer { //what happen to the game world will be draw here
         else if(world.gameState == World.GAME_OVER_STATE)
         {
         	batch.draw(gameOverImg, 100 ,100);
-        	font.draw(batch,"Wave: " +world.waveNumber,DontDieGame.SCREEN_WIDTH/2 -30,225);
-            font.draw(batch,"Time Survived: " +world.timeSec + "  sec",DontDieGame.SCREEN_WIDTH/2 -30, 200);
-            font.draw(batch,"Gained Score: " +world.score,DontDieGame.SCREEN_WIDTH/2 -30, 175);
-            font.draw(batch,"Highest-Score: " +world.hiScore,DontDieGame.SCREEN_WIDTH/2  -30,150);
+        	font.draw(batch,"Wave: " +world.waveNumber,DontDieGame.SCREEN_WIDTH/2 -130,350);
+            font.draw(batch,"Time Survived: " +world.timeSec + "  sec",DontDieGame.SCREEN_WIDTH/2 -130, 325);
+            font.draw(batch,"Gained Score: " +world.score,DontDieGame.SCREEN_WIDTH/2 +55, 350);
+            font.draw(batch,"Highest-Score: " +world.hiScore,DontDieGame.SCREEN_WIDTH/2 +55,325);
         }
         //draw players health bar
         renderHealthBar();

@@ -23,16 +23,11 @@ public class IronBall {
 	private Player1 player1;
 	private Player1 player2;
 	
-	private static final int DIRECTION_UP = 1;
-    private static final int DIRECTION_RIGHT = 2;
-    private static final int DIRECTION_BOTTOM = 3;
-    private static final int DIRECTION_LEFT = 4;
-    private static final int DIRECTION_STILL = 0;
 	private int faceDir;
 	private Random rand = new Random();
 	public int gotAttack;
 	
-	private static final int [][] DIR_OFFSETS = new int [][] { // for spawn
+	private static final int [][] DIR_OFFSETS = new int [][] {
         {0,0}, //still
         {0,1}, //move up
         {1,0}, // move right
@@ -40,7 +35,7 @@ public class IronBall {
         {-1,0},// move left
     };
 
-	public IronBall(World world,int dir, int x, int y) { // do this method all time
+	public IronBall(World world,int dir, int x, int y) {
 		this.world = world;
 		currPos = new Vector2(x,y);
 		faceDir = dir;
@@ -57,7 +52,7 @@ public class IronBall {
 			world.ball_list.remove(this);
 		}
 	}
-	public Vector2 getPosition() { // for other class to get current position of snake
+	public Vector2 getPosition() { // for other class to get current position of ball
 		currCenter_X = currPos.x + GET_CENTER_X;
 		currCenter_Y = currPos.y + GET_CENTER_Y;
         return currPos;    
@@ -106,9 +101,9 @@ public class IronBall {
 		if(player1.isPlayerDead == false)
 		{
 			Vector2 player1Pos = player1.getPosition(); //get position of player 1
-			if(player1.getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && player1.getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player1 is within 20 radius.x of this enemy
+			if(player1.getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && player1.getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player1 is within radius.x of this enemy
 			{
-				if(player1.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player1.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this enemy
+				if(player1.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player1.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within radius.y of this enemy
 				{
 					pushPlayer(1);
 					player1.takeDamage(3);
@@ -119,10 +114,10 @@ public class IronBall {
 		
 		if(player2.isPlayerDead== false)
 		{
-			Vector2 player2Pos = player2.getPosition(); //get position of player 1
-			if(player2.getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && player2.getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player2 is within 20 radius.x of this enemy
+			Vector2 player2Pos = player2.getPosition(); //get position of player 2
+			if(player2.getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && player2.getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player2 is within radius.x of this enemy
 			{
-				if(player2.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player2.getCurrentYPos()< currCenter_Y + IMAGE_RADIUS_Y) //if player2 is within 20 radius.y of this enemy
+				if(player2.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player2.getCurrentYPos()< currCenter_Y + IMAGE_RADIUS_Y) //if player2 is within radius.y of this enemy
 				{
 					pushPlayer(2);
 					player2.takeDamage(3);
@@ -132,7 +127,7 @@ public class IronBall {
 		}
 	}
 	
-	private void pushPlayer(int player) 
+	private void pushPlayer(int player) //if hit player will push player by this function
 	{
 		int playerNumber = player;
 		if(playerNumber == 1)
@@ -153,7 +148,7 @@ public class IronBall {
 		}
 	}
 
-	public void changeDirection(int dirToChangeTo) {
+	public void changeDirection(int dirToChangeTo) { //if got attacked by player will trigger this function to change it's direction
 		faceDir = dirToChangeTo;
 		gotAttack +=1;
 		

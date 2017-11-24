@@ -17,12 +17,12 @@ public class GameScreen extends ScreenAdapter {
 	private WorldRenderer worldRender;
     World world;
 
-    public GameScreen(DontDieGame dontdieGame) { //receive input and final drawn after receive from WorldRenderer if dont have Worldrenderer will only accept input but not draw anything
+    public GameScreen(DontDieGame dontdieGame) {
         this.dontdieGame = dontdieGame;
-        world = new World(dontdieGame,1); //create
+        world = new World(dontdieGame,1); //create world, and give instruction ,once for first time
         player1 = world.getPlayer1();
         player2 = world.getPlayer2();
-        worldRender = new WorldRenderer(this.dontdieGame,world); //what is the difference if use dontdieGame instead of this.dontdieGame
+        worldRender = new WorldRenderer(this.dontdieGame,world);
     }
     
     @Override
@@ -54,12 +54,7 @@ public class GameScreen extends ScreenAdapter {
     		{
     			moveplayer2();
     		}
-    		if(Gdx.input.isKeyPressed(Keys.F2)) 
-    		{
-    			world.timestop = 250;
-    		}
     	}
-    	//F1 button for restart game is it work flawlessly?
     	if(Gdx.input.isKeyPressed(Keys.F1)) 
         {
     		if(world.gameState == World.START_GAME_STATE)
@@ -70,16 +65,15 @@ public class GameScreen extends ScreenAdapter {
     		{
     			world.game_over.stop();
     		}
-        	world.game_over.stop();
         	this.dontdieGame = dontdieGame;
-        	world = new World(dontdieGame,2); //create
+        	world = new World(dontdieGame,2); //create world but this time skip instruction
         	player1 = world.getPlayer1();
             player2 = world.getPlayer2();
             worldRender = new WorldRenderer(this.dontdieGame,world);
         }
         
     }
-    private void moveplayer1()//input for player1 movement
+    private void moveplayer1()//input for player1 movement & action
     {
     	if(Gdx.input.isKeyPressed(Keys.W)) 
         {
@@ -130,7 +124,7 @@ public class GameScreen extends ScreenAdapter {
         }
     }
     
-    private void moveplayer2()//input for player2 movement
+    private void moveplayer2()//input for player2 movement & action
     {
     	if(Gdx.input.isKeyPressed(Keys.UP)) 
     	{

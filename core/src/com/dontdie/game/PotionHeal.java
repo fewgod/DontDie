@@ -22,7 +22,7 @@ public class PotionHeal {
   	private int HEALING_POTENCY_ALL = 5;
   	public boolean isThisItemHealOne;
 	
-	public PotionHeal(World world,boolean isHealone, int x, int y) { // do this method all time
+	public PotionHeal(World world,boolean isHealone, int x, int y) {
 		this.world = world;
 		currPos = new Vector2(x,y);
 		currCenter_X = currPos.x + GET_CENTER_X;
@@ -34,7 +34,7 @@ public class PotionHeal {
 		isItemPickUp = false;
 	}
 	
-	public Vector2 getPosition() { // for other class to get current position of snake
+	public Vector2 getPosition() { // for other class to get current position of potion
 		currCenter_X = currPos.x + GET_CENTER_X;
 		currCenter_Y = currPos.y + GET_CENTER_Y;
         return currPos;    
@@ -50,7 +50,7 @@ public class PotionHeal {
     	return currCenter_Y = currPos.y + GET_CENTER_Y;
     }
 
-	public void update(float delta) //make snake do things
+	public void update(float delta)
     {
 		checkIfCollideWithPlayer();
     }
