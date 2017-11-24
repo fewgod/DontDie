@@ -5,7 +5,7 @@ import java.util.Random;
 import com.badlogic.gdx.math.Vector2;
 
 public class IronBall {
-	private int BALL_MOVE_SPEED = 11;
+	private int BALL_MOVE_SPEED = 10;
 	private int BALL_PUSH_POWER = BALL_MOVE_SPEED * 9;
 	
 	//snake image size is 53*53
@@ -105,7 +105,7 @@ public class IronBall {
 				if(player1.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player1.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within radius.y of this enemy
 				{
 					pushPlayer(1);
-					player1.takeDamage(3);
+					player1.takeDamage(2);
 					world.ball_list.remove(this);
 				}
 			}
@@ -118,7 +118,7 @@ public class IronBall {
 				if(player2.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player2.getCurrentYPos()< currCenter_Y + IMAGE_RADIUS_Y) //if player2 is within radius.y of this enemy
 				{
 					pushPlayer(2);
-					player2.takeDamage(3);
+					player2.takeDamage(2);
 					world.ball_list.remove(this);
 				}
 			}
