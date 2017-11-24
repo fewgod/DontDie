@@ -47,7 +47,7 @@ public class IronBall {
 	}
 	
 	public void checkIfOutBound() {
-		if(currCenter_X < 60 || currCenter_X > DontDieGame.SCREEN_WIDTH +60 || currCenter_Y < -60 || currCenter_Y > DontDieGame.SCREEN_HEIGHT+60)
+		if(currCenter_X < -70 || currCenter_X > DontDieGame.SCREEN_WIDTH +70 || currCenter_Y < -70 || currCenter_Y > DontDieGame.SCREEN_HEIGHT +70)
 		{
 			world.ball_list.remove(this);
 		}
@@ -100,7 +100,6 @@ public class IronBall {
 	{
 		if(player1.isPlayerDead == false)
 		{
-			Vector2 player1Pos = player1.getPosition(); //get position of player 1
 			if(player1.getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && player1.getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player1 is within radius.x of this enemy
 			{
 				if(player1.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player1.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within radius.y of this enemy
@@ -114,7 +113,6 @@ public class IronBall {
 		
 		if(player2.isPlayerDead== false)
 		{
-			Vector2 player2Pos = player2.getPosition(); //get position of player 2
 			if(player2.getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && player2.getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player2 is within radius.x of this enemy
 			{
 				if(player2.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player2.getCurrentYPos()< currCenter_Y + IMAGE_RADIUS_Y) //if player2 is within radius.y of this enemy

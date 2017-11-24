@@ -73,15 +73,15 @@ public class World { // what happen to the game will be create here
         player2 = new Player1(world, 600,150);
         if(gameState == START_GAME_STATE) // if finished reading instruction or after restart game will go to this state
         {
-        	game_start.play(0.9f);
+        	game_start.play(0.8f);
         	tStart = System.nanoTime();
         	timestop = 0;
         	waveNumber = 0;
         	nextWaveTime = 1;
         }
         maxtimePotion = 11 + rand.nextInt(5);
-        maxtimeStopItem = 8 + rand.nextInt(2);
-        long id = bgm.play(0.62f); //1.0f is for volumn 1.0 for maximum possible
+        maxtimeStopItem = 8 + rand.nextInt(3);
+        long id = bgm.play(0.55f); //1.0f is for volumn 1.0 for maximum possible
         bgm.setLooping(id, true); 
     }
  
@@ -122,7 +122,7 @@ public class World { // what happen to the game will be create here
 			spawnSnake(numberofEnemy -1);
 			if(this.waveNumber % 3 == 2) 
 			{
-				spawnBall(rand.nextInt(this.waveNumber * rand.nextInt(3)+1)- this.waveNumber + 2);
+				spawnBall(rand.nextInt(this.waveNumber * rand.nextInt(3)+1)- this.waveNumber + 1);
 			}
 			nextWaveTime = currStartWaveTime + 2 * numberofEnemy + this.waveNumber *3; //if player use too much time will go to next wave
 			world.waveNumber += 1;
@@ -137,12 +137,12 @@ public class World { // what happen to the game will be create here
     	if(timePotion >= maxtimePotion)
     	{
     		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT +40) -30));
-    		maxtimePotion = timePotion + 13 + rand.nextInt(7);
+    		maxtimePotion = timePotion + 13 + rand.nextInt(8);
     	}
     	if(timeStopItem >= maxtimeStopItem)
     	{
     		timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT +40) -30));
-    		maxtimeStopItem = timePotion + 11 + rand.nextInt(10);
+    		maxtimeStopItem = timePotion + 11 + rand.nextInt(12);
     	}
     }
     
@@ -150,9 +150,9 @@ public class World { // what happen to the game will be create here
     { 
     	if(timeSec >= 17)
     	{
-    		if(waveNumber >=3)
+    		if(waveNumber >= 3)
     		{
-    			if(rand.nextInt(1000) <= waveNumber*1.9) //gradually spawn iron ball by random number
+    			if(rand.nextInt(1200) <= waveNumber*1.2) //gradually spawn iron ball by random number
     			{
     				spawnBall(1);
     			}
@@ -160,7 +160,7 @@ public class World { // what happen to the game will be create here
     	}
     	if(timeSec >= 20)
     	{
-    		if(rand.nextInt(1000) <= waveNumber*2.2) //gradually spawn iron ball by random number
+    		if(rand.nextInt(1000) <= waveNumber*2.1) //gradually spawn iron ball by random number
     		{
     			spawnSnake(1);
     		}
@@ -177,7 +177,7 @@ public class World { // what happen to the game will be create here
     		}
     		if(waveNumber >= 3)
     		{
-    			if(rand.nextInt(1000) <= 8) //gradually spawn iron ball by random number
+    			if(rand.nextInt(1000) <= 3) //gradually spawn iron ball by random number
     			{
     				spawnBall(1);
     			}
@@ -216,32 +216,32 @@ public class World { // what happen to the game will be create here
     		int laneNumber = rand.nextInt(4)+1;
     		if(laneNumber == DIRECTION_UP) //spawn from down and go up
     		{
-    			ball_list.add( new IronBall(world,DIRECTION_UP,rand.nextInt(dontdieGame.SCREEN_WIDTH) , -50));
+    			ball_list.add( new IronBall(world,DIRECTION_UP,rand.nextInt(dontdieGame.SCREEN_WIDTH) , -30));
     		}
     		if(laneNumber == DIRECTION_DOWN) //spawn from up and go down
     		{
-    			ball_list.add( new IronBall(world,DIRECTION_DOWN, rand.nextInt(dontdieGame.SCREEN_WIDTH) , dontdieGame.SCREEN_HEIGHT+50));
+    			ball_list.add( new IronBall(world,DIRECTION_DOWN, rand.nextInt(dontdieGame.SCREEN_WIDTH) , dontdieGame.SCREEN_HEIGHT +30));
     		}
     		if(laneNumber == DIRECTION_LEFT) // spawn from right and go left
     		{
-    			ball_list.add( new IronBall(world,DIRECTION_LEFT,dontdieGame.SCREEN_WIDTH+50, rand.nextInt(dontdieGame.SCREEN_HEIGHT)));
+    			ball_list.add( new IronBall(world,DIRECTION_LEFT,dontdieGame.SCREEN_WIDTH +30, rand.nextInt(dontdieGame.SCREEN_HEIGHT)));
     		}
     		if(laneNumber == DIRECTION_RIGHT)//spawn from left and go right
     		{
-    			ball_list.add( new IronBall(world,DIRECTION_RIGHT,  -50, rand.nextInt(dontdieGame.SCREEN_HEIGHT)));
+    			ball_list.add( new IronBall(world,DIRECTION_RIGHT, -30, rand.nextInt(dontdieGame.SCREEN_HEIGHT)));
     		}
     	}
     }
     
     private void randomSpawnItem() 
     { //gradually spawn item by random number
-    	if(rand.nextInt(15000) <= 4) //for healing potion
+    	if(rand.nextInt(16000) <= 4) //for healing potion
 		{
-    		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -40) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -40) +40));
+    		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT +40) -30));
 		}
-    	if(rand.nextInt(15000) <= 6) //for time stop item
+    	if(rand.nextInt(16000) <= 5) //for time stop item
 		{
-    		timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -40) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -40) +40));
+    		timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT +40) -30));
 		}
     }
     

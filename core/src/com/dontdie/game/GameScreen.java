@@ -66,7 +66,7 @@ public class GameScreen extends ScreenAdapter {
     			world.game_over.stop();
     		}
         	this.dontdieGame = dontdieGame;
-        	world = new World(dontdieGame,2); //create world but this time skip instruction
+        	world = new World(this.dontdieGame,2); //create world but this time skip instruction
         	player1 = world.getPlayer1();
             player2 = world.getPlayer2();
             worldRender = new WorldRenderer(this.dontdieGame,world);
@@ -151,7 +151,7 @@ public class GameScreen extends ScreenAdapter {
     	{
     		if(player2.attackCoolDown <= 0)
     		{
-    			world.swordswing.play(0.48f);
+    			world.swordswing.play(0.45f);
         		world.attack_list.add( new Attack(world, player2.faceDir , 1, player2.getCurrentXPos() , player2.getCurrentYPos())); //draw from center of player2.
         		player2.attackCoolDown = 18;
         		player2.slowDownTime = 20;

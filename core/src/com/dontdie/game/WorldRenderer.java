@@ -266,6 +266,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
         {
         	batch.draw(provoke_Img, 18,39);
         	font.draw(batch,"Ready in: " +player1.provokeCoolDown/60 +"  sec",65,65);
+
         }
 	}
 	
@@ -307,17 +308,26 @@ public class WorldRenderer { //what happen to the game world will be draw here
         renderAttackAnimation(player1Pos,player2Pos);
         
         /////draw item////
-        renderItem(player1Pos,player2Pos);
-        
+        if(world.gameState != world.GAME_OVER_STATE)
+        {
+        	renderItem(player1Pos,player2Pos);
+        }
         /////draw enemy////////
         renderEnemy(player1Pos,player2Pos);
         
         //draw game information
-        renderText();
+        if(world.gameState != world.GAME_OVER_STATE)
+        {	
+        	renderText();
+        }
+        
+        //draw instruction page if in instruction state
         if(world.gameState == World.INSTRUCTION_STATE)
         {
         	batch.draw(instructionImg, 100 ,100);
+        	font.draw(batch,"Press any button to Begin",DontDieGame.SCREEN_WIDTH/2 -95,135);
         }
+        //draw player's statistic when it's gameover
         else if(world.gameState == World.GAME_OVER_STATE)
         {
         	batch.draw(gameOverImg, 100 ,100);
@@ -325,6 +335,10 @@ public class WorldRenderer { //what happen to the game world will be draw here
             font.draw(batch,"Time Survived: " +world.timeSec + "  sec",DontDieGame.SCREEN_WIDTH/2 -130, 325);
             font.draw(batch,"Gained Score: " +world.score,DontDieGame.SCREEN_WIDTH/2 +55, 350);
             font.draw(batch,"Highest-Score: " +world.hiScore,DontDieGame.SCREEN_WIDTH/2 +55,325);
+            if(world.score >= world.hiScore)
+            {
+            	font.draw(batch,"You have acheived new high score! " ,DontDieGame.SCREEN_WIDTH/2 -100 ,280);
+            }
         }
         //draw players health bar
         renderHealthBar();

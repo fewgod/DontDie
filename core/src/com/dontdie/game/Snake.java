@@ -124,7 +124,7 @@ public class Snake {
 	public void checkIfAlive() {
 		if(hitPoints <=0)
 		{
-			world.enemydead.play(0.75f);
+			world.enemydead.play(0.68f);
 			world.snake_list.remove(this);
 			world.score += 3;
 		}

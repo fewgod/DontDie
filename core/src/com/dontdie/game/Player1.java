@@ -13,7 +13,7 @@ public class Player1 {
     private int PLAYER_MOVE_SPEED = 5;
     public Vector2 currPos;
     private World world;
-    private double MAX_HITPOINTS = 15;
+    private double MAX_HITPOINTS = 14;
     private double hitPoints;
     private double hpPercentage; //for draw hp bar
     public long hpScale;
@@ -87,11 +87,11 @@ public class Player1 {
     		if(hitPoints <= 0)
     		{
     			hitPoints = 0;
-    			world.playerdead.play(0.8f);
+    			world.playerdead.play(0.1f);
     		}
     		if(hitPoints > 0)
     		{
-    			world.playergothit.play(0.6f);
+    			world.playergothit.play(0.55f);
     		}
     		checkIfAlive();
     		invisibleTime = 15;
@@ -115,13 +115,13 @@ public class Player1 {
     	if(whoToRevive == 1)
     	{
     		world.player1.isPlayerDead = false;
-			world.player1.healPlayer(5);
+			world.player1.healPlayer(4);
 			world.player1.invisibleTime = 200;
     	}
     	if(whoToRevive == 2)
     	{
     		world.player2.isPlayerDead = false;
-    		world.player2.healPlayer(5);
+    		world.player2.healPlayer(4);
     		world.player2.invisibleTime = 200;
     	}
 		world.somePlayerIsDead();
@@ -188,7 +188,7 @@ public class Player1 {
     	skillCastingTime += 1;
     	if(skillCastingTime >= maxSkillCastTime)
     	{
-    		world.provokeTime = 1300;
+    		world.provokeTime = 1350;
     		provokeCoolDown = 4000;
     		world.provoke.play(0.80f);
     		for(int i =0 ; i< world.snake_list.size() ; i++) //update every snake in snake_list
