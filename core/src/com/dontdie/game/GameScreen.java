@@ -15,7 +15,7 @@ public class GameScreen extends ScreenAdapter {
     private Player1 player1;
     private Player1 player2;
 	private WorldRenderer worldRender;
-    World world;
+    private World world;
 
     public GameScreen(DontDieGame dontdieGame) {
         this.dontdieGame = dontdieGame;
@@ -30,8 +30,8 @@ public class GameScreen extends ScreenAdapter {
     	//update(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        worldRender.render(delta);
         update(delta);
+        worldRender.render(delta);
     }
     
     private void update(float delta) 
@@ -73,6 +73,7 @@ public class GameScreen extends ScreenAdapter {
         }
         
     }
+    
     private void moveplayer1()//input for player1 movement & action
     {
     	if(Gdx.input.isKeyPressed(Keys.W)) 

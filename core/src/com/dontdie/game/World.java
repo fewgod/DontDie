@@ -39,6 +39,18 @@ public class World { // what happen to the game will be create here
     
     public World world;
     
+    
+    /*static enum GameState {
+    	INSTRUCTION(1),
+    	START_GAME(2),
+    	GAME_OVER(3);
+    	
+    	public final int value;
+    	private GameState(final int value) {
+    		this.value = value;
+    	}
+    }*/
+    
     public static final int INSTRUCTION_STATE = 1;
     public static final int START_GAME_STATE = 2;
     public static final int GAME_OVER_STATE = 3;
@@ -50,7 +62,6 @@ public class World { // what happen to the game will be create here
     private static final int DIRECTION_RIGHT = 2;
     private static final int DIRECTION_DOWN = 3;
     private static final int DIRECTION_LEFT = 4;
-	private static final int GAME_START_STATE = 0;
 	
     public int waveNumber;
     private long nextWaveTime;
@@ -84,7 +95,7 @@ public class World { // what happen to the game will be create here
         long id = bgm.play(0.55f); //1.0f is for volumn 1.0 for maximum possible
         bgm.setLooping(id, true); 
     }
- 
+    
     Player1 getPlayer1() {
         return player1;
     }
@@ -285,28 +296,24 @@ public class World { // what happen to the game will be create here
     
     private void updateItemandEnemy(float delta)
     {
-    	for(int i =0 ; i< attack_list.size() ; i++) //update every attack
-    	{
-    		attack_list.get(i).update(delta);
+    	for (Attack item : attack_list) { // update every attack
+    		item.update(delta);
     	}
     	
-    	for(int i =0 ; i< snake_list.size() ; i++) //update every snake in snake_list
-    	{
-    		snake_list.get(i).update(delta);
+    	for (Snake item : snake_list) { //update every snake in snake_list
+    		item.update(delta);
     	}
     	
-    	for(int i =0 ; i< ball_list.size() ; i++) //update every ball
-    	{
-    		ball_list.get(i).update(delta);
+    	for (IronBall item : ball_list) { //update every ball
+    		item.update(delta);
     	}
     	
-    	for(int i =0 ; i< timestopper_list.size() ; i++) //update every time stopper item in the list
-    	{
-    		timestopper_list.get(i).update(delta);
+    	for (Timestopper item : timestopper_list) { //update every time item
+    		item.update(delta);
     	}
-    	for(int i =0 ; i< potion_heal_list.size() ; i++) //update every potion item in the list
-    	{
-    		potion_heal_list.get(i).update(delta);
+    	
+    	for (PotionHeal item : potion_heal_list) { //update every potion
+    		item.update(delta);
     	}
     }
     
@@ -328,6 +335,7 @@ public class World { // what happen to the game will be create here
     		randomSpawnItem();//for both mode
     		timeSpawnItem(); //for both mode
     	}
+    	
     	if(gameState == START_GAME_STATE) //to use this function only once
     	{
     		isItGameOver();

@@ -29,7 +29,7 @@ heal all is from 3 to 54
 timestop is now 295 from 275
 
 greatly decrease balls spawn rate (ball spawn rate ---)
--ball spawn rate is now 1.2*wave number in 1200 range(was 1000 and *1500)
+-ball spawn rate is now 1.1*wave number in 1200 range(was 1000 and *1500)
 -ball spawn rate is now 3in 1000(was 5)
 -ball damage deal is only 2 (was 3)
 randint to timestop item for timespawn item function is increase ( timestop spawn rate -)

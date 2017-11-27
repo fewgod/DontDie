@@ -62,7 +62,7 @@ public class Player1 {
         invisibleTime = 0;
         slowDownTime = 0;
     }    
- 
+    
     public Vector2 getPosition() { // for other class to get current position of player1
     	currCenter_X = currPos.x + GET_CENTER_X;
     	currCenter_Y = currPos.y + GET_CENTER_Y;
