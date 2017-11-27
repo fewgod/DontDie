@@ -17,7 +17,7 @@ public class DesktopLauncher {
 
 /*
 update 24/11/2017
-need to cover more radius in attack
+need to cover more radius in attack 
 reduced snake number in each spawn wave
 ball will only spawn after wave 3 or more in both random and time spawn and wave spawn enemy function
 spawn snake by wave is reduced by 1
