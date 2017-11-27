@@ -104,9 +104,12 @@ public class IronBall {
 			{
 				if(player1.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player1.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within radius.y of this enemy
 				{
-					pushPlayer(1);
-					player1.takeDamage(2);
-					world.ball_list.remove(this);
+					if(player1.invisibleTime <=0)
+					{
+						pushPlayer(1);
+						player1.takeDamage(2);
+						world.ball_list.remove(this);
+					}
 				}
 			}
 		}
@@ -117,9 +120,12 @@ public class IronBall {
 			{
 				if(player2.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player2.getCurrentYPos()< currCenter_Y + IMAGE_RADIUS_Y) //if player2 is within radius.y of this enemy
 				{
-					pushPlayer(2);
-					player2.takeDamage(2);
-					world.ball_list.remove(this);
+					if(player2.invisibleTime <=0)
+					{
+						pushPlayer(2);
+						player2.takeDamage(2);
+						world.ball_list.remove(this);
+					}
 				}
 			}
 		}

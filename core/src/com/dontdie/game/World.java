@@ -283,16 +283,15 @@ public class World { // what happen to the game will be create here
     	}
     }
     
-    private void updateItemandEnemy(float delta)
+	private void updateItemandEnemy(float delta)
     {
     	for(int i =0 ; i< attack_list.size() ; i++) //update every attack
     	{
     		attack_list.get(i).update(delta);
     	}
     	
-    	for(int i =0 ; i< snake_list.size() ; i++) //update every snake in snake_list
-    	{
-    		snake_list.get(i).update(delta);
+    	for (Snake snake : snake_list) { //update every snake in snake_list
+    		snake.update(delta);
     	}
     	
     	for(int i =0 ; i< ball_list.size() ; i++) //update every ball
@@ -300,11 +299,12 @@ public class World { // what happen to the game will be create here
     		ball_list.get(i).update(delta);
     	}
     	
-    	for(int i =0 ; i< timestopper_list.size() ; i++) //update every time stopper item in the list
+    	for(int i =0 ; i< timestopper_list.size() ; i++) //update every time stop item
     	{
     		timestopper_list.get(i).update(delta);
     	}
-    	for(int i =0 ; i< potion_heal_list.size() ; i++) //update every potion item in the list
+    	
+    	for(int i =0 ; i< potion_heal_list.size() ; i++) //update every potion
     	{
     		potion_heal_list.get(i).update(delta);
     	}
