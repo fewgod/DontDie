@@ -36,32 +36,32 @@ public class GameScreen extends ScreenAdapter {
     
     private void update(float delta) 
     {
-    	if(world.gameState == World.INSTRUCTION_STATE)
+    	if(world.gameState == World.STATE_INSTRUCTION)
     	{
     		if(Gdx.input.isKeyPressed(Keys.ANY_KEY))
     		{
-    			world.gameState = World.START_GAME_STATE;
+    			world.gameState = World.STATE_START_GAME;
     			world.tStart = System.nanoTime();
     		}
     	}
-    	if(world.gameState == World.START_GAME_STATE)
+    	if(world.gameState == World.STATE_START_GAME)
     	{
     		if(player1.isPlayerDead == false)
     		{
-    			moveplayer1();
+    			movePlayer1();
     		}
     		if(player2.isPlayerDead == false)
     		{
-    			moveplayer2();
+    			movePlayer2();
     		}
     	}
     	if(Gdx.input.isKeyPressed(Keys.F1)) 
         {
-    		if(world.gameState == World.START_GAME_STATE)
+    		if(world.gameState == World.STATE_START_GAME)
     		{
     			world.bgm.stop();
     		}
-    		if(world.gameState == World.GAME_OVER_STATE)
+    		if(world.gameState == World.STATE_GAME_OVER)
     		{
     			world.game_over.stop();
     		}
@@ -73,7 +73,7 @@ public class GameScreen extends ScreenAdapter {
         }
         
     }
-    private void moveplayer1()//input for player1 movement & action
+    private void movePlayer1()//input for player1 movement & action
     {
     	if(Gdx.input.isKeyPressed(Keys.W)) 
         {
@@ -124,7 +124,7 @@ public class GameScreen extends ScreenAdapter {
         }
     }
     
-    private void moveplayer2()//input for player2 movement & action
+    private void movePlayer2()//input for player2 movement & action
     {
     	if(Gdx.input.isKeyPressed(Keys.UP)) 
     	{

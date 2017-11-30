@@ -308,7 +308,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
         renderAttackAnimation(player1Pos,player2Pos);
         
         /////draw item////
-        if(world.gameState != world.GAME_OVER_STATE)
+        if(world.gameState != world.STATE_GAME_OVER)
         {
         	renderItem(player1Pos,player2Pos);
         }
@@ -316,19 +316,19 @@ public class WorldRenderer { //what happen to the game world will be draw here
         renderEnemy(player1Pos,player2Pos);
         
         //draw game information
-        if(world.gameState != world.GAME_OVER_STATE)
+        if(world.gameState != world.STATE_GAME_OVER)
         {	
         	renderText();
         }
         
         //draw instruction page if in instruction state
-        if(world.gameState == World.INSTRUCTION_STATE)
+        if(world.gameState == World.STATE_INSTRUCTION)
         {
         	batch.draw(instructionImg, 100 ,100);
         	font.draw(batch,"Press any button to Begin",DontDieGame.SCREEN_WIDTH/2 -95,135);
         }
         //draw player's statistic when it's gameover
-        else if(world.gameState == World.GAME_OVER_STATE)
+        else if(world.gameState == World.STATE_GAME_OVER)
         {
         	batch.draw(gameOverImg, 100 ,100);
         	font.draw(batch,"Wave: " +world.waveNumber,DontDieGame.SCREEN_WIDTH/2 -130,350);

@@ -55,14 +55,14 @@ public class Timestopper {
 	
 	public void timestop() 
 	{
-		world.timestop = TIME_STOP_POTENCY;
+		world.timeStop = TIME_STOP_POTENCY;
 		if(player1.isPlayerDead == false)
 		{
-			player1.invisibleTime = world.timestop = TIME_STOP_POTENCY;
+			player1.invisibleTime = world.timeStop = TIME_STOP_POTENCY;
 		}
 		if(player2.isPlayerDead == false)
 		{
-			player2.invisibleTime = world.timestop = TIME_STOP_POTENCY;
+			player2.invisibleTime = world.timeStop = TIME_STOP_POTENCY;
 		}
 		isItemPickUp = true;
 		world.timestopper_list.remove(this);

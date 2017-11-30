@@ -78,17 +78,17 @@ public class IronBall {
 
 	private void move() 
 	{
-		if(world.timestop <= 0) //check if whether the time is stop and is it in unmovable state? , if not it can move.
+		if(world.timeStop <= 0) //check if whether the time is stop and is it in unmovable state? , if not it can move.
 		{
 			currPos.x += BALL_MOVE_SPEED * DIR_OFFSETS[faceDir][0];
 			currPos.y += BALL_MOVE_SPEED * DIR_OFFSETS[faceDir][1];
 		}
-		else if(world.timestop >= 0 && gotAttack > 0) //if got attack will move regardless of timestop or not
+		else if(world.timeStop >= 0 && gotAttack > 0) //if got attack will move regardless of timestop or not
 		{
 			currPos.x += BALL_MOVE_SPEED * DIR_OFFSETS[faceDir][0];
 			currPos.y += BALL_MOVE_SPEED * DIR_OFFSETS[faceDir][1];
 		}
-		else if (world.timestop > 0 && world.timestop <= 75 && gotAttack == 0) //add breaking timestop animation when timestop is running out
+		else if (world.timeStop > 0 && world.timeStop <= 75 && gotAttack == 0) //add breaking timestop animation when timestop is running out
 		{
 			currPos.x += rand.nextInt(3);
 			currPos.x -= rand.nextInt(3);

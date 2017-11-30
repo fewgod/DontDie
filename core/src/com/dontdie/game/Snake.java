@@ -169,12 +169,12 @@ public class Snake {
 
 	private void move() 
 	{
-		if(world.timestop <= 0 && cooldown_movetime <= 0) //check if whether the time is stop and is it in unmovable state? , if not it can move.
+		if(world.timeStop <= 0 && cooldown_movetime <= 0) //check if whether the time is stop and is it in unmovable state? , if not it can move.
 		{
 			currPos.x += SNAKE_MOVE_SPEED * DIR_OFFSETS[faceDir][0];
 			currPos.y += SNAKE_MOVE_SPEED * DIR_OFFSETS[faceDir][1];
 		}
-		else if (world.timestop >= 0 && world.timestop <= 75) //add breaking timestop animation when timestop is running out
+		else if (world.timeStop >= 0 && world.timeStop <= 75) //add breaking timestop animation when timestop is running out
 		{
 			currPos.x += rand.nextInt(3);
 			currPos.x -= rand.nextInt(3);

@@ -13,7 +13,7 @@ public class World { // what happen to the game will be create here
     public Player1 player1;
     public Player1 player2;
     private DontDieGame dontdieGame;
-    public int timestop; //init the time stop count to 0
+    public int timeStop; //init the time stop count to 0
     public int provokeTime;
     
     Sound bgm = Gdx.audio.newSound(Gdx.files.internal("sound/game_bgm.mp3"));
@@ -39,9 +39,9 @@ public class World { // what happen to the game will be create here
     
     public World world;
     
-    public static final int INSTRUCTION_STATE = 1;
-    public static final int START_GAME_STATE = 2;
-    public static final int GAME_OVER_STATE = 3;
+    public static final int STATE_INSTRUCTION = 1;
+    public static final int STATE_START_GAME = 2;
+    public static final int STATE_GAME_OVER = 3;
 	public int gameState;
 	public boolean chose2Player;
 	private Random rand = new Random(); //for random things such as number
@@ -50,7 +50,6 @@ public class World { // what happen to the game will be create here
     private static final int DIRECTION_RIGHT = 2;
     private static final int DIRECTION_DOWN = 3;
     private static final int DIRECTION_LEFT = 4;
-	private static final int GAME_START_STATE = 0;
 	
     public int waveNumber;
     private long nextWaveTime;
@@ -71,11 +70,11 @@ public class World { // what happen to the game will be create here
         gameState = worldState;
         player1 = new Player1(world, 300,150);
         player2 = new Player1(world, 600,150);
-        if(gameState == START_GAME_STATE) // if finished reading instruction or after restart game will go to this state
+        if(gameState == STATE_START_GAME) // if finished reading instruction or after restart game will go to this state
         {
         	game_start.play(0.8f);
         	tStart = System.nanoTime();
-        	timestop = 0;
+        	timeStop = 0;
         	waveNumber = 0;
         	nextWaveTime = 1;
         }
@@ -92,7 +91,7 @@ public class World { // what happen to the game will be create here
         return player2;
     }
     Snake getSnake(int i) 
-    { //return type is snake
+    {
         return snake_list.get(i);
     }
     
@@ -169,7 +168,7 @@ public class World { // what happen to the game will be create here
     
     private void randomSpawnEnemy() 
     {
-    	if(timestop <= 0)
+    	if(timeStop <= 0)
     	{
     		if(rand.nextInt(1000) <= 11) //gradually spawn snake by random number
     		{
@@ -251,13 +250,13 @@ public class World { // what happen to the game will be create here
     	{
     		bgm.stop();
     		game_over.play(0.8f);
-    		gameState = GAME_OVER_STATE;
+    		gameState = STATE_GAME_OVER;
     	}
     }
     
     public void timeUpdate () 
     {
-    	timestop -= 1; 
+    	timeStop -= 1; 
     	provokeTime -=1;
     	tEnd = System.nanoTime();
     	if(player1.isPlayerDead == false || player2.isPlayerDead == false) { //time will only count if some of player is still alive
@@ -312,7 +311,7 @@ public class World { // what happen to the game will be create here
     
     public void update(float delta)//for make every object update itself
 	{
-    	if(gameState == START_GAME_STATE || gameState == GAME_OVER_STATE)
+    	if(gameState == STATE_START_GAME || gameState == STATE_GAME_OVER)
     	{	
     		timeUpdate();
     		player1.update(delta);
@@ -328,7 +327,7 @@ public class World { // what happen to the game will be create here
     		randomSpawnItem();//for both mode
     		timeSpawnItem(); //for both mode
     	}
-    	if(gameState == START_GAME_STATE) //to use this function only once
+    	if(gameState == STATE_START_GAME) //to use this function only once
     	{
     		isItGameOver();
     	}

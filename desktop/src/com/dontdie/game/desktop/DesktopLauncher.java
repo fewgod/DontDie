@@ -23,10 +23,10 @@ ball will only spawn after wave 3 or more in both random and time spawn and wave
 spawn snake by wave is reduced by 1
 
 update 25/11/2017
-player hp is now 14 from 10
-heal one is from 5 to 7
-heal all is from 3 to 54
-timestop is now 295 from 275
+-player hp is now 14 from 10
+-heal one is from 5 to 7
+-heal all is from 3 to 54
+-timestop is now 295 from 275
  
 greatly decrease balls spawn rate (ball spawn rate ---)
 -ball spawn rate is now 1.1*wave number in 1200 range(was 1000 and *1500)
@@ -35,4 +35,7 @@ greatly decrease balls spawn rate (ball spawn rate ---)
 randint to timestop item for timespawn item function is increase ( timestop spawn rate -)
 spawn time stop by random is now 16000 <=5 from 15000 <= 6( timestop spawn rate --)
 spawn potion by radom is now 16000 from 15000( potion spawn rate -)
+
+update 1/12/2017
+-optimize some more code
 */

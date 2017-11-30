@@ -1,8 +1,6 @@
 package com.dontdie.game;
 
-import java.util.ArrayList;
-
-import com.badlogic.gdx.math.Vector2; //how to create position at the center of image (right now it's bottom left)
+import com.badlogic.gdx.math.Vector2;
 
 public class Attack {
 	public static final int SCREEN_WIDTH = 900;
