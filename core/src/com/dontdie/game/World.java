@@ -151,7 +151,7 @@ public class World { // what happen to the game will be create here
     	{
     		if(waveNumber >= 3)
     		{
-    			if(rand.nextInt(1200) <= waveNumber*1.2) //gradually spawn iron ball by random number
+    			if(rand.nextInt(1400) <= waveNumber*1.2) //gradually spawn iron ball by random number
     			{
     				spawnBall(1);
     			}
@@ -176,7 +176,7 @@ public class World { // what happen to the game will be create here
     		}
     		if(waveNumber >= 3)
     		{
-    			if(rand.nextInt(1000) <= 3) //gradually spawn iron ball by random number
+    			if(rand.nextInt(1150) <= 3) //gradually spawn iron ball by random number
     			{
     				spawnBall(1);
     			}

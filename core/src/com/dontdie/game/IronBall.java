@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class IronBall {
 	private int BALL_MOVE_SPEED = 10;
-	private int BALL_PUSH_POWER = BALL_MOVE_SPEED * 9;
+	private int BALL_PUSH_POWER = BALL_MOVE_SPEED * 10;
 	
 	//snake image size is 53*53
 	private float IMAGE_SIZE_X = 53;

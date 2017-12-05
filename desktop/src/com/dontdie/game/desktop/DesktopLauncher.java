@@ -38,4 +38,12 @@ spawn potion by radom is now 16000 from 15000( potion spawn rate -)
 
 update 1/12/2017
 -optimize some more code
+
+update 5/12/2017
+-timespawnenemy ball is decrease from 1200 to 1400
+-randomspawnenemy ball is decrease from 1000 to 1150
+-increase ball push power from 9 to 10
+-increase player die sfx 0.1 to 1.0
+-decrease slow fireball cast sfx 0.67 to 0.63
+-decrease enemy dead sfx 0.68 to 0.63
 */
