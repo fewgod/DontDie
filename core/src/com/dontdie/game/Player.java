@@ -80,9 +80,9 @@ public class Player {
     }
     
     public void takeDamage(int damageReceive) {
-    	skillCastingTime = 0;
     	if(invisibleTime <=0)
     	{
+    		skillCastingTime = 0;
     		hitPoints -= damageReceive;
     		if(hitPoints <= 0)
     		{

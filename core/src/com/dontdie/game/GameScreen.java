@@ -57,14 +57,9 @@ public class GameScreen extends ScreenAdapter {
     	}
     	if(Gdx.input.isKeyPressed(Keys.F1)) 
         {
-    		if(world.gameState == World.STATE_START_GAME)
-    		{
-    			world.bgm.stop();
-    		}
-    		if(world.gameState == World.STATE_GAME_OVER)
-    		{
-    			world.game_over.stop();
-    		}
+    		world.dispose();
+    		worldRender.dispose();
+    		world = null;
         	this.dontdieGame = dontdieGame;
         	world = new World(this.dontdieGame,2); //create world but this time skip instruction
         	player1 = world.getPlayer1();

@@ -27,7 +27,6 @@ update 25/11/2017
 -heal one is from 5 to 7
 -heal all is from 3 to 54
 -timestop is now 295 from 275
- 
 greatly decrease balls spawn rate (ball spawn rate ---)
 -ball spawn rate is now 1.1*wave number in 1200 range(was 1000 and *1500)
 -ball spawn rate is now 3in 1000(was 5)
@@ -46,4 +45,14 @@ update 5/12/2017
 -increase player die sfx 0.1 to 1.0
 -decrease slow fireball cast sfx 0.67 to 0.63
 -decrease enemy dead sfx 0.68 to 0.63
+
+update 13/12/2017
+-add world and world renderer dispose fucntion
+-rename Player1 class to Player
+-increase Timestopper image y radius by 12
+-increase PotionHeal image y radius by 4
+-potionheal(rand.nextInt(17500) <= 4) was 16000
+-maxtimePotion = timePotion + 14 + rand.nextInt(8) was 13,8
+-maxtimeStopItem = timePotion + 12 + rand.nextInt(10); was 11,12
+-timestop(rand.nextInt(17500) <= 5) was 16000
 */

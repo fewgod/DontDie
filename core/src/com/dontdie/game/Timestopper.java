@@ -2,7 +2,7 @@ package com.dontdie.game;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class Timestopper extends Item {
+public class Timestopper {
 	private Vector2 currPos;
 	private World world;
 	private Player player1;
@@ -15,14 +15,13 @@ public class Timestopper extends Item {
   	private float GET_CENTER_X = IMAGE_SIZE_X/2;
   	private float GET_CENTER_Y = IMAGE_SIZE_Y/2;
   	private float IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
-  	private float IMAGE_RADIUS_Y = GET_CENTER_Y;
+  	private float IMAGE_RADIUS_Y = GET_CENTER_Y +12; //+12 for easier pickup
   	private float currCenter_X;
   	private float currCenter_Y;
   	private int TIME_STOP_POTENCY = 290;
 	
 	
 	public Timestopper(World world, int x, int y) { // do this method all time
-		super(world,x,y);
 		this.world = world;
 		currPos = new Vector2(x,y);
 		currCenter_X = currPos.x + GET_CENTER_X;
@@ -32,6 +31,22 @@ public class Timestopper extends Item {
 		player2 = world.getPlayer2();
 		isItemPickUp = false;
 	}
+	
+	public Vector2 getPosition() { // for other class to get current position of snake
+		currCenter_X = currPos.x + GET_CENTER_X;
+		currCenter_Y = currPos.y + GET_CENTER_Y;
+        return currPos;    
+    }
+	
+	public float getCurrentXPos() 
+    {
+    	return currCenter_X = currPos.x + GET_CENTER_X;
+    }
+    
+    public float getCurrentYPos() 
+    {
+    	return currCenter_Y = currPos.y + GET_CENTER_Y;
+    }
 
 	public void update(float delta) //make snake do things
     {
@@ -43,11 +58,11 @@ public class Timestopper extends Item {
 		world.timeStop = TIME_STOP_POTENCY;
 		if(player1.isPlayerDead == false)
 		{
-			player1.invisibleTime = world.timeStop = TIME_STOP_POTENCY;
+			player1.invisibleTime = TIME_STOP_POTENCY;
 		}
 		if(player2.isPlayerDead == false)
 		{
-			player2.invisibleTime = world.timeStop = TIME_STOP_POTENCY;
+			player2.invisibleTime = TIME_STOP_POTENCY;
 		}
 		isItemPickUp = true;
 		world.timestopper_list.remove(this);

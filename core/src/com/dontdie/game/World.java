@@ -95,6 +95,58 @@ public class World { // what happen to the game will be create here
         return snake_list.get(i);
     }
     
+    public void dispose() //when want to discard or restart game wont use unless being called
+    {
+		if(world.gameState == World.STATE_START_GAME)
+		{
+			world.bgm.stop();
+		}
+		if(world.gameState == World.STATE_GAME_OVER)
+		{
+			world.game_over.stop();
+		}
+		bgm.dispose();
+		game_over.dispose();
+		game_start.dispose();
+		enemydead.dispose();
+		swordswing.dispose();
+		magiccasting.dispose();
+		playergothit.dispose();
+		playerdead.dispose();
+		heal.dispose();
+		provoke.dispose();
+		pickitem.dispose();
+		for(int i =0 ; i< attack_list.size() ; i++)
+    	{
+    		attack_list.remove(i);
+    	}
+    	
+    	for (int i =0 ; i< attack_list.size() ; i++) {
+    		snake_list.remove(i);
+    	}
+    	
+    	for(int i =0 ; i< ball_list.size() ; i++)
+    	{
+    		ball_list.remove(i);
+    	}
+    	
+    	for(int i =0 ; i< timestopper_list.size() ; i++)
+    	{
+    		timestopper_list.remove(i);
+    	}
+    	
+    	for(int i =0 ; i< potion_heal_list.size() ; i++)
+    	{
+    		potion_heal_list.remove(i);
+    	}
+    	snake_list = null;
+    	potion_heal_list = null;
+    	timestopper_list = null;
+    	ball_list = null;
+    	player1 = null;
+    	player2 = null;
+    }
+    
     public void somePlayerIsDead() { //or somePlayer being revived 
     	// to let other class call this method to reconfig all enemies to change pattern and change who to chase
     	//wont run unless being call
@@ -136,12 +188,12 @@ public class World { // what happen to the game will be create here
     	if(timePotion >= maxtimePotion)
     	{
     		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT +40) -30));
-    		maxtimePotion = timePotion + 13 + rand.nextInt(8);
+    		maxtimePotion = timePotion + 14 + rand.nextInt(9);
     	}
     	if(timeStopItem >= maxtimeStopItem)
     	{
     		timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT +40) -30));
-    		maxtimeStopItem = timePotion + 11 + rand.nextInt(12);
+    		maxtimeStopItem = timePotion + 12 + rand.nextInt(13);
     	}
     }
     
@@ -234,11 +286,11 @@ public class World { // what happen to the game will be create here
     
     private void randomSpawnItem() 
     { //gradually spawn item by random number
-    	if(rand.nextInt(16000) <= 4) //for healing potion
+    	if(rand.nextInt(17500) <= 4) //for healing potion
 		{
     		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT +40) -30));
 		}
-    	if(rand.nextInt(16000) <= 5) //for time stop item
+    	if(rand.nextInt(17500) <= 5) //for time stop item
 		{
     		timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT +40) -30));
 		}

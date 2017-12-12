@@ -286,6 +286,46 @@ public class WorldRenderer { //what happen to the game world will be draw here
         font.draw(batch,"Hi-Score: " +world.hiScore,30 ,DontDieGame.SCREEN_HEIGHT - 50);
 	}
 	
+	public void dispose() //when want to discard or restart game wont use unless being called
+	{
+		instructionImg.dispose();
+		backgroundImg.dispose();
+		gameOverImg.dispose();
+		player1RightImg.dispose();
+		player1LeftImg.dispose();
+		player1UpImg.dispose();
+		player1DownImg.dispose();
+		player1KO_Img.dispose();
+		player2RightImg.dispose();
+		player2LeftImg.dispose();
+		player2UpImg.dispose();
+		player2DownImg.dispose();
+		player2KO_Img.dispose();
+		
+		timestopperImg.dispose();
+		potionHealOneImg.dispose();
+		potionHealAllImg.dispose();
+		
+		attackLeft_Img.dispose();
+		attackRight_Img.dispose();
+		attackUp_Img.dispose();
+		attackDown_Img.dispose();
+		fireball_Img.dispose();
+		fireball_Big_Img.dispose();
+		provoke_Img.dispose();
+		
+		skillcasting1_Img.dispose();
+		skillcasting2_Img.dispose();
+		revive1_Img.dispose();
+		revive2_Img.dispose();
+		
+		snakeImg.dispose();
+		ballImg.dispose();
+		
+		player1 = null;
+		player2 = null;
+	}
+	
 	public void render(float delta) { // this is for draw game animation to window
 		world.update(delta); //this make the world update which will order enemy and object to update afterward
         SpriteBatch batch = dontdieGame.batch;
