@@ -10,8 +10,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 
 public class World { // what happen to the game will be create here
-    public Player1 player1;
-    public Player1 player2;
+    public Player player1;
+    public Player player2;
     private DontDieGame dontdieGame;
     public int timeStop; //init the time stop count to 0
     public int provokeTime;
@@ -68,8 +68,8 @@ public class World { // what happen to the game will be create here
     	world = this;
         this.dontdieGame = dontdieGame;
         gameState = worldState;
-        player1 = new Player1(world, 300,150);
-        player2 = new Player1(world, 600,150);
+        player1 = new Player(world, 300,150);
+        player2 = new Player(world, 600,150);
         if(gameState == STATE_START_GAME) // if finished reading instruction or after restart game will go to this state
         {
         	game_start.play(0.8f);
@@ -84,10 +84,10 @@ public class World { // what happen to the game will be create here
         bgm.setLooping(id, true); 
     }
  
-    Player1 getPlayer1() {
+    Player getPlayer1() {
         return player1;
     }
-    Player1 getPlayer2() {
+    Player getPlayer2() {
         return player2;
     }
     Snake getSnake(int i) 

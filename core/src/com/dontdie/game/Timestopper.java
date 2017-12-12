@@ -5,8 +5,8 @@ import com.badlogic.gdx.math.Vector2;
 public class Timestopper {
 	private Vector2 currPos;
 	private World world;
-	private Player1 player1;
-	private Player1 player2;
+	private Player player1;
+	private Player player2;
 	private boolean isItemPickUp;
 	
 	//timestopper image size is 34*34

@@ -13,8 +13,8 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private DontDieGame dontdieGame;
 	private SpriteBatch batch;
 	private World world;
-	private Player1 player1;
-	private Player1 player2;
+	private Player player1;
+	private Player player2;
 	//image
 	private Texture instructionImg;
 	private Texture backgroundImg;

@@ -2,7 +2,7 @@ package com.dontdie.game;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class Player1 {
+public class Player {
 
 	public static final int DIRECTION_UP = 1;
     public static final int DIRECTION_RIGHT = 2;
@@ -47,7 +47,7 @@ public class Player1 {
         {-1,0}
     };
     
-    public Player1(World world , int x, int y) { //when first init give spawn position to player 1
+    public Player(World world , int x, int y) { //when first init give spawn position to player 1
     	this.world = world;
     	faceDir = DIRECTION_UP;
         currPos = new Vector2(x,y);

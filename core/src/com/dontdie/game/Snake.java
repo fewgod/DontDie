@@ -20,8 +20,8 @@ public class Snake {
 	
 	public Vector2 currPos;
 	private World world;
-	private Player1 player1;
-	private Player1 player2;
+	private Player player1;
+	private Player player2;
 	boolean chasingPlayer1 = false;
 	boolean chasingPlayer2 = false;
 	private boolean initWhoToChase = false;

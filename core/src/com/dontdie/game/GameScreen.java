@@ -12,8 +12,8 @@ import com.badlogic.gdx.math.Vector2;
 public class GameScreen extends ScreenAdapter {
 	 
     private DontDieGame dontdieGame;
-    private Player1 player1;
-    private Player1 player2;
+    private Player player1;
+    private Player player2;
 	private WorldRenderer worldRender;
     World world;
 
@@ -77,23 +77,23 @@ public class GameScreen extends ScreenAdapter {
     {
     	if(Gdx.input.isKeyPressed(Keys.W)) 
         {
-    		player1.faceDir = Player1.DIRECTION_UP;
-    		player1.move(Player1.DIRECTION_UP);
+    		player1.faceDir = Player.DIRECTION_UP;
+    		player1.move(Player.DIRECTION_UP);
     	}
     	if(Gdx.input.isKeyPressed(Keys.D)) 
     	{
-    		player1.faceDir = Player1.DIRECTION_RIGHT;
-        	player1.move(Player1.DIRECTION_RIGHT);
+    		player1.faceDir = Player.DIRECTION_RIGHT;
+        	player1.move(Player.DIRECTION_RIGHT);
     	}
     	if(Gdx.input.isKeyPressed(Keys.S)) 
     	{
-    		player1.faceDir = Player1.DIRECTION_DOWN;
-        	player1.move(Player1.DIRECTION_DOWN);
+    		player1.faceDir = Player.DIRECTION_DOWN;
+        	player1.move(Player.DIRECTION_DOWN);
     	}
     	if(Gdx.input.isKeyPressed(Keys.A)) 
     	{
-    		player1.faceDir = Player1.DIRECTION_LEFT;
-        	player1.move(Player1.DIRECTION_LEFT);
+    		player1.faceDir = Player.DIRECTION_LEFT;
+        	player1.move(Player.DIRECTION_LEFT);
         }
         if(Gdx.input.isKeyPressed(Keys.SPACE)) 
         {
@@ -128,23 +128,23 @@ public class GameScreen extends ScreenAdapter {
     {
     	if(Gdx.input.isKeyPressed(Keys.UP)) 
     	{
-    		player2.faceDir = Player1.DIRECTION_UP;
-    		player2.move(Player1.DIRECTION_UP);
+    		player2.faceDir = Player.DIRECTION_UP;
+    		player2.move(Player.DIRECTION_UP);
     	}
     	if(Gdx.input.isKeyPressed(Keys.RIGHT)) 
     	{
-    		player2.faceDir = Player1.DIRECTION_RIGHT;
-        	player2.move(Player1.DIRECTION_RIGHT);
+    		player2.faceDir = Player.DIRECTION_RIGHT;
+        	player2.move(Player.DIRECTION_RIGHT);
     	}
     	if(Gdx.input.isKeyPressed(Keys.DOWN)) 
     	{
-    		player2.faceDir = Player1.DIRECTION_DOWN;
-        	player2.move(Player1.DIRECTION_DOWN);
+    		player2.faceDir = Player.DIRECTION_DOWN;
+        	player2.move(Player.DIRECTION_DOWN);
     	}
     	if(Gdx.input.isKeyPressed(Keys.LEFT)) 
     	{
-    		player2.faceDir = Player1.DIRECTION_LEFT;
-        	player2.move(Player1.DIRECTION_LEFT);
+    		player2.faceDir = Player.DIRECTION_LEFT;
+        	player2.move(Player.DIRECTION_LEFT);
         }
     	
     	if(Gdx.input.isKeyPressed(Keys.NUMPAD_1)) 

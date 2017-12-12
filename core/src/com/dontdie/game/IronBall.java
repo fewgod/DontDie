@@ -20,8 +20,8 @@ public class IronBall {
 	
 	public Vector2 currPos;
 	private World world;
-	private Player1 player1;
-	private Player1 player2;
+	private Player player1;
+	private Player player2;
 	
 	private int faceDir;
 	private Random rand = new Random();
