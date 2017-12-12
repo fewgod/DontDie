@@ -2,7 +2,7 @@ package com.dontdie.game;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class PotionHeal {
+public class PotionHeal extends Item{
 	private Vector2 currPos;
 	private World world;
 	private Player player1;
@@ -23,6 +23,7 @@ public class PotionHeal {
   	public boolean isThisItemHealOne;
 	
 	public PotionHeal(World world,boolean isHealone, int x, int y) {
+		super(world,x,y);
 		this.world = world;
 		currPos = new Vector2(x,y);
 		currCenter_X = currPos.x + GET_CENTER_X;
@@ -33,28 +34,7 @@ public class PotionHeal {
 		isThisItemHealOne = isHealone;
 		isItemPickUp = false;
 	}
-	
-	public Vector2 getPosition() { // for other class to get current position of potion
-		currCenter_X = currPos.x + GET_CENTER_X;
-		currCenter_Y = currPos.y + GET_CENTER_Y;
-        return currPos;    
-    }
-	
-	public float getCurrentXPos() 
-    {
-    	return currCenter_X = currPos.x + GET_CENTER_X;
-    }
-    
-    public float getCurrentYPos() 
-    {
-    	return currCenter_Y = currPos.y + GET_CENTER_Y;
-    }
 
-	public void update(float delta)
-    {
-		checkIfCollideWithPlayer();
-    }
-	
 	public void heal(int whichPlayerPick)  // do healing function here
 	{
 		if(isThisItemHealOne == true)  // is this item heal the one who pick or heal both players?
@@ -77,7 +57,7 @@ public class PotionHeal {
 		world.potion_heal_list.remove(this);
 	}
 	
-	private void checkIfCollideWithPlayer() //player1 test only
+	public void checkIfCollideWithPlayer() //player1 test only
 	{
 		if(isItemPickUp == false)
 		{
@@ -108,5 +88,11 @@ public class PotionHeal {
         	}
 		}
 	}
+	
+	public void update(float delta)
+    {
+		checkIfCollideWithPlayer();
+    }
+	
 }
 

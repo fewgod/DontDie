@@ -2,7 +2,7 @@ package com.dontdie.game;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class Timestopper {
+public class Timestopper extends Item {
 	private Vector2 currPos;
 	private World world;
 	private Player player1;
@@ -22,6 +22,7 @@ public class Timestopper {
 	
 	
 	public Timestopper(World world, int x, int y) { // do this method all time
+		super(world,x,y);
 		this.world = world;
 		currPos = new Vector2(x,y);
 		currCenter_X = currPos.x + GET_CENTER_X;
@@ -31,22 +32,6 @@ public class Timestopper {
 		player2 = world.getPlayer2();
 		isItemPickUp = false;
 	}
-	
-	public Vector2 getPosition() { // for other class to get current position of snake
-		currCenter_X = currPos.x + GET_CENTER_X;
-		currCenter_Y = currPos.y + GET_CENTER_Y;
-        return currPos;    
-    }
-	
-	public float getCurrentXPos() 
-    {
-    	return currCenter_X = currPos.x + GET_CENTER_X;
-    }
-    
-    public float getCurrentYPos() 
-    {
-    	return currCenter_Y = currPos.y + GET_CENTER_Y;
-    }
 
 	public void update(float delta) //make snake do things
     {
