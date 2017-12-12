@@ -51,6 +51,7 @@ update 13/12/2017
 -rename Player1 class to Player
 -increase Timestopper image y radius by 12
 -increase PotionHeal image y radius by 4
+-decrease ball spawn rate ranspawn rand.nextInt(1550) <= 3 was 1150 time spawn 1750, was 1400
 -potionheal(rand.nextInt(17500) <= 4) was 16000
 -maxtimePotion = timePotion + 14 + rand.nextInt(8), was 13,8
 -maxtimeStopItem = timePotion + 12 + rand.nextInt(10), was 11,12
