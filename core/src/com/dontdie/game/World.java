@@ -188,12 +188,12 @@ public class World { // what happen to the game will be create here
     	if(timePotion >= maxtimePotion)
     	{
     		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT +40) -30));
-    		maxtimePotion = timePotion + 14 + rand.nextInt(9);
+    		maxtimePotion = timePotion + 14 + rand.nextInt(8);
     	}
     	if(timeStopItem >= maxtimeStopItem)
     	{
     		timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT +40) -30));
-    		maxtimeStopItem = timePotion + 12 + rand.nextInt(13);
+    		maxtimeStopItem = timePotion + 13 + rand.nextInt(12);
     	}
     }
     
@@ -203,7 +203,7 @@ public class World { // what happen to the game will be create here
     	{
     		if(waveNumber >= 3)
     		{
-    			if(rand.nextInt(1750) <= waveNumber*1.2) //gradually spawn iron ball by random number
+    			if(rand.nextInt(1750) <= waveNumber*1.1) //gradually spawn iron ball by random number
     			{
     				spawnBall(1);
     			}
@@ -228,7 +228,7 @@ public class World { // what happen to the game will be create here
     		}
     		if(waveNumber >= 3)
     		{
-    			if(rand.nextInt(1550) <= 3) //gradually spawn iron ball by random number
+    			if(rand.nextInt(1600) <= 3) //gradually spawn iron ball by random number
     			{
     				spawnBall(1);
     			}

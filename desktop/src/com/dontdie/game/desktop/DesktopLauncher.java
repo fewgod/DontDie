@@ -54,6 +54,15 @@ update 13/12/2017
 -decrease ball spawn rate ranspawn rand.nextInt(1550) <= 3 was 1150 time spawn 1750, was 1400
 -potionheal(rand.nextInt(17500) <= 4) was 16000
 -maxtimePotion = timePotion + 14 + rand.nextInt(8), was 13,8
--maxtimeStopItem = timePotion + 12 + rand.nextInt(10), was 11,12
+-maxtimeStopItem = timeStop + 12 + rand.nextInt(10), was 11,12
 -timestop(rand.nextInt(17500) <= 5), was 16000
+
+update 17/12/2017
+-add Object class
+-Item,Player,Enemy inherit from Object class which include getPosition getPosition_X&Y
+-Item,Player,Enemy now when update will call setCurrPos from object class
+ to set Current Position to use in other function (such as getPositionX&Y and getPosition Vector)
+-maxtimeStopItem = timePotion + 13 + rand.nextInt(12), was 12,10
+-reduce ball random spawn to 1600 <=3 was 1550
+-optimize worldrenderer code (delete unused send parameters)
 */

@@ -2,7 +2,7 @@ package com.dontdie.game;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class PotionHeal {
+public class PotionHeal extends Object{
 	private Vector2 currPos;
 	private World world;
 	private Player player1;
@@ -10,8 +10,8 @@ public class PotionHeal {
 	private boolean isItemPickUp;
 	
 	//Potion_HealOne image size is 40*45
-	private float IMAGE_SIZE_X = 40;
-  	private float IMAGE_SIZE_Y = 42; //+2for easier pick up ;
+	private static float IMAGE_SIZE_X = 40;
+  	private static float IMAGE_SIZE_Y = 42; //+2for easier pick up ;
   	private float GET_CENTER_X = IMAGE_SIZE_X/2;
   	private float GET_CENTER_Y = IMAGE_SIZE_Y/2;
   	private float IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
@@ -23,6 +23,7 @@ public class PotionHeal {
   	public boolean isThisItemHealOne;
 	
 	public PotionHeal(World world,boolean isHealone, int x, int y) {
+		super(x,y,IMAGE_SIZE_X,IMAGE_SIZE_Y);
 		this.world = world;
 		currPos = new Vector2(x,y);
 		currCenter_X = currPos.x + GET_CENTER_X;
@@ -33,25 +34,10 @@ public class PotionHeal {
 		isThisItemHealOne = isHealone;
 		isItemPickUp = false;
 	}
-	
-	public Vector2 getPosition() { // for other class to get current position of potion
-		currCenter_X = currPos.x + GET_CENTER_X;
-		currCenter_Y = currPos.y + GET_CENTER_Y;
-        return currPos;    
-    }
-	
-	public float getCurrentXPos() 
-    {
-    	return currCenter_X = currPos.x + GET_CENTER_X;
-    }
-    
-    public float getCurrentYPos() 
-    {
-    	return currCenter_Y = currPos.y + GET_CENTER_Y;
-    }
 
 	public void update(float delta)
     {
+		setCurrPos(currPos);
 		checkIfCollideWithPlayer();
     }
 	
@@ -74,6 +60,7 @@ public class PotionHeal {
 			player2.healPlayer(HEALING_POTENCY_ALL);
 		}
 		isItemPickUp = true;
+		world.heal.play(0.8f);
 		world.potion_heal_list.remove(this);
 	}
 	
@@ -89,7 +76,6 @@ public class PotionHeal {
 					{
 						heal(1);
 						world.score += 5;
-						world.heal.play(0.8f);
 					}
 				}
 			}
@@ -102,7 +88,6 @@ public class PotionHeal {
 					{
 						heal(2);
 						world.score += 5;
-						world.heal.play(0.8f);
 					}
 				}
         	}

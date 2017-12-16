@@ -2,7 +2,7 @@ package com.dontdie.game;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class Timestopper {
+public class Timestopper extends Object{
 	private Vector2 currPos;
 	private World world;
 	private Player player1;
@@ -10,8 +10,8 @@ public class Timestopper {
 	private boolean isItemPickUp;
 	
 	//timestopper image size is 34*34
-	private float IMAGE_SIZE_X = 34;
-  	private float IMAGE_SIZE_Y = 34;
+	private static float IMAGE_SIZE_X = 34;
+  	private static float IMAGE_SIZE_Y = 34;
   	private float GET_CENTER_X = IMAGE_SIZE_X/2;
   	private float GET_CENTER_Y = IMAGE_SIZE_Y/2;
   	private float IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
@@ -22,6 +22,7 @@ public class Timestopper {
 	
 	
 	public Timestopper(World world, int x, int y) { // do this method all time
+		super(x,y,IMAGE_SIZE_X,IMAGE_SIZE_Y);
 		this.world = world;
 		currPos = new Vector2(x,y);
 		currCenter_X = currPos.x + GET_CENTER_X;
@@ -32,24 +33,9 @@ public class Timestopper {
 		isItemPickUp = false;
 	}
 	
-	public Vector2 getPosition() { // for other class to get current position of snake
-		currCenter_X = currPos.x + GET_CENTER_X;
-		currCenter_Y = currPos.y + GET_CENTER_Y;
-        return currPos;    
-    }
-	
-	public float getCurrentXPos() 
-    {
-    	return currCenter_X = currPos.x + GET_CENTER_X;
-    }
-    
-    public float getCurrentYPos() 
-    {
-    	return currCenter_Y = currPos.y + GET_CENTER_Y;
-    }
-
 	public void update(float delta) //make snake do things
     {
+		setCurrPos(currPos);
 		checkIfCollideWithPlayer();
     }
 	
@@ -65,6 +51,7 @@ public class Timestopper {
 			player2.invisibleTime = TIME_STOP_POTENCY;
 		}
 		isItemPickUp = true;
+		world.pickitem.play(0.8f);
 		world.timestopper_list.remove(this);
 	}
 	
@@ -80,7 +67,6 @@ public class Timestopper {
 					{
 						timestop();
 						world.score += 5;
-						world.pickitem.play(0.8f);
 					}
 				}
 			}
@@ -93,7 +79,6 @@ public class Timestopper {
 					{
 						timestop();
 						world.score += 5;
-						world.pickitem.play(0.8f);
 					}
 				}
         	}

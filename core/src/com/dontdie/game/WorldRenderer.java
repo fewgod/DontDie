@@ -233,7 +233,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
     	}
 	}
 	
-	private void renderItem(Vector2 player1Pos , Vector2 player2Pos)
+	private void renderItem()
 	{
 		for(int i =0;i< world.timestopper_list.size(); i++) //draw every timestopper item in timestopper_list 
     	{
@@ -252,7 +252,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
     	}
 	}
 	
-	private void renderEnemy(Vector2 player1Pos , Vector2 player2Pos) 
+	private void renderEnemy() 
 	{
 		for(int i =0;i< world.snake_list.size(); i++) //draw every snake in snake_list
     	{
@@ -350,10 +350,10 @@ public class WorldRenderer { //what happen to the game world will be draw here
         /////draw item////
         if(world.gameState != world.STATE_GAME_OVER)
         {
-        	renderItem(player1Pos,player2Pos);
+        	renderItem();
         }
         /////draw enemy////////
-        renderEnemy(player1Pos,player2Pos);
+        renderEnemy();
         
         //draw game information
         if(world.gameState != world.STATE_GAME_OVER)

@@ -2,21 +2,23 @@ package com.dontdie.game;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class Player {
-
+public class Player extends Object{
+    public Vector2 currPos;
+    private World world;
+	
 	public static final int DIRECTION_UP = 1;
     public static final int DIRECTION_RIGHT = 2;
     public static final int DIRECTION_DOWN = 3;
     public static final int DIRECTION_LEFT = 4;
     public static final int DIRECTION_STILL = 0;
-    public int faceDir;
     private int PLAYER_MOVE_SPEED = 5;
-    public Vector2 currPos;
-    private World world;
+    public int faceDir;
+    
     private double MAX_HITPOINTS = 14;
     private double hitPoints;
     private double hpPercentage; //for draw hp bar
     public long hpScale;
+    
     public int attackCoolDown;
     public int skillCastingTime;
     private int SKILL_REVIVE_MAX_CAST_TIME = 200;
@@ -24,13 +26,14 @@ public class Player {
     private int SKILL_SLOW_FIREBALL_MAX_CAST_TIME = 112;
     private int SKILL_PROVOKE_MAX_CAST_TIME = 33;
     public int maxSkillCastTime;
+    
     public int invisibleTime;
     public int slowDownTime;
     public int provokeCoolDown;
     
-  //snake image size is 22*41
-  	private float IMAGE_SIZE_X = 22;
-  	private float IMAGE_SIZE_Y = 41;
+  //player image size is 22*41
+  	private static float IMAGE_SIZE_X = 22;
+  	private static float IMAGE_SIZE_Y = 41;
   	private float GET_CENTER_X = IMAGE_SIZE_X/2;
   	private float GET_CENTER_Y = IMAGE_SIZE_Y/2;
   	private float IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
@@ -48,12 +51,12 @@ public class Player {
     };
     
     public Player(World world , int x, int y) { //when first init give spawn position to player 1
+    	super(x,y,IMAGE_SIZE_X,IMAGE_SIZE_Y);
     	this.world = world;
     	faceDir = DIRECTION_UP;
         currPos = new Vector2(x,y);
         currCenter_X = currPos.x + GET_CENTER_X;
         currCenter_Y = currPos.y + GET_CENTER_Y;
-        
         isPlayerDead = false;
         attackCoolDown = 0;
         hitPoints = MAX_HITPOINTS;
@@ -62,22 +65,6 @@ public class Player {
         invisibleTime = 0;
         slowDownTime = 0;
     }    
- 
-    public Vector2 getPosition() { // for other class to get current position of player1
-    	currCenter_X = currPos.x + GET_CENTER_X;
-    	currCenter_Y = currPos.y + GET_CENTER_Y;
-        return currPos;    
-    }
-    
-    public float getCurrentXPos() 
-    {
-    	return currCenter_X = currPos.x + GET_CENTER_X;
-    }
-    
-    public float getCurrentYPos() 
-    {
-    	return currCenter_Y = currPos.y + GET_CENTER_Y;
-    }
     
     public void takeDamage(int damageReceive) {
     	if(invisibleTime <=0)
@@ -256,6 +243,7 @@ public class Player {
         slowDownTime -= 1;
         invisibleTime -= 1;
         provokeCoolDown -=1;
+        setCurrPos(currPos);
     	getCurrentXPos();
     	getCurrentYPos();
     }

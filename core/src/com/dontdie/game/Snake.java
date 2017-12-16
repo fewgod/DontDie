@@ -4,13 +4,13 @@ import java.util.Random;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class Snake {
+public class Snake extends Object{
 	private int SNAKE_MOVE_SPEED = 3;
 	private int SNAKE_PUSH_POWER = SNAKE_MOVE_SPEED * 10;
 	
 	//snake image size is 40*40
-	private float IMAGE_SIZE_X = 40;
-	private float IMAGE_SIZE_Y = 40;
+	private static float IMAGE_SIZE_X = 40;
+	private static float IMAGE_SIZE_Y = 40;
 	private float GET_CENTER_X = IMAGE_SIZE_X/2;
 	private float GET_CENTER_Y = IMAGE_SIZE_Y/2;
 	private float IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
@@ -58,6 +58,7 @@ public class Snake {
     };
 
 	public Snake(World world, int x, int y) {
+		super(x,y,IMAGE_SIZE_X,IMAGE_SIZE_Y);
 		this.world = world;
 		currPos = new Vector2(x,y);
 		currCenter_X = currPos.x + GET_CENTER_X;
@@ -129,21 +130,6 @@ public class Snake {
 			world.score += 3;
 		}
 	}
-	public Vector2 getPosition() { // for other class to get current position of snake
-		currCenter_X = currPos.x + GET_CENTER_X;
-		currCenter_Y = currPos.y + GET_CENTER_Y;
-        return currPos;    
-    }
-	
-	public float getCurrentXPos() 
-    {
-    	return currCenter_X = currPos.x + GET_CENTER_X;
-    }
-    
-    public float getCurrentYPos() 
-    {
-    	return currCenter_Y = currPos.y + GET_CENTER_Y;
-    }
 	
 	public void update(float delta) //make snake do things
     {
@@ -164,6 +150,7 @@ public class Snake {
 		{
 			move();
 		}
+		setCurrPos(currPos);
 		checkIfCollideWithPlayer();
     }
 
