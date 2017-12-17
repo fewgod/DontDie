@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Snake extends Object{
 	private int SNAKE_MOVE_SPEED = 3;
 	private int SNAKE_PUSH_POWER = SNAKE_MOVE_SPEED * 10;
+	private int SNAKE_ATTACK_POWER = 1;
 	
 	//snake image size is 40*40
 	private static float IMAGE_SIZE_X = 40;
@@ -63,6 +64,11 @@ public class Snake extends Object{
 		currPos = new Vector2(x,y);
 		currCenter_X = currPos.x + GET_CENTER_X;
 		currCenter_Y = currPos.y + GET_CENTER_Y;
+		
+		//If it want to check whether it collide with player or not ,it must init (must have these 2 line)
+		setImgRadius(IMAGE_RADIUS_X,IMAGE_RADIUS_Y); //send to Object class
+		setWorldandSetPlayer(world);
+		//--------------------------------------------------------------------------------------
 		
 		player1 = world.getPlayer1();
 		player2 = world.getPlayer2();
@@ -150,7 +156,7 @@ public class Snake extends Object{
 		{
 			move();
 		}
-		setCurrPos(currPos);
+		setCurrPos(currPos);// must update to get the lastest current position of this object
 		checkIfCollideWithPlayer();
     }
 
@@ -288,52 +294,26 @@ public class Snake extends Object{
 		}
 	}
 	
-	private void checkIfCollideWithPlayer() //when collide will remove this enemy
-	{
-		if(player1.isPlayerDead == false)
+	private void checkIfCollideWithPlayer() //when collide will deal damage to player
+	{		
+		if(ifHitPlayer1() == true) //ifHitPlayer method is from parent class
 		{
-			if(player1.getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && player1.getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player1 is within radius.x of this enemy
+			pushPlayer(1 ,SNAKE_PUSH_POWER ,faceDir);
+			player1.takeDamage(SNAKE_ATTACK_POWER);
+			if(player1.invisibleTime <=0)
 			{
-				if(player1.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player1.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within radius.y of this enemy
-				{
-					pushPlayer(1);
-					player1.takeDamage(1);
-				}
+				cooldown_movetime = 10;
 			}
 		}
-		
-		if(player2.isPlayerDead== false)
+		if(ifHitPlayer2() == true)
 		{
-			if(player2.getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && player2.getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player2 is within radius.x of this enemy
+			pushPlayer(2 ,SNAKE_PUSH_POWER ,faceDir);
+			player2.takeDamage(SNAKE_ATTACK_POWER);
+			if(player1.invisibleTime <=0)
 			{
-				if(player2.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player2.getCurrentYPos()< currCenter_Y + IMAGE_RADIUS_Y) //if player2 is within radius.y of this enemy
-				{
-					pushPlayer(2);
-					player2.takeDamage(1);
-				}
+				cooldown_movetime = 10;
 			}
 		}
 	}
 	
-	private void pushPlayer(int player) 
-	{
-		int playerNumber = player;
-		if(playerNumber == 1)
-		{
-			if(world.player1.invisibleTime <= 0)
-			{
-				world.player1.currPos.x += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][0];
-				world.player1.currPos.y += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][1];
-			}
-		}
-		if(playerNumber == 2)
-		{
-			if(world.player2.invisibleTime <= 0)
-			{
-				world.player2.currPos.x += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][0];
-				world.player2.currPos.y += SNAKE_PUSH_POWER * DIR_OFFSETS[faceDir][1];
-			}
-		}
-		cooldown_movetime = 10;
-	}
 }

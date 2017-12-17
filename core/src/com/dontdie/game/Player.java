@@ -224,18 +224,26 @@ public class Player extends Object{
     	if(currCenter_X < 0) // prevent player walk off screen
     	{
     		currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[2][0];
+    		setCurrPos(currPos);
+    		getCurrentXPos();
     	}
-    	if(currCenter_X > DontDieGame.SCREEN_WIDTH - 0)
+    	if(currCenter_X > DontDieGame.SCREEN_WIDTH)
     	{
     		currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[4][0];
+    		setCurrPos(currPos);
+    		getCurrentXPos();
     	}
     	if(currCenter_Y < 0)
     	{
     		currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[1][1];
+    		setCurrPos(currPos);
+    		getCurrentYPos();
     	}
-    	if(currCenter_Y > DontDieGame.SCREEN_HEIGHT )
+    	if(currCenter_Y > DontDieGame.SCREEN_HEIGHT)
     	{
     		currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[3][1];
+    		setCurrPos(currPos);
+    		getCurrentYPos();
     	}
     	hpPercentage = (hitPoints / MAX_HITPOINTS)*100 ;
         hpScale = Math.round(hpPercentage/10);
@@ -243,7 +251,7 @@ public class Player extends Object{
         slowDownTime -= 1;
         invisibleTime -= 1;
         provokeCoolDown -=1;
-        setCurrPos(currPos);
+        setCurrPos(currPos);// must update to get the lastest current position of this object
     	getCurrentXPos();
     	getCurrentYPos();
     }

@@ -29,6 +29,12 @@ public class PotionHeal extends Object{
 		currCenter_X = currPos.x + GET_CENTER_X;
 		currCenter_Y = currPos.y + GET_CENTER_Y;
 		
+		setCurrPos(currPos); // because item cannot move so you just need to know it's position once
+		//If it want to check whether it collide with player or not ,it must init (must have these 2 line)
+		setImgRadius(IMAGE_RADIUS_X,IMAGE_RADIUS_Y); //send to Object class
+		setWorldandSetPlayer(world);
+		//--------------------------------------------------------------------------------------
+		
 		player1 = world.getPlayer1();
 		player2 = world.getPlayer2();
 		isThisItemHealOne = isHealone;
@@ -37,7 +43,7 @@ public class PotionHeal extends Object{
 
 	public void update(float delta)
     {
-		setCurrPos(currPos);
+		//setCurrPos(currPos);// must update to get the lastest current position of this object
 		checkIfCollideWithPlayer();
     }
 	
@@ -54,7 +60,7 @@ public class PotionHeal extends Object{
 				player2.healPlayer(HEALING_POTENCY_ONE);
 			}
 		}
-		else
+		else //if it's heal all item it's doesnt matter who pick it
 		{
 			player1.healPlayer(HEALING_POTENCY_ALL);
 			player2.healPlayer(HEALING_POTENCY_ALL);
@@ -63,34 +69,18 @@ public class PotionHeal extends Object{
 		world.heal.play(0.8f);
 		world.potion_heal_list.remove(this);
 	}
-	
-	private void checkIfCollideWithPlayer() //player1 test only
-	{
-		if(isItemPickUp == false)
+
+	private void checkIfCollideWithPlayer() //when collide will call medthod heal
+	{		
+		if(ifHitPlayer1() == true) //ifHitPlayer method is from parent class
 		{
-			if(player1.isPlayerDead == false)
-			{
-				if(player1.getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && player1.getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player1 is within 20 radius.x of this item
-				{
-					if(player1.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player1.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player1 is within 20 radius.y of this item
-					{
-						heal(1);
-						world.score += 5;
-					}
-				}
-			}
-        	
-			if(player2.isPlayerDead == false)
-			{
-				if(player2.getCurrentXPos() > currCenter_X - IMAGE_RADIUS_X && player2.getCurrentXPos() < currCenter_X + IMAGE_RADIUS_X)  //if player2 is within 30 radius.x of this item
-				{
-					if(player2.getCurrentYPos() > currCenter_Y - IMAGE_RADIUS_Y && player2.getCurrentYPos() < currCenter_Y + IMAGE_RADIUS_Y) //if player2 is within 30 radius.y of this item
-					{
-						heal(2);
-						world.score += 5;
-					}
-				}
-        	}
+			heal(1); //send which player is pick up this item
+			world.score += 5;
+		}
+		if(ifHitPlayer2() == true)
+		{
+			heal(2);
+			world.score += 5;
 		}
 	}
 }

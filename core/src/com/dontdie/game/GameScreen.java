@@ -60,6 +60,7 @@ public class GameScreen extends ScreenAdapter {
     		world.dispose();
     		worldRender.dispose();
     		world = null;
+    		worldRender = null;
         	this.dontdieGame = dontdieGame;
         	world = new World(this.dontdieGame,2); //create world but this time skip instruction
         	player1 = world.getPlayer1();
