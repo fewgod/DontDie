@@ -2,23 +2,21 @@ package com.dontdie.game;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class Player extends Object{
-    public Vector2 currPos;
-    private World world;
-	
+public class Player {
+
 	public static final int DIRECTION_UP = 1;
     public static final int DIRECTION_RIGHT = 2;
     public static final int DIRECTION_DOWN = 3;
     public static final int DIRECTION_LEFT = 4;
     public static final int DIRECTION_STILL = 0;
-    private int PLAYER_MOVE_SPEED = 5;
     public int faceDir;
-    
+    private int PLAYER_MOVE_SPEED = 5;
+    public Vector2 currPos;
+    private World world;
     private double MAX_HITPOINTS = 14;
     private double hitPoints;
     private double hpPercentage; //for draw hp bar
     public long hpScale;
-    
     public int attackCoolDown;
     public int skillCastingTime;
     private int SKILL_REVIVE_MAX_CAST_TIME = 200;
@@ -26,14 +24,13 @@ public class Player extends Object{
     private int SKILL_SLOW_FIREBALL_MAX_CAST_TIME = 112;
     private int SKILL_PROVOKE_MAX_CAST_TIME = 33;
     public int maxSkillCastTime;
-    
     public int invisibleTime;
     public int slowDownTime;
     public int provokeCoolDown;
     
-  //player image size is 22*41
-  	private static float IMAGE_SIZE_X = 22;
-  	private static float IMAGE_SIZE_Y = 41;
+  //snake image size is 22*41
+  	private float IMAGE_SIZE_X = 22;
+  	private float IMAGE_SIZE_Y = 41;
   	private float GET_CENTER_X = IMAGE_SIZE_X/2;
   	private float GET_CENTER_Y = IMAGE_SIZE_Y/2;
   	private float IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
@@ -51,12 +48,12 @@ public class Player extends Object{
     };
     
     public Player(World world , int x, int y) { //when first init give spawn position to player 1
-    	super(x,y,IMAGE_SIZE_X,IMAGE_SIZE_Y);
     	this.world = world;
     	faceDir = DIRECTION_UP;
         currPos = new Vector2(x,y);
         currCenter_X = currPos.x + GET_CENTER_X;
         currCenter_Y = currPos.y + GET_CENTER_Y;
+        
         isPlayerDead = false;
         attackCoolDown = 0;
         hitPoints = MAX_HITPOINTS;
@@ -65,6 +62,22 @@ public class Player extends Object{
         invisibleTime = 0;
         slowDownTime = 0;
     }    
+ 
+    public Vector2 getPosition() { // for other class to get current position of player1
+    	currCenter_X = currPos.x + GET_CENTER_X;
+    	currCenter_Y = currPos.y + GET_CENTER_Y;
+        return currPos;    
+    }
+    
+    public float getCurrentXPos() 
+    {
+    	return currCenter_X = currPos.x + GET_CENTER_X;
+    }
+    
+    public float getCurrentYPos() 
+    {
+    	return currCenter_Y = currPos.y + GET_CENTER_Y;
+    }
     
     public void takeDamage(int damageReceive) {
     	if(invisibleTime <=0)
@@ -111,9 +124,22 @@ public class Player extends Object{
     		world.player2.healPlayer(4);
     		world.player2.invisibleTime = 200;
     	}
-		world.somePlayerIsDead();
+		world.somePlayerIsDead(); //or alive
     }
     
+    public void checkIfAlive() {
+    	if(hitPoints <= 0)
+    	{
+    		isPlayerDead = true;
+    		world.somePlayerIsDead();
+    	}
+    	else
+    	{
+    		isPlayerDead = false;
+    	}
+    }
+    
+    //------------------Skill here--------------------
     public void castSkillRevive(int whichPlayerIsCasting)
     {
     	maxSkillCastTime = SKILL_REVIVE_MAX_CAST_TIME;
@@ -185,18 +211,7 @@ public class Player extends Object{
     		skillCastingTime = 0;
     	}
     }
-    
-    public void checkIfAlive() {
-    	if(hitPoints <= 0)
-    	{
-    		isPlayerDead = true;
-    		world.somePlayerIsDead();
-    	}
-    	else
-    	{
-    		isPlayerDead = false;
-    	}
-    }
+    //----------------------------------------------
     
     public void move(int dir) { 
     	if(slowDownTime <=0 && skillCastingTime == 0) //if dont cast skill and dont slow
@@ -224,26 +239,18 @@ public class Player extends Object{
     	if(currCenter_X < 0) // prevent player walk off screen
     	{
     		currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[2][0];
-    		setCurrPos(currPos);
-    		getCurrentXPos();
     	}
-    	if(currCenter_X > DontDieGame.SCREEN_WIDTH)
+    	if(currCenter_X > DontDieGame.SCREEN_WIDTH - 0)
     	{
     		currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[4][0];
-    		setCurrPos(currPos);
-    		getCurrentXPos();
     	}
     	if(currCenter_Y < 0)
     	{
     		currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[1][1];
-    		setCurrPos(currPos);
-    		getCurrentYPos();
     	}
-    	if(currCenter_Y > DontDieGame.SCREEN_HEIGHT)
+    	if(currCenter_Y > DontDieGame.SCREEN_HEIGHT )
     	{
     		currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[3][1];
-    		setCurrPos(currPos);
-    		getCurrentYPos();
     	}
     	hpPercentage = (hitPoints / MAX_HITPOINTS)*100 ;
         hpScale = Math.round(hpPercentage/10);
@@ -251,7 +258,6 @@ public class Player extends Object{
         slowDownTime -= 1;
         invisibleTime -= 1;
         provokeCoolDown -=1;
-        setCurrPos(currPos);// must update to get the lastest current position of this object
     	getCurrentXPos();
     	getCurrentYPos();
     }
