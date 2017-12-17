@@ -69,4 +69,6 @@ update 16/12/2017
 update 17/12/2017
 -Item&Enemy which need to check if it collide with player now can use those If hit player from parent class (Object class)
 -Revert Player class to none object sub class (13/12/2017)
+-Change item spawn random position (will spawn at least y>=100)
+-Timestop and Provoke time now need to call world method to set its value
 */

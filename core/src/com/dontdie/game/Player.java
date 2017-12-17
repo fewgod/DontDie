@@ -3,32 +3,39 @@ package com.dontdie.game;
 import com.badlogic.gdx.math.Vector2;
 
 public class Player {
-
+    
+	//--------movement------
+	private World world;
 	public static final int DIRECTION_UP = 1;
     public static final int DIRECTION_RIGHT = 2;
     public static final int DIRECTION_DOWN = 3;
     public static final int DIRECTION_LEFT = 4;
     public static final int DIRECTION_STILL = 0;
-    public int faceDir;
     private int PLAYER_MOVE_SPEED = 5;
+    public int faceDir;
     public Vector2 currPos;
-    private World world;
+    
+    //---------hp------------
     private double MAX_HITPOINTS = 14;
     private double hitPoints;
-    private double hpPercentage; //for draw hp bar
+    private double hpPercentage;
     public long hpScale;
+	public boolean isPlayerDead;
+    public int invisibleTime;
+    
+    //--------attack&skill--------
     public int attackCoolDown;
     public int skillCastingTime;
     private int SKILL_REVIVE_MAX_CAST_TIME = 200;
+    private int REVIVE_HEAL_AMOUNT = 4;
     private int SKILL_FIREBALL_MAX_CAST_TIME = 40;
     private int SKILL_SLOW_FIREBALL_MAX_CAST_TIME = 112;
     private int SKILL_PROVOKE_MAX_CAST_TIME = 33;
     public int maxSkillCastTime;
-    public int invisibleTime;
     public int slowDownTime;
     public int provokeCoolDown;
     
-  //snake image size is 22*41
+  //player image size is 22*41
   	private float IMAGE_SIZE_X = 22;
   	private float IMAGE_SIZE_Y = 41;
   	private float GET_CENTER_X = IMAGE_SIZE_X/2;
@@ -37,7 +44,6 @@ public class Player {
   	private float IMAGE_RADIUS_Y = GET_CENTER_Y;
   	private float currCenter_X;
   	private float currCenter_Y;
-	public boolean isPlayerDead;
     
     private static final int [][] DIR_OFFSETS = new int [][] { // for use with move method
         {0,0},
@@ -115,13 +121,13 @@ public class Player {
     	if(whoToRevive == 1)
     	{
     		world.player1.isPlayerDead = false;
-			world.player1.healPlayer(4);
+			world.player1.healPlayer(REVIVE_HEAL_AMOUNT);
 			world.player1.invisibleTime = 200;
     	}
     	if(whoToRevive == 2)
     	{
     		world.player2.isPlayerDead = false;
-    		world.player2.healPlayer(4);
+    		world.player2.healPlayer(REVIVE_HEAL_AMOUNT);
     		world.player2.invisibleTime = 200;
     	}
 		world.somePlayerIsDead(); //or alive
@@ -182,7 +188,7 @@ public class Player {
     	skillCastingTime += 1;
     	if(skillCastingTime >= maxSkillCastTime)
     	{
-    		world.magiccasting.play(0.63f);
+    		world.magiccasting.play(0.58f);
     		if(whichPlayerIsCasting == 1) //if player 1 is casting
     		{
     			world.attack_list.add( new Attack(world, world.player1.faceDir , 3, world.player1.getCurrentXPos() , world.player1.getCurrentYPos()));
@@ -201,7 +207,7 @@ public class Player {
     	skillCastingTime += 1;
     	if(skillCastingTime >= maxSkillCastTime)
     	{
-    		world.provokeTime = 1350;
+    		world.setProvokeTime(1350);
     		provokeCoolDown = 4000;
     		world.provoke.play(0.80f);
     		for(int i =0 ; i< world.snake_list.size() ; i++) //update every snake in snake_list
@@ -240,7 +246,7 @@ public class Player {
     	{
     		currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[2][0];
     	}
-    	if(currCenter_X > DontDieGame.SCREEN_WIDTH - 0)
+    	if(currCenter_X > DontDieGame.SCREEN_WIDTH)
     	{
     		currPos.x += PLAYER_MOVE_SPEED * DIR_OFFSETS[4][0];
     	}
@@ -248,7 +254,7 @@ public class Player {
     	{
     		currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[1][1];
     	}
-    	if(currCenter_Y > DontDieGame.SCREEN_HEIGHT )
+    	if(currCenter_Y > DontDieGame.SCREEN_HEIGHT)
     	{
     		currPos.y += PLAYER_MOVE_SPEED * DIR_OFFSETS[3][1];
     	}

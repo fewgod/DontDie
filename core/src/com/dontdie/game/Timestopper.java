@@ -47,7 +47,7 @@ public class Timestopper extends Object{
 	
 	public void timestop() 
 	{
-		world.timeStop = TIME_STOP_POTENCY;
+		world.setTimestopTime(TIME_STOP_POTENCY);
 		if(player1.isPlayerDead == false)
 		{
 			player1.invisibleTime = TIME_STOP_POTENCY;

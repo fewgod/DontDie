@@ -156,9 +156,17 @@ public class World { // what happen to the game will be create here
     	}
     }
     
+    public void setProvokeTime(int amount) {
+    	provokeTime = amount;
+    }
+    
+    public void setTimestopTime(int amount) {
+    	timeStop = amount;
+    }
+    
     private void provokeSkillPlayer1() 
     {
-    	if(world.provokeTime > 0 && world.provokeTime % 125 == 0) //while in provoke duration
+    	if(provokeTime > 0 && provokeTime % 125 == 0) //while in provoke duration
     	{
     		player1.healPlayer(1);
     	}
@@ -187,12 +195,12 @@ public class World { // what happen to the game will be create here
     	timeStopItem = Math.round(timeSec);
     	if(timePotion >= maxtimePotion)
     	{
-    		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT +40) -30));
+    		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -70) +80));
     		maxtimePotion = timePotion + 14 + rand.nextInt(8);
     	}
     	if(timeStopItem >= maxtimeStopItem)
     	{
-    		timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT +40) -30));
+    		timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -70) +80));
     		maxtimeStopItem = timePotion + 13 + rand.nextInt(12);
     	}
     }
@@ -288,11 +296,11 @@ public class World { // what happen to the game will be create here
     { //gradually spawn item by random number
     	if(rand.nextInt(17500) <= 4) //for healing potion
 		{
-    		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT +40) -30));
+    		potion_heal_list.add( new PotionHeal(world, rand.nextBoolean() , rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -70) +80));
 		}
     	if(rand.nextInt(17500) <= 5) //for time stop item
 		{
-    		timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT +40) -30));
+    		timestopper_list.add( new Timestopper(world, rand.nextInt(dontdieGame.SCREEN_WIDTH -50) +40 , rand.nextInt(dontdieGame.SCREEN_HEIGHT -70) +80));
 		}
     }
     
@@ -373,11 +381,11 @@ public class World { // what happen to the game will be create here
     		updateItemandEnemy(delta);
     	
     		scoreFunction();
-    		waveSpawnEnemy(waveNumber); //for wave mode
-    		timeSpawnEnemy(); // for wave mode
-    		randomSpawnEnemy(); // for survival mode
-    		randomSpawnItem();//for both mode
-    		timeSpawnItem(); //for both mode
+    		waveSpawnEnemy(waveNumber);
+    		timeSpawnEnemy();
+    		randomSpawnEnemy();
+    		randomSpawnItem();
+    		timeSpawnItem();
     	}
     	if(gameState == STATE_START_GAME) //to use this function only once
     	{
