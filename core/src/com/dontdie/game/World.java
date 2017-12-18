@@ -5,6 +5,7 @@ import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
@@ -63,6 +64,8 @@ public class World { // what happen to the game will be create here
     int maxtimePotion;
     int maxtimeStopItem;
 	public boolean revivingSomeone;
+	
+	private Preferences prefs;
     
     public World(DontDieGame dontdieGame , int worldState) {
     	world = this;
@@ -82,6 +85,9 @@ public class World { // what happen to the game will be create here
         maxtimeStopItem = 8 + rand.nextInt(3);
         long id = bgm.play(0.55f); //1.0f is for volumn 1.0 for maximum possible
         bgm.setLooping(id, true); 
+        
+        prefs = Gdx.app.getPreferences("highscore");
+        hiScore = prefs.getInteger("highscore");
     }
  
     Player getPlayer1() {
@@ -311,6 +317,8 @@ public class World { // what happen to the game will be create here
     		bgm.stop();
     		game_over.play(0.8f);
     		gameState = STATE_GAME_OVER;
+    		prefs.putInteger("highscore", hiScore);
+    		prefs.flush();
     	}
     }
     
@@ -391,5 +399,8 @@ public class World { // what happen to the game will be create here
     	{
     		isItGameOver();
     	}
+    }
+    public Preferences getPrefs() {
+    	return prefs;
     }
 }
