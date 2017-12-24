@@ -57,18 +57,24 @@ public class GameScreen extends ScreenAdapter {
     	}
     	if(Gdx.input.isKeyPressed(Keys.F1)) 
         {
-    		world.dispose();
-    		worldRender.dispose();
-    		world = null;
-    		worldRender = null;
-        	this.dontdieGame = dontdieGame;
-        	world = new World(this.dontdieGame,2); //create world but this time skip instruction
-        	player1 = world.getPlayer1();
-            player2 = world.getPlayer2();
-            worldRender = new WorldRenderer(this.dontdieGame,world);
+    		restartGame();
         }
         
     }
+    
+    private void restartGame() 
+    {
+    	world.dispose();
+		worldRender.dispose();
+		world = null;
+		worldRender = null;
+    	this.dontdieGame = dontdieGame;
+    	world = new World(this.dontdieGame,2); //create world but this time skip instruction
+    	player1 = world.getPlayer1();
+        player2 = world.getPlayer2();
+        worldRender = new WorldRenderer(this.dontdieGame,world);
+    }
+    
     private void movePlayer1()//input for player1 movement & action
     {
     	if(Gdx.input.isKeyPressed(Keys.W)) 

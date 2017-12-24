@@ -5,13 +5,13 @@ import java.util.Random;
 import com.badlogic.gdx.math.Vector2;
 
 public class IronBall extends Object{
-	private int BALL_MOVE_SPEED = 10;
-	private int BALL_PUSH_POWER = BALL_MOVE_SPEED * 10;
-	private int BALL_ATTACK_POWER = 2;
+	private final int BALL_MOVE_SPEED = 10;
+	private final int BALL_PUSH_POWER = BALL_MOVE_SPEED * 10;
+	private final int BALL_ATTACK_POWER = 2;
 	
 	//snake image size is 53*53
-	private static float IMAGE_SIZE_X = 53;
-	private static float IMAGE_SIZE_Y = 53;
+	private static final float IMAGE_SIZE_X = 53;
+	private static final float IMAGE_SIZE_Y = 53;
 	private float GET_CENTER_X = IMAGE_SIZE_X/2;
 	private float GET_CENTER_Y = IMAGE_SIZE_Y/2;
 	private float IMAGE_RADIUS_X = GET_CENTER_X; //just different name for easier use and understanding
