@@ -34,6 +34,7 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Texture healthBar1Img;
 	private Texture healthBar2Img;
 	
+	//item animation images
 	private Texture attackLeft_Img;
 	private Texture attackRight_Img;
 	private Texture attackDown_Img;
@@ -41,12 +42,10 @@ public class WorldRenderer { //what happen to the game world will be draw here
 	private Texture fireball_Img;
 	private Texture fireball_Big_Img;
 	private Texture provoke_Img;
-	
 	private Texture skillcasting1_Img;
 	private Texture skillcasting2_Img;
 	private Texture revive1_Img;
 	private Texture revive2_Img;
-	
 	private Texture timestopperImg;
 	private Texture potionHealOneImg;
 	private Texture potionHealAllImg;
